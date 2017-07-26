@@ -7,21 +7,46 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37360097DA8F6B3247293343 /* Pods_Muze.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5865016E2658DD8446279F92 /* Pods_Muze.framework */; };
 		D101204C1EE74DA900E7B88B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D101204B1EE74DA900E7B88B /* AppDelegate.swift */; };
-		D101204E1EE74DA900E7B88B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D101204D1EE74DA900E7B88B /* ViewController.swift */; };
 		D10120511EE74DA900E7B88B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D101204F1EE74DA900E7B88B /* Main.storyboard */; };
 		D10120531EE74DA900E7B88B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D10120521EE74DA900E7B88B /* Assets.xcassets */; };
 		D10120561EE74DA900E7B88B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D10120541EE74DA900E7B88B /* LaunchScreen.storyboard */; };
+		D101205E1EE7608300E7B88B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D101205D1EE7608300E7B88B /* LoginViewController.swift */; };
+		D13DCD921EF61B8300969FC0 /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13DCD911EF61B8300969FC0 /* AuthorizationManager.swift */; };
+		D1501AEE1F27CDCD004C9B89 /* MuzeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1501AED1F27CDCD004C9B89 /* MuzeClient.swift */; };
+		D1501AF01F27D031004C9B89 /* MuzeClientSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1501AEF1F27D031004C9B89 /* MuzeClientSession.swift */; };
+		D1501AF21F27D0F9004C9B89 /* MuzeClientConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1501AF11F27D0F9004C9B89 /* MuzeClientConstants.swift */; };
+		D1B39DEF1EF6439F001FFF01 /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B39DEE1EF6439F001FFF01 /* Identifier.swift */; };
+		D1B39DF11EF6443E001FFF01 /* UIUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B39DF01EF6443E001FFF01 /* UIUtil.swift */; };
+		D1C2DDE81F2718410090AA56 /* ConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C2DDE71F2718410090AA56 /* ConnectViewController.swift */; };
+		D1C2DDEA1F2718840090AA56 /* ConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C2DDE91F2718840090AA56 /* ConfirmViewController.swift */; };
+		D1C2DDEC1F271E420090AA56 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C2DDEB1F271E420090AA56 /* Utility.swift */; };
+		D1C7F5981F0179890030851C /* PlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C7F5971F0179890030851C /* PlaylistViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5865016E2658DD8446279F92 /* Pods_Muze.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Muze.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A14C5D3A3454C21188B77264 /* Pods-Muze.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muze.release.xcconfig"; path = "Pods/Target Support Files/Pods-Muze/Pods-Muze.release.xcconfig"; sourceTree = "<group>"; };
+		A877E5DD63A937D6CA7A4792 /* Pods-Muze.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muze.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Muze/Pods-Muze.debug.xcconfig"; sourceTree = "<group>"; };
 		D10120481EE74DA900E7B88B /* Muze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Muze.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D101204B1EE74DA900E7B88B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D101204D1EE74DA900E7B88B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D10120501EE74DA900E7B88B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D10120521EE74DA900E7B88B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D10120551EE74DA900E7B88B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D10120571EE74DA900E7B88B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D101205D1EE7608300E7B88B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		D120A9D71F206653001C2BCA /* Muze.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Muze.entitlements; sourceTree = "<group>"; };
+		D13DCD911EF61B8300969FC0 /* AuthorizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
+		D1501AED1F27CDCD004C9B89 /* MuzeClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuzeClient.swift; sourceTree = "<group>"; };
+		D1501AEF1F27D031004C9B89 /* MuzeClientSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuzeClientSession.swift; sourceTree = "<group>"; };
+		D1501AF11F27D0F9004C9B89 /* MuzeClientConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuzeClientConstants.swift; sourceTree = "<group>"; };
+		D1B39DEE1EF6439F001FFF01 /* Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifier.swift; sourceTree = "<group>"; };
+		D1B39DF01EF6443E001FFF01 /* UIUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtil.swift; sourceTree = "<group>"; };
+		D1C2DDE71F2718410090AA56 /* ConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectViewController.swift; sourceTree = "<group>"; };
+		D1C2DDE91F2718840090AA56 /* ConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmViewController.swift; sourceTree = "<group>"; };
+		D1C2DDEB1F271E420090AA56 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		D1C7F5971F0179890030851C /* PlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +54,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37360097DA8F6B3247293343 /* Pods_Muze.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		54E4146F868838F54891BF46 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5865016E2658DD8446279F92 /* Pods_Muze.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6ADE2E3F3753DF1F9366CCD4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A877E5DD63A937D6CA7A4792 /* Pods-Muze.debug.xcconfig */,
+				A14C5D3A3454C21188B77264 /* Pods-Muze.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D101203F1EE74DA900E7B88B = {
 			isa = PBXGroup;
 			children = (
 				D101204A1EE74DA900E7B88B /* Muze */,
 				D10120491EE74DA900E7B88B /* Products */,
+				6ADE2E3F3753DF1F9366CCD4 /* Pods */,
+				54E4146F868838F54891BF46 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -55,11 +100,22 @@
 			isa = PBXGroup;
 			children = (
 				D101204B1EE74DA900E7B88B /* AppDelegate.swift */,
-				D101204D1EE74DA900E7B88B /* ViewController.swift */,
+				D1B39DEE1EF6439F001FFF01 /* Identifier.swift */,
+				D1B39DF01EF6443E001FFF01 /* UIUtil.swift */,
+				D1C2DDEB1F271E420090AA56 /* Utility.swift */,
+				D1501AED1F27CDCD004C9B89 /* MuzeClient.swift */,
+				D1501AEF1F27D031004C9B89 /* MuzeClientSession.swift */,
+				D1501AF11F27D0F9004C9B89 /* MuzeClientConstants.swift */,
+				D13DCD911EF61B8300969FC0 /* AuthorizationManager.swift */,
+				D101205D1EE7608300E7B88B /* LoginViewController.swift */,
+				D1C2DDE71F2718410090AA56 /* ConnectViewController.swift */,
+				D1C2DDE91F2718840090AA56 /* ConfirmViewController.swift */,
+				D1C7F5971F0179890030851C /* PlaylistViewController.swift */,
 				D101204F1EE74DA900E7B88B /* Main.storyboard */,
 				D10120521EE74DA900E7B88B /* Assets.xcassets */,
 				D10120541EE74DA900E7B88B /* LaunchScreen.storyboard */,
 				D10120571EE74DA900E7B88B /* Info.plist */,
+				D120A9D71F206653001C2BCA /* Muze.entitlements */,
 			);
 			path = Muze;
 			sourceTree = "<group>";
@@ -71,9 +127,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D101205A1EE74DA900E7B88B /* Build configuration list for PBXNativeTarget "Muze" */;
 			buildPhases = (
+				D6959890972728C00A692EEE /* [CP] Check Pods Manifest.lock */,
 				D10120441EE74DA900E7B88B /* Sources */,
 				D10120451EE74DA900E7B88B /* Frameworks */,
 				D10120461EE74DA900E7B88B /* Resources */,
+				34149142E04CC522DCE79C1B /* [CP] Embed Pods Frameworks */,
+				55E0565E94E072F4E65C5087 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -91,13 +150,22 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Charles Gong";
 				TargetAttributes = {
 					D10120471EE74DA900E7B88B = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = PSC5Z4HE75;
+						DevelopmentTeam = HMYCNE59S2;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -132,13 +200,71 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		34149142E04CC522DCE79C1B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Muze/Pods-Muze-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		55E0565E94E072F4E65C5087 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Muze/Pods-Muze-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D6959890972728C00A692EEE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D10120441EE74DA900E7B88B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D101204E1EE74DA900E7B88B /* ViewController.swift in Sources */,
+				D1C2DDE81F2718410090AA56 /* ConnectViewController.swift in Sources */,
+				D101205E1EE7608300E7B88B /* LoginViewController.swift in Sources */,
+				D1C2DDEC1F271E420090AA56 /* Utility.swift in Sources */,
 				D101204C1EE74DA900E7B88B /* AppDelegate.swift in Sources */,
+				D1C2DDEA1F2718840090AA56 /* ConfirmViewController.swift in Sources */,
+				D1C7F5981F0179890030851C /* PlaylistViewController.swift in Sources */,
+				D1B39DEF1EF6439F001FFF01 /* Identifier.swift in Sources */,
+				D1501AF01F27D031004C9B89 /* MuzeClientSession.swift in Sources */,
+				D1501AEE1F27CDCD004C9B89 /* MuzeClient.swift in Sources */,
+				D1501AF21F27D0F9004C9B89 /* MuzeClientConstants.swift in Sources */,
+				D1B39DF11EF6443E001FFF01 /* UIUtil.swift in Sources */,
+				D13DCD921EF61B8300969FC0 /* AuthorizationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,7 +300,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -182,7 +310,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -224,7 +356,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -232,7 +366,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -259,27 +397,39 @@
 		};
 		D101205B1EE74DA900E7B88B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A877E5DD63A937D6CA7A4792 /* Pods-Muze.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = PSC5Z4HE75;
+				CODE_SIGN_ENTITLEMENTS = Muze/Muze.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HMYCNE59S2;
 				INFOPLIST_FILE = Muze/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.gong.Muze;
+				PRODUCT_BUNDLE_IDENTIFIER = com.charlesgong.muze;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
 		D101205C1EE74DA900E7B88B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A14C5D3A3454C21188B77264 /* Pods-Muze.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = PSC5Z4HE75;
+				CODE_SIGN_ENTITLEMENTS = Muze/Muze.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HMYCNE59S2;
 				INFOPLIST_FILE = Muze/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.gong.Muze;
+				PRODUCT_BUNDLE_IDENTIFIER = com.charlesgong.muze;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -302,6 +452,7 @@
 				D101205C1EE74DA900E7B88B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
