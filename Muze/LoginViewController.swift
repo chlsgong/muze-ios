@@ -9,7 +9,7 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-    let authMgr = AuthorizationManager()
+    private let authMgr = AuthorizationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()

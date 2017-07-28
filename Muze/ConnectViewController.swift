@@ -12,7 +12,7 @@ class ConnectViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var phoneNumberTextField: UITextField!
     @IBOutlet weak var sendButton: UIButton!
     
-    let muzeClient = MuzeClient()
+    private let muzeClient = MuzeClient()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +30,14 @@ class ConnectViewController: UIViewController, UITextFieldDelegate {
         phoneNumberTextField.resignFirstResponder()
         
         super.touchesBegan(touches, with: event)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.isIdentified(byId: .toConfirm) {
+            if let destination = segue.destination as? ConfirmViewController {
+                destination.phoneNumber = phoneNumberTextField.text!
+            }
+        }
     }
     
     // MARK: UITextFieldDelegate Methods

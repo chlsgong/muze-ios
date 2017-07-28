@@ -16,3 +16,9 @@ extension UIViewController {
         self.performSegue(withIdentifier: id.rawValue, sender: sender)
     }
 }
+
+extension UIStoryboardSegue {
+    func isIdentified(byId id: Identifier.Segue) -> Bool {
+        return self.identifier == id.rawValue
+    }
+}

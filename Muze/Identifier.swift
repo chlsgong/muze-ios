@@ -10,7 +10,8 @@ import Foundation
 
 enum Identifier {
     enum Segue: String {
-        case toTabBar = "ToTabBar"
         case toConnect = "ToConnect"
+        case toConfirm = "ToConfirm"
+        case toTabBar = "ToTabBar"
     }
 }

@@ -145,10 +145,16 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yvH-we-fxp">
                                 <rect key="frame" x="314" y="216" width="37" height="30"/>
                                 <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="doneButtonTapped:" destination="ihO-Ki-EJY" eventType="touchUpInside" id="vY9-x8-qJU"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6pS-Fy-Bxu">
                                 <rect key="frame" x="24" y="216" width="52" height="30"/>
                                 <state key="normal" title="Resend"/>
+                                <connections>
+                                    <action selector="resendButtonTapped:" destination="ihO-Ki-EJY" eventType="touchUpInside" id="VTu-IA-XhO"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -166,6 +172,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="codeConfirmationTextField" destination="DNc-Rw-CWb" id="S1l-H1-9XR"/>
+                        <outlet property="doneButton" destination="yvH-we-fxp" id="H2d-Ix-y8Y"/>
                         <segue destination="ORk-wV-qt0" kind="presentation" identifier="ToTabBar" id="xIl-xl-Tny"/>
                     </connections>
                 </viewController>
@@ -242,7 +250,7 @@
                                 <state key="normal" title="Send"/>
                                 <connections>
                                     <action selector="sendButtonTapped:" destination="YXK-Ui-V7B" eventType="touchUpInside" id="etU-kd-R1k"/>
-                                    <segue destination="ihO-Ki-EJY" kind="show" id="Tn1-kJ-14v"/>
+                                    <segue destination="ihO-Ki-EJY" kind="show" identifier="ToConfirm" id="Tn1-kJ-14v"/>
                                 </connections>
                             </button>
                         </subviews>
