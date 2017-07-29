@@ -9,6 +9,7 @@
 import Foundation
 import StoreKit
 import MediaPlayer
+import UserNotifications
 
 //  - TODO:
 // Add request country code
@@ -17,6 +18,7 @@ import MediaPlayer
 class AuthorizationManager {
     private let cloudServiceController = SKCloudServiceController()
     private var cloudServiceCapabilities = SKCloudServiceCapability()
+    private let userNotificationCenter = UNUserNotificationCenter.current()
     
     private var cloudServiceStorefrontCountryCode = "us"
     
@@ -77,6 +79,22 @@ class AuthorizationManager {
         }
         
         return availableCapabilities
+    }
+    
+    func requestNotificationCenterAuthorization(completion: ((Bool) -> Void)?) {
+        userNotificationCenter.getNotificationSettings() { settings in
+            if settings.authorizationStatus == .notDetermined {
+                self.userNotificationCenter.requestAuthorization(options: [.badge, .alert, .sound]) { granted, error in
+                    completion?(granted)
+                }
+            }
+        }
+    }
+    
+    func registerForRemoteNotificationsIfNeeded() {
+        if !UIApplication.shared.isRegisteredForRemoteNotifications {
+            UIApplication.shared.registerForRemoteNotifications()
+        }
     }
     
 }

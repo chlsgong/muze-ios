@@ -41,7 +41,7 @@ class ConfirmViewController: UIViewController, UITextFieldDelegate {
             guard range.length == 1 else { return false }
             
             if range.location == lenLimit - 1 {
-                resendButton.isEnabled = false
+                doneButton.isEnabled = false
             }
         }
         else {
@@ -50,7 +50,7 @@ class ConfirmViewController: UIViewController, UITextFieldDelegate {
             guard range.location < lenLimit else { return false }
             
             if range.location == lenLimit - 1 {
-                resendButton.isEnabled = true
+                doneButton.isEnabled = true
             }
         }
         
@@ -71,6 +71,11 @@ class ConfirmViewController: UIViewController, UITextFieldDelegate {
         doneButton.isEnabled = false
         
         muzeClient.checkVerificationCode(phoneNumber: phoneNumber, code: codeConfirmationTextField.text!, apnToken: user.apnToken) { userId in
+            if userId != nil {
+                self.user.updateLoginInfo(userId: userId!, apnToken: self.user.apnToken, phoneNumber: self.phoneNumber)
+                self.performSegue(withIdentifier: .toTabBar, sender: nil)
+            }
+            
             self.doneButton.isEnabled = true
         }
     }

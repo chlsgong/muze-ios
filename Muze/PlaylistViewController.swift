@@ -11,7 +11,8 @@ import MediaPlayer
 import UserNotifications
 
 class PlaylistViewController: UIViewController {
-
+    private let authMgr = AuthorizationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,26 +27,17 @@ class PlaylistViewController: UIViewController {
 //            }
 //        }
         
-        UNUserNotificationCenter.current().getNotificationSettings() { settings in
-            if settings.authorizationStatus == .notDetermined {
-                UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in }
-                if !UIApplication.shared.isRegisteredForRemoteNotifications {
-                    UIApplication.shared.registerForRemoteNotifications()
-                }
-            }
-        }
+        authMgr.requestNotificationCenterAuthorization(completion: nil)
+        authMgr.registerForRemoteNotificationsIfNeeded()
         
-        UIApplication.shared.applicationIconBadgeNumber = 0
-        
-        if !UIApplication.shared.isRegisteredForRemoteNotifications {
-            UIApplication.shared.registerForRemoteNotifications()
-        }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
     
 
     /*

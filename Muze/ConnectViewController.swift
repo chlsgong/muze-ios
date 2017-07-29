@@ -18,8 +18,14 @@ class ConnectViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         phoneNumberTextField.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        sendButton.isEnabled = false
+        if phoneNumberTextField.text!.isEmpty {
+            sendButton.isEnabled = false
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -87,5 +93,9 @@ class ConnectViewController: UIViewController, UITextFieldDelegate {
             self.sendButton.isEnabled = true
         }
     }
-
+    
+    @IBAction func cancelButtonTapped(_ sender: Any) {
+        self.navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
 }

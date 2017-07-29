@@ -12,7 +12,9 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
+    let muzeClient = MuzeClient()
+    let user = User.standard
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -22,8 +24,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-        print("APNs device token: \(deviceTokenString)")
+        let apnToken = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+        print("APNs device token: \(apnToken)")
+        
+        // store apn token
+        muzeClient.updateAPNToken(userId: user.userId, apnToken: apnToken) { error in
+            if error == nil {
+                self.user.updateLoginInfo(userId: self.user.userId, apnToken: apnToken, phoneNumber: self.user.phoneNumber)
+            }
+        }
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {

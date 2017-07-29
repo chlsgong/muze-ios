@@ -15,4 +15,8 @@ extension String {
     func isNumeric() -> Bool {
         return CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: self))
     }
+    
+    func setDefault() -> String {
+        return self.isEmpty ? "None": self
+    }
 }

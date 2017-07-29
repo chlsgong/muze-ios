@@ -30,9 +30,9 @@ class MuzeClient {
         let parameter = [
             "code": code,
             "phone_number": phoneNumber,
-            "apn_token": apnToken
+            "apn_token": apnToken.setDefault()
         ]
-        
+                
         request(endpoint: .getVerificationCheck, method: .get, parameters: parameter).responseJSON { response in
             var userId: String?
             
@@ -48,7 +48,7 @@ class MuzeClient {
         }
     }
     
-    func updateAPNToken(userId: String, apnToken: String, completion: @escaping (Error?) -> Void) {
+    func updateAPNToken(userId: String, apnToken: String, completion: ((Error?) -> Void)?) {
         let parameter = [
             "user_id": userId,
             "apn_token": apnToken
@@ -57,7 +57,7 @@ class MuzeClient {
         request(endpoint: .putUsersAPNToken, method: .put, parameters: parameter, encoding: JSONEncoding.default).responseData { response in
             let error = response.result.error
             self.handleHTTPError(error: error)
-            completion(error)
+            completion?(error)
         }
     }
     
