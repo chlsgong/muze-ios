@@ -19,6 +19,15 @@
 		D1501AEE1F27CDCD004C9B89 /* MuzeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1501AED1F27CDCD004C9B89 /* MuzeClient.swift */; };
 		D1501AF01F27D031004C9B89 /* MuzeClientSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1501AEF1F27D031004C9B89 /* MuzeClientSession.swift */; };
 		D1501AF21F27D0F9004C9B89 /* MuzeClientConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1501AF11F27D0F9004C9B89 /* MuzeClientConstants.swift */; };
+		D18893831F2FD2CB000F3904 /* PlaylistDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18893821F2FD2CB000F3904 /* PlaylistDetailViewController.swift */; };
+		D18893851F2FD322000F3904 /* PlaylistListenersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18893841F2FD322000F3904 /* PlaylistListenersViewController.swift */; };
+		D18893871F2FD33E000F3904 /* PlaylistContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18893861F2FD33E000F3904 /* PlaylistContactsViewController.swift */; };
+		D18893891F2FD450000F3904 /* PlaylistDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18893881F2FD450000F3904 /* PlaylistDetailTableViewCell.swift */; };
+		D188938D1F300C76000F3904 /* PlaylistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D188938C1F300C76000F3904 /* PlaylistModel.swift */; };
+		D188938F1F300C86000F3904 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D188938E1F300C86000F3904 /* UserModel.swift */; };
+		D1AE86841F31AAC20047F2ED /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE86831F31AAC20047F2ED /* Song.swift */; };
+		D1AE86881F3303F70047F2ED /* PlaylistListenersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE86871F3303F70047F2ED /* PlaylistListenersTableViewCell.swift */; };
+		D1AE868C1F3310AA0047F2ED /* PlaylistContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE868B1F3310AA0047F2ED /* PlaylistContactsTableViewCell.swift */; };
 		D1B39DEF1EF6439F001FFF01 /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B39DEE1EF6439F001FFF01 /* Identifier.swift */; };
 		D1B39DF11EF6443E001FFF01 /* UIUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B39DF01EF6443E001FFF01 /* UIUtil.swift */; };
 		D1C2DDE81F2718410090AA56 /* ConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C2DDE71F2718410090AA56 /* ConnectViewController.swift */; };
@@ -45,6 +54,15 @@
 		D1501AED1F27CDCD004C9B89 /* MuzeClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuzeClient.swift; sourceTree = "<group>"; };
 		D1501AEF1F27D031004C9B89 /* MuzeClientSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuzeClientSession.swift; sourceTree = "<group>"; };
 		D1501AF11F27D0F9004C9B89 /* MuzeClientConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuzeClientConstants.swift; sourceTree = "<group>"; };
+		D18893821F2FD2CB000F3904 /* PlaylistDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistDetailViewController.swift; sourceTree = "<group>"; };
+		D18893841F2FD322000F3904 /* PlaylistListenersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistListenersViewController.swift; sourceTree = "<group>"; };
+		D18893861F2FD33E000F3904 /* PlaylistContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistContactsViewController.swift; sourceTree = "<group>"; };
+		D18893881F2FD450000F3904 /* PlaylistDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistDetailTableViewCell.swift; sourceTree = "<group>"; };
+		D188938C1F300C76000F3904 /* PlaylistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistModel.swift; sourceTree = "<group>"; };
+		D188938E1F300C86000F3904 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		D1AE86831F31AAC20047F2ED /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+		D1AE86871F3303F70047F2ED /* PlaylistListenersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistListenersTableViewCell.swift; sourceTree = "<group>"; };
+		D1AE868B1F3310AA0047F2ED /* PlaylistContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistContactsTableViewCell.swift; sourceTree = "<group>"; };
 		D1B39DEE1EF6439F001FFF01 /* Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifier.swift; sourceTree = "<group>"; };
 		D1B39DF01EF6443E001FFF01 /* UIUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtil.swift; sourceTree = "<group>"; };
 		D1C2DDE71F2718410090AA56 /* ConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectViewController.swift; sourceTree = "<group>"; };
@@ -104,11 +122,14 @@
 			isa = PBXGroup;
 			children = (
 				D101204B1EE74DA900E7B88B /* AppDelegate.swift */,
-				D1B39DEE1EF6439F001FFF01 /* Identifier.swift */,
 				D14DE8C61F2B32BE0059C07E /* UserDefaultsKey.swift */,
+				D1B39DEE1EF6439F001FFF01 /* Identifier.swift */,
 				D1B39DF01EF6443E001FFF01 /* UIUtil.swift */,
 				D1C2DDEB1F271E420090AA56 /* Utility.swift */,
 				D14DE8C41F2B2C4C0059C07E /* User.swift */,
+				D188938E1F300C86000F3904 /* UserModel.swift */,
+				D188938C1F300C76000F3904 /* PlaylistModel.swift */,
+				D1AE86831F31AAC20047F2ED /* Song.swift */,
 				D1501AED1F27CDCD004C9B89 /* MuzeClient.swift */,
 				D1501AEF1F27D031004C9B89 /* MuzeClientSession.swift */,
 				D1501AF11F27D0F9004C9B89 /* MuzeClientConstants.swift */,
@@ -117,6 +138,12 @@
 				D1C2DDE71F2718410090AA56 /* ConnectViewController.swift */,
 				D1C2DDE91F2718840090AA56 /* ConfirmViewController.swift */,
 				D1C7F5971F0179890030851C /* PlaylistViewController.swift */,
+				D18893821F2FD2CB000F3904 /* PlaylistDetailViewController.swift */,
+				D18893881F2FD450000F3904 /* PlaylistDetailTableViewCell.swift */,
+				D18893841F2FD322000F3904 /* PlaylistListenersViewController.swift */,
+				D1AE86871F3303F70047F2ED /* PlaylistListenersTableViewCell.swift */,
+				D18893861F2FD33E000F3904 /* PlaylistContactsViewController.swift */,
+				D1AE868B1F3310AA0047F2ED /* PlaylistContactsTableViewCell.swift */,
 				D101204F1EE74DA900E7B88B /* Main.storyboard */,
 				D10120521EE74DA900E7B88B /* Assets.xcassets */,
 				D10120541EE74DA900E7B88B /* LaunchScreen.storyboard */,
@@ -259,19 +286,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1AE868C1F3310AA0047F2ED /* PlaylistContactsTableViewCell.swift in Sources */,
+				D1AE86841F31AAC20047F2ED /* Song.swift in Sources */,
 				D14DE8C51F2B2C4C0059C07E /* User.swift in Sources */,
+				D188938D1F300C76000F3904 /* PlaylistModel.swift in Sources */,
+				D18893871F2FD33E000F3904 /* PlaylistContactsViewController.swift in Sources */,
+				D18893891F2FD450000F3904 /* PlaylistDetailTableViewCell.swift in Sources */,
 				D1C2DDE81F2718410090AA56 /* ConnectViewController.swift in Sources */,
 				D101205E1EE7608300E7B88B /* LoginViewController.swift in Sources */,
+				D18893831F2FD2CB000F3904 /* PlaylistDetailViewController.swift in Sources */,
 				D1C2DDEC1F271E420090AA56 /* Utility.swift in Sources */,
 				D101204C1EE74DA900E7B88B /* AppDelegate.swift in Sources */,
 				D1C2DDEA1F2718840090AA56 /* ConfirmViewController.swift in Sources */,
 				D1C7F5981F0179890030851C /* PlaylistViewController.swift in Sources */,
 				D1B39DEF1EF6439F001FFF01 /* Identifier.swift in Sources */,
 				D1501AF01F27D031004C9B89 /* MuzeClientSession.swift in Sources */,
+				D18893851F2FD322000F3904 /* PlaylistListenersViewController.swift in Sources */,
+				D1AE86881F3303F70047F2ED /* PlaylistListenersTableViewCell.swift in Sources */,
 				D1501AEE1F27CDCD004C9B89 /* MuzeClient.swift in Sources */,
 				D14DE8C71F2B32BE0059C07E /* UserDefaultsKey.swift in Sources */,
 				D1501AF21F27D0F9004C9B89 /* MuzeClientConstants.swift in Sources */,
 				D1B39DF11EF6443E001FFF01 /* UIUtil.swift in Sources */,
+				D188938F1F300C86000F3904 /* UserModel.swift in Sources */,
 				D13DCD921EF61B8300969FC0 /* AuthorizationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

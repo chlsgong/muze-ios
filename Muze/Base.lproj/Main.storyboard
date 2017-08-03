@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ORk-wV-qt0">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -100,7 +100,7 @@
         <!--Playlists-->
         <scene sceneID="Sxl-TI-vA5">
             <objects>
-                <viewController id="rAA-gD-DTU" customClass="PlaylistViewController" customModule="Muze" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="rAA-gD-DTU" customClass="PlaylistViewController" customModule="Muze" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6Pg-VN-LQJ"/>
                         <viewControllerLayoutGuide type="bottom" id="6Ps-41-rhj"/>
@@ -113,7 +113,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="3Uv-nO-SeZ" style="IBUITableViewCellStyleDefault" id="WFU-88-FAu">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlaylistCell" textLabel="3Uv-nO-SeZ" style="IBUITableViewCellStyleDefault" id="WFU-88-FAu">
                                         <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WFU-88-FAu" id="8np-Zx-Wzr">
@@ -129,9 +129,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="O1j-k4-YZy" kind="show" id="vEb-LL-uje"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -147,6 +144,10 @@
                     <navigationItem key="navigationItem" title="Playlists" id="z8R-Oa-duI">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="5EK-4N-3Vg"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="playlistTableView" destination="xvF-iE-gsF" id="uN7-Gm-EZT"/>
+                        <segue destination="O1j-k4-YZy" kind="show" identifier="ToPlaylistDetail" id="ftf-ce-Kfc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RXB-wR-4cG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -155,7 +156,7 @@
         <!--Title-->
         <scene sceneID="fys-k9-EIT">
             <objects>
-                <viewController id="O1j-k4-YZy" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="O1j-k4-YZy" customClass="PlaylistDetailViewController" customModule="Muze" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ff4-EC-GkK"/>
                         <viewControllerLayoutGuide type="bottom" id="iY9-dL-MxI"/>
@@ -168,7 +169,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="TDx-vm-RYN">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlaylistDetailCell" id="TDx-vm-RYN" customClass="PlaylistDetailTableViewCell" customModule="Muze" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TDx-vm-RYN" id="MU4-I4-Zlk">
@@ -180,6 +181,9 @@
                                                     <state key="normal" title="Remove">
                                                         <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="removeButtonTapped:" destination="TDx-vm-RYN" eventType="touchUpInside" id="F6p-T6-jeJ"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WD1-h0-X24">
                                                     <rect key="frame" x="8" y="8" width="41" height="26.5"/>
@@ -204,6 +208,11 @@
                                                 <constraint firstItem="q5e-kt-bvW" firstAttribute="centerY" secondItem="MU4-I4-Zlk" secondAttribute="centerY" id="xgq-F3-oHl"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="removeButton" destination="q5e-kt-bvW" id="kzP-V3-fs0"/>
+                                            <outlet property="songArtistLabel" destination="bRO-PP-QAN" id="7zo-Ps-bre"/>
+                                            <outlet property="songTitleLabel" destination="WD1-h0-X24" id="kBx-1o-qN1"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -226,12 +235,15 @@
                             </barButtonItem>
                             <barButtonItem systemItem="add" id="9AJ-0I-eY8">
                                 <connections>
-                                    <segue destination="xO4-KG-Z9m" kind="show" id="smQ-wJ-6QX"/>
+                                    <segue destination="xO4-KG-Z9m" kind="show" identifier="ToAddListeners" id="smQ-wJ-6QX"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="playlistDetailTableView" destination="2M0-2b-LqS" id="4XG-9g-NVu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bHD-mB-ilu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -240,7 +252,7 @@
         <!--Add Listeners-->
         <scene sceneID="EGf-yC-Tdu">
             <objects>
-                <viewController id="xO4-KG-Z9m" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="xO4-KG-Z9m" customClass="PlaylistListenersViewController" customModule="Muze" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MLV-9B-4Qg"/>
                         <viewControllerLayoutGuide type="bottom" id="T32-Gn-kDx"/>
@@ -259,7 +271,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add by phone number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mmd-EQ-0iy">
                                         <rect key="frame" x="8" y="8" width="170" height="21"/>
@@ -271,7 +283,7 @@
                                         <rect key="frame" x="8" y="82" width="130" height="30"/>
                                         <state key="normal" title="Add from Contacts"/>
                                         <connections>
-                                            <segue destination="tTl-RW-81p" kind="show" id="Vqh-6W-naS"/>
+                                            <segue destination="tTl-RW-81p" kind="show" identifier="ToContacts" id="Vqh-6W-naS"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GSs-Ej-UPS">
@@ -280,6 +292,9 @@
                                             <constraint firstAttribute="width" constant="22" id="PJW-uY-9st"/>
                                             <constraint firstAttribute="height" constant="22" id="ihi-wy-dwQ"/>
                                         </constraints>
+                                        <connections>
+                                            <action selector="addPhoneNumberButtonTapped:" destination="xO4-KG-Z9m" eventType="touchUpInside" id="7Ll-4K-gjs"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -301,7 +316,7 @@
                                 <rect key="frame" x="0.0" y="184" width="375" height="434"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="WCo-uB-lrp">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="WCo-uB-lrp" customClass="PlaylistListenersTableViewCell" customModule="Muze" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WCo-uB-lrp" id="DXz-PL-GbU">
@@ -309,8 +324,8 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oUs-V9-nzz">
-                                                    <rect key="frame" x="16" y="11" width="33.5" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="16" y="8.5" width="41" height="26.5"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -319,6 +334,9 @@
                                                     <state key="normal" title="Remove">
                                                         <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="removeButtonTapped:" destination="WCo-uB-lrp" eventType="touchUpInside" id="mtD-kQ-Gx2"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -328,6 +346,10 @@
                                                 <constraint firstItem="oUs-V9-nzz" firstAttribute="leading" secondItem="DXz-PL-GbU" secondAttribute="leadingMargin" constant="8" id="zcT-8G-5EQ"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="removeButton" destination="q5b-Wk-BfF" id="ZBB-Ch-Vfm"/>
+                                            <outlet property="titleLabel" destination="oUs-V9-nzz" id="5W2-0v-SHl"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -346,6 +368,12 @@
                     <navigationItem key="navigationItem" title="Add Listeners" id="P1r-V7-4gj">
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="4C3-EL-aBX"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="addFromContactsButton" destination="8y4-5f-80U" id="fkk-cS-DVr"/>
+                        <outlet property="addPhoneNumberButton" destination="GSs-Ej-UPS" id="0dE-Lh-evH"/>
+                        <outlet property="listenersTableView" destination="J37-D1-fct" id="Jh8-3c-1D1"/>
+                        <outlet property="phoneNumberTextField" destination="Og3-vC-8gv" id="BEy-Hv-AID"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gFn-oN-r2b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -354,7 +382,7 @@
         <!--Contacts-->
         <scene sceneID="d88-fy-Udd">
             <objects>
-                <viewController id="tTl-RW-81p" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="tTl-RW-81p" customClass="PlaylistContactsViewController" customModule="Muze" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="msV-7e-lxa"/>
                         <viewControllerLayoutGuide type="bottom" id="B3u-ab-lHG"/>
@@ -362,13 +390,63 @@
                     <view key="view" contentMode="scaleToFill" id="PiN-Z6-wkg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yuN-UK-dEv">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlaylistContactsCell" id="V1Z-A5-r8e" customClass="PlaylistContactsTableViewCell" customModule="Muze" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="V1Z-A5-r8e" id="g11-yC-xMg">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JvW-Vw-QRo">
+                                                    <rect key="frame" x="8" y="26.5" width="44" height="14.5"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0U-yn-x4K">
+                                                    <rect key="frame" x="8" y="0.0" width="41" height="26.5"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="I0U-yn-x4K" firstAttribute="leading" secondItem="g11-yC-xMg" secondAttribute="leading" constant="8" id="Jep-BN-K4Z"/>
+                                                <constraint firstAttribute="bottom" secondItem="JvW-Vw-QRo" secondAttribute="bottom" constant="2.5" id="NAo-4Z-4GN"/>
+                                                <constraint firstItem="JvW-Vw-QRo" firstAttribute="top" secondItem="I0U-yn-x4K" secondAttribute="bottom" id="WmW-8u-Ryz"/>
+                                                <constraint firstItem="I0U-yn-x4K" firstAttribute="top" secondItem="g11-yC-xMg" secondAttribute="top" id="YuZ-9y-qnd"/>
+                                                <constraint firstItem="JvW-Vw-QRo" firstAttribute="leading" secondItem="I0U-yn-x4K" secondAttribute="leading" id="dgh-oi-Bdn"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="I0U-yn-x4K" id="Oc1-5b-pKr"/>
+                                            <outlet property="phoneNumberLabel" destination="JvW-Vw-QRo" id="K1j-eo-lA1"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="yuN-UK-dEv" firstAttribute="top" secondItem="msV-7e-lxa" secondAttribute="bottom" id="9V2-aZ-GSP"/>
+                            <constraint firstItem="B3u-ab-lHG" firstAttribute="top" secondItem="yuN-UK-dEv" secondAttribute="bottom" id="VcD-8p-6C3"/>
+                            <constraint firstAttribute="trailing" secondItem="yuN-UK-dEv" secondAttribute="trailing" id="WyG-QU-YVf"/>
+                            <constraint firstItem="yuN-UK-dEv" firstAttribute="leading" secondItem="PiN-Z6-wkg" secondAttribute="leading" id="bC5-wL-ovV"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Contacts" id="6TB-8p-v2N"/>
+                    <connections>
+                        <outlet property="contactsTableView" destination="yuN-UK-dEv" id="ZJA-5u-fJK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hXz-k5-Eow" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5119" y="-289"/>
+            <point key="canvasLocation" x="5117.6000000000004" y="-289.20539730134936"/>
         </scene>
         <!--Add Music-->
         <scene sceneID="n5o-He-Ouv">

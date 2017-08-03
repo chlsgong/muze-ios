@@ -34,6 +34,7 @@ class ConfirmViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: UITextFieldDelegate methods
     
+    // bug after changing character in the middle
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let lenLimit = 6
         

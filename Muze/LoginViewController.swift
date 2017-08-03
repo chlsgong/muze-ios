@@ -19,6 +19,7 @@ class LoginViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    // have to swipe up for segue bug
     @IBAction func appleMusicButtonTapped(_ sender: Any) {
         authMgr.requestCloudServiceAuthorization { authorizationStatus in
             if authorizationStatus == .authorized {

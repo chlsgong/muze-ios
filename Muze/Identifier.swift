@@ -13,5 +13,14 @@ enum Identifier {
         case toConnect = "ToConnect"
         case toConfirm = "ToConfirm"
         case toTabBar = "ToTabBar"
+        case toPlaylistDetail = "ToPlaylistDetail"
+        case toAddListeners = "ToAddListeners"
+        case toContacts = "ToContacts"
+    }
+    
+    enum Cell: String {
+        case playlist = "PlaylistCell"
+        case playlistDetailCell = "PlaylistDetailCell"
+        case playlistContactsCell = "PlaylistContactsCell"
     }
 }

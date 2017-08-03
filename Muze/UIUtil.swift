@@ -22,3 +22,9 @@ extension UIStoryboardSegue {
         return self.identifier == id.rawValue
     }
 }
+
+extension UITableView {
+    func dequeueReusableCell(withIdentifier id: Identifier.Cell, for indexPath: IndexPath) -> UITableViewCell {
+        return self.dequeueReusableCell(withIdentifier: id.rawValue, for: indexPath)
+    }
+}

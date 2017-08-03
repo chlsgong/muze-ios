@@ -14,7 +14,7 @@ class MuzeClient {
     
     // MARK: - HTTP methods
     
-    func requestVerificationCode(phoneNumber: String, completion: @escaping (Error?) -> Void) {
+    func requestVerificationCode(phoneNumber: String, completion: ((Error?) -> Void)?) {
         let parameter = [
             "phone_number": phoneNumber
         ]
@@ -22,7 +22,10 @@ class MuzeClient {
         request(endpoint: .postVerificationCode, method: .post, parameters: parameter).responseData { response in
             let error = response.result.error
             self.handleHTTPError(error: error)
-            completion(error)
+            
+            DispatchQueue.main.async {
+                completion?(error)
+            }
         }
     }
     
@@ -44,7 +47,39 @@ class MuzeClient {
             case .failure(let error):
                 self.handleHTTPError(error: error)
             }
-            completion(userId)
+            
+            DispatchQueue.main.async {
+                completion(userId)
+            }
+        }
+    }
+    
+    func getUser(userId: String, completion: @escaping (UserModel?) -> Void) {
+        let parameter = [
+            "user_id": userId
+        ]
+        
+        request(endpoint: .getUsers, method: .get, parameters: parameter).responseJSON { response in
+            var userModel: UserModel?
+            
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                let userId = json["id"].stringValue
+                let phoneNumber = json["phoneNumber"].stringValue
+                let badgeCount = json["badgeCount"].intValue
+                let apnToken = json["apnToken"].stringValue
+                let ownedPlaylists = json["ownedPlaylists"].arrayObject as! [String]
+                let sharedPlaylists = json["sharedPlaylists"].arrayObject as! [String]
+                userModel = UserModel(id: userId, phoneNumber: phoneNumber, badgeCount: badgeCount, apnToken: apnToken, ownedPlaylists: ownedPlaylists, sharedPlaylists: sharedPlaylists)
+                
+            case .failure(let error):
+                self.handleHTTPError(error: error)
+            }
+            
+            DispatchQueue.main.async {
+                completion(userModel)
+            }
         }
     }
     
@@ -55,6 +90,90 @@ class MuzeClient {
         ]
         
         request(endpoint: .putUsersAPNToken, method: .put, parameters: parameter, encoding: JSONEncoding.default).responseData { response in
+            let error = response.result.error
+            self.handleHTTPError(error: error)
+            completion?(error)
+        }
+    }
+    
+    func getPlaylistTitles(playlistIds: [String], completion: @escaping ([PlaylistModel]) -> Void) {
+        var playlistTitles = [PlaylistModel]()
+        let group = DispatchGroup()
+        
+        for id in playlistIds {
+            group.enter()
+            getPlaylistTitle(playlistId: id) { playlistModel in
+                if playlistModel != nil {
+                    playlistTitles.append(playlistModel!)
+                }
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: .main) {
+            completion(playlistTitles)
+        }
+    }
+    
+    private func getPlaylistTitle(playlistId: String, completion: @escaping (PlaylistModel?) -> Void) {
+        let parameter = [
+            "playlist_id": playlistId
+        ]
+        
+        request(endpoint: .getPlaylistTitle, method: .get, parameters: parameter).responseJSON { response in
+            var playlistModel: PlaylistModel?
+            
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                let playlistId = json["id"].stringValue
+                let title = json["title"].stringValue
+                let creationTime = json["creationTime"].stringValue
+                playlistModel = PlaylistModel(id: playlistId, title: title, creationTime: creationTime)
+                
+            case .failure(let error):
+                self.handleHTTPError(error: error)
+            }
+            
+            DispatchQueue.main.async {
+                completion(playlistModel)
+            }
+        }
+    }
+    
+    func getPlaylist(playlistModel: PlaylistModel, completion: @escaping (PlaylistModel) -> Void) {
+        let parameter = [
+            "playlist_id": playlistModel.id
+        ]
+        
+        request(endpoint: .getPlaylist, method: .get, parameters: parameter).responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                let playlistId = json["id"].stringValue
+                let creatorId = json["creatorId"].stringValue
+                let playlist = json["playlist"].arrayObject as! [Song]
+                let size = json["size"].intValue
+                let creationTime = json["creationTime"].stringValue
+                playlistModel.update(id: playlistId, title: playlistModel.title, creationTime: creationTime, creatorId: creatorId, playlist: playlist, size: size)
+                
+            case .failure(let error):
+                self.handleHTTPError(error: error)
+            }
+            
+            DispatchQueue.main.async {
+                completion(playlistModel)
+            }
+        }
+    }
+    
+    func addPlaylistUsers(playlistId: String, phoneNumbers: [String], completion: ((Error?) -> Void)?) {
+        let parameter: [String: Any] = [
+            "playlist_id": playlistId,
+            "phone_numbers": phoneNumbers
+        ]
+        
+        request(endpoint: .putPlaylistUsers, method: .put, parameters: parameter, encoding: JSONEncoding.default).responseData { response in
             let error = response.result.error
             self.handleHTTPError(error: error)
             completion?(error)

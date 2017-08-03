@@ -1,59 +1,53 @@
 //
-//  ConnectViewController.swift
+//  PlaylistListenersViewController.swift
 //  Muze
 //
-//  Created by Charles Gong on 7/25/17.
+//  Created by Charles Gong on 7/31/17.
 //  Copyright © 2017 Charles Gong. All rights reserved.
 //
 
 import UIKit
 
-class ConnectViewController: UIViewController, UITextFieldDelegate {
+class PlaylistListenersViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var phoneNumberTextField: UITextField!
-    @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var addPhoneNumberButton: UIButton!
+    @IBOutlet weak var addFromContactsButton: UIButton!
+    @IBOutlet weak var listenersTableView: UITableView!
     
-    private let muzeClient = MuzeClient()
+    let muzeClient = MuzeClient()
+    
+    var playlistId: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
         
         phoneNumberTextField.delegate = self
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
-        if phoneNumberTextField.text!.isEmpty {
-            sendButton.isEnabled = false
-        }
+        addPhoneNumberButton.isEnabled = false
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        phoneNumberTextField.resignFirstResponder()
-        
-        super.touchesBegan(touches, with: event)
+        // Dispose of any resources that can be recreated.
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.isIdentified(byId: .toConfirm) {
-            if let destination = segue.destination as? ConfirmViewController {
-                destination.phoneNumber = phoneNumberTextField.text!
+        if segue.isIdentified(byId: .toContacts) {
+            if let destination = segue.destination as? PlaylistContactsViewController {
+                destination.playlistId = playlistId
             }
         }
     }
     
-    // MARK: UITextFieldDelegate Methods
+    // MARK: UITextFieldDelegate methods
     
-    // bug after changing character in the middle
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let text = textField.text else { return true }
         
         let lenLimit = 12
-
+        
         if string.isEmpty {
             guard range.length == 1 else { return false }
             
@@ -63,7 +57,7 @@ class ConnectViewController: UIViewController, UITextFieldDelegate {
                 return false
             }
             if range.location == lenLimit - 1 {
-                sendButton.isEnabled = false
+                addPhoneNumberButton.isEnabled = false
             }
         }
         else {
@@ -76,27 +70,23 @@ class ConnectViewController: UIViewController, UITextFieldDelegate {
                 return false
             }
             if range.location == lenLimit - 1 {
-                sendButton.isEnabled = true
+                addPhoneNumberButton.isEnabled = true
             }
         }
         
         return true
     }
     
-    // MARK: IBAction Methods
+    // IBAction methods
     
-    @IBAction func sendButtonTapped(_ sender: Any) {
-        sendButton.isEnabled = false
+    @IBAction func addPhoneNumberButtonTapped(_ sender: Any) {
+        addPhoneNumberButton.isEnabled = false
         
         let phoneNumber = phoneNumberTextField.text!.replacingOccurrences(of: "-", with: "")
         
-        muzeClient.requestVerificationCode(phoneNumber: phoneNumber) { error in
-            self.sendButton.isEnabled = true
+        muzeClient.addPlaylistUsers(playlistId: playlistId, phoneNumbers: [phoneNumber]) { error in
+            self.addPhoneNumberButton.isEnabled = true
         }
     }
-    
-    @IBAction func cancelButtonTapped(_ sender: Any) {
-        self.navigationController?.dismiss(animated: true, completion: nil)
-    }
-    
+
 }
