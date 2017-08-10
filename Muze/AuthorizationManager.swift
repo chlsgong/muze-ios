@@ -10,6 +10,7 @@ import Foundation
 import StoreKit
 import MediaPlayer
 import UserNotifications
+import Contacts
 
 //  - TODO:
 // Add request country code
@@ -19,6 +20,7 @@ class AuthorizationManager {
     private let cloudServiceController = SKCloudServiceController()
     private var cloudServiceCapabilities = SKCloudServiceCapability()
     private let userNotificationCenter = UNUserNotificationCenter.current()
+    private let contactStore = CNContactStore()
     
     private var cloudServiceStorefrontCountryCode = "us"
     
@@ -81,6 +83,7 @@ class AuthorizationManager {
         return availableCapabilities
     }
     
+    // change to match contacts (return type)
     func requestNotificationCenterAuthorization(completion: ((Bool) -> Void)?) {
         userNotificationCenter.getNotificationSettings() { settings in
             if settings.authorizationStatus == .notDetermined {
@@ -97,6 +100,16 @@ class AuthorizationManager {
         }
     }
     
+    func requestContactsAuthorization(completion: @escaping (CNAuthorizationStatus) -> Void) {
+        guard CNContactStore.authorizationStatus(for: .contacts) == .notDetermined else {
+            completion(CNContactStore.authorizationStatus(for: .contacts))
+            return
+        }
+        
+        contactStore.requestAccess(for: .contacts) { granted, error in
+            completion(CNContactStore.authorizationStatus(for: .contacts))
+        }
+    }
 }
 
 extension SKCloudServiceCapability {

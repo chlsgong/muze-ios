@@ -16,7 +16,9 @@ enum Endpoint {
     case getUsers
     case getPlaylistTitle
     case getPlaylist
+    case getPlaylistUsers
     case putPlaylistUsers
+    case deletePlaylistUsers
     
     var url: String {
         let host = "http://10.175.1.25:3000"
@@ -28,7 +30,9 @@ enum Endpoint {
         case .getUsers: return host + "/users"
         case .getPlaylistTitle: return host + "/playlist/title"
         case .getPlaylist: return host + "/playlist"
+        case .getPlaylistUsers: return host + "/playlist/users"
         case .putPlaylistUsers: return host + "/playlist/users"
+        case .deletePlaylistUsers: return host + "/playlist/users"
         }
     }
 }

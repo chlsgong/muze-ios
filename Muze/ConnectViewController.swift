@@ -16,13 +16,11 @@ class ConnectViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         phoneNumberTextField.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         if phoneNumberTextField.text!.isEmpty {
             sendButton.isEnabled = false
         }
@@ -34,7 +32,6 @@ class ConnectViewController: UIViewController, UITextFieldDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         phoneNumberTextField.resignFirstResponder()
-        
         super.touchesBegan(touches, with: event)
     }
     

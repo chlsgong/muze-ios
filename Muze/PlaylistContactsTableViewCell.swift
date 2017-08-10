@@ -11,6 +11,7 @@ import UIKit
 class PlaylistContactsTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var phoneNumberLabel: UILabel!
+    @IBOutlet weak var checkBoxView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

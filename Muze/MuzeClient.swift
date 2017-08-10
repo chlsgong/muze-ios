@@ -92,7 +92,10 @@ class MuzeClient {
         request(endpoint: .putUsersAPNToken, method: .put, parameters: parameter, encoding: JSONEncoding.default).responseData { response in
             let error = response.result.error
             self.handleHTTPError(error: error)
-            completion?(error)
+            
+            DispatchQueue.main.async {
+                completion?(error)
+            }
         }
     }
     
@@ -167,6 +170,34 @@ class MuzeClient {
         }
     }
     
+    func getPlaylistUsers(playlistId: String, completion: @escaping ([(String, String)]) -> Void) {
+        let parameter = [
+            "playlist_id": playlistId
+        ]
+        
+        request(endpoint: .getPlaylistUsers, method: .get, parameters: parameter).responseJSON { response in
+            var playlistUsers = [(String, String)]()
+            
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                let users = json["users"].arrayValue
+                for user in users {
+                    let userId = user["id"].stringValue
+                    let phoneNumber = user["phoneNumber"].stringValue
+                    playlistUsers.append((userId, phoneNumber))
+                }
+                    
+            case .failure(let error):
+                self.handleHTTPError(error: error)
+            }
+            
+            DispatchQueue.main.async {
+                completion(playlistUsers)
+            }
+        }
+    }
+    
     func addPlaylistUsers(playlistId: String, phoneNumbers: [String], completion: ((Error?) -> Void)?) {
         let parameter: [String: Any] = [
             "playlist_id": playlistId,
@@ -176,7 +207,26 @@ class MuzeClient {
         request(endpoint: .putPlaylistUsers, method: .put, parameters: parameter, encoding: JSONEncoding.default).responseData { response in
             let error = response.result.error
             self.handleHTTPError(error: error)
-            completion?(error)
+            
+            DispatchQueue.main.async {
+                completion?(error)
+            }
+        }
+    }
+    
+    func deletePlaylistUser(playlistId: String, userId: String, completion: ((Error?) -> Void)?) {
+        let parameter = [
+            "playlist_id": playlistId,
+            "user_id": userId
+        ]
+        
+        request(endpoint: .deletePlaylistUsers, method: .delete, parameters: parameter, encoding: JSONEncoding.default).responseData { response in
+            let error = response.result.error
+            self.handleHTTPError(error: error)
+            
+            DispatchQueue.main.async {
+                completion?(error)
+            }
         }
     }
     

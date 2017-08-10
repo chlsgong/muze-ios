@@ -316,7 +316,7 @@
                                 <rect key="frame" x="0.0" y="184" width="375" height="434"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="WCo-uB-lrp" customClass="PlaylistListenersTableViewCell" customModule="Muze" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlaylistListenersCell" id="WCo-uB-lrp" customClass="PlaylistListenersTableViewCell" customModule="Muze" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WCo-uB-lrp" id="DXz-PL-GbU">
@@ -347,8 +347,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="phoneNumberLabel" destination="oUs-V9-nzz" id="v4y-G9-y0Q"/>
                                             <outlet property="removeButton" destination="q5b-Wk-BfF" id="ZBB-Ch-Vfm"/>
-                                            <outlet property="titleLabel" destination="oUs-V9-nzz" id="5W2-0v-SHl"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -365,9 +365,7 @@
                             <constraint firstItem="XRG-2h-y3J" firstAttribute="leading" secondItem="gXR-e3-x6y" secondAttribute="leading" id="sv1-AC-rmf"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Add Listeners" id="P1r-V7-4gj">
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="4C3-EL-aBX"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Add Listeners" id="P1r-V7-4gj"/>
                     <connections>
                         <outlet property="addFromContactsButton" destination="8y4-5f-80U" id="fkk-cS-DVr"/>
                         <outlet property="addPhoneNumberButton" destination="GSs-Ej-UPS" id="0dE-Lh-evH"/>
@@ -391,7 +389,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yuN-UK-dEv">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yuN-UK-dEv">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -414,8 +412,18 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eCu-pf-Nx3">
+                                                    <rect key="frame" x="346" y="11.5" width="21" height="21"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="Wbl-L1-lWN"/>
+                                                        <constraint firstAttribute="width" constant="21" id="d9i-9W-znY"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="eCu-pf-Nx3" firstAttribute="centerY" secondItem="g11-yC-xMg" secondAttribute="centerY" id="0TY-lK-wCO"/>
+                                                <constraint firstAttribute="trailing" secondItem="eCu-pf-Nx3" secondAttribute="trailing" constant="8" id="8Dm-EZ-riC"/>
                                                 <constraint firstItem="I0U-yn-x4K" firstAttribute="leading" secondItem="g11-yC-xMg" secondAttribute="leading" constant="8" id="Jep-BN-K4Z"/>
                                                 <constraint firstAttribute="bottom" secondItem="JvW-Vw-QRo" secondAttribute="bottom" constant="2.5" id="NAo-4Z-4GN"/>
                                                 <constraint firstItem="JvW-Vw-QRo" firstAttribute="top" secondItem="I0U-yn-x4K" secondAttribute="bottom" id="WmW-8u-Ryz"/>
@@ -424,6 +432,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="checkBoxView" destination="eCu-pf-Nx3" id="Fnf-TV-FmH"/>
                                             <outlet property="nameLabel" destination="I0U-yn-x4K" id="Oc1-5b-pKr"/>
                                             <outlet property="phoneNumberLabel" destination="JvW-Vw-QRo" id="K1j-eo-lA1"/>
                                         </connections>
@@ -439,9 +448,16 @@
                             <constraint firstItem="yuN-UK-dEv" firstAttribute="leading" secondItem="PiN-Z6-wkg" secondAttribute="leading" id="bC5-wL-ovV"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Contacts" id="6TB-8p-v2N"/>
+                    <navigationItem key="navigationItem" title="Contacts" id="6TB-8p-v2N">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="0ws-2o-1zd">
+                            <connections>
+                                <action selector="doneButtonTapped:" destination="tTl-RW-81p" id="r6p-gg-tsw"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="contactsTableView" destination="yuN-UK-dEv" id="ZJA-5u-fJK"/>
+                        <outlet property="doneButton" destination="0ws-2o-1zd" id="uit-Vm-Ead"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hXz-k5-Eow" userLabel="First Responder" sceneMemberID="firstResponder"/>

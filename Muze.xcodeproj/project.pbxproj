@@ -13,6 +13,7 @@
 		D10120531EE74DA900E7B88B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D10120521EE74DA900E7B88B /* Assets.xcassets */; };
 		D10120561EE74DA900E7B88B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D10120541EE74DA900E7B88B /* LaunchScreen.storyboard */; };
 		D101205E1EE7608300E7B88B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D101205D1EE7608300E7B88B /* LoginViewController.swift */; };
+		D1209BE41F3BE70D00A04C47 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1209BE31F3BE70D00A04C47 /* Contact.swift */; };
 		D13DCD921EF61B8300969FC0 /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13DCD911EF61B8300969FC0 /* AuthorizationManager.swift */; };
 		D14DE8C51F2B2C4C0059C07E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14DE8C41F2B2C4C0059C07E /* User.swift */; };
 		D14DE8C71F2B32BE0059C07E /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14DE8C61F2B32BE0059C07E /* UserDefaultsKey.swift */; };
@@ -47,6 +48,7 @@
 		D10120551EE74DA900E7B88B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D10120571EE74DA900E7B88B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D101205D1EE7608300E7B88B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		D1209BE31F3BE70D00A04C47 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		D120A9D71F206653001C2BCA /* Muze.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Muze.entitlements; sourceTree = "<group>"; };
 		D13DCD911EF61B8300969FC0 /* AuthorizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
 		D14DE8C41F2B2C4C0059C07E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				D188938E1F300C86000F3904 /* UserModel.swift */,
 				D188938C1F300C76000F3904 /* PlaylistModel.swift */,
 				D1AE86831F31AAC20047F2ED /* Song.swift */,
+				D1209BE31F3BE70D00A04C47 /* Contact.swift */,
 				D1501AED1F27CDCD004C9B89 /* MuzeClient.swift */,
 				D1501AEF1F27D031004C9B89 /* MuzeClientSession.swift */,
 				D1501AF11F27D0F9004C9B89 /* MuzeClientConstants.swift */,
@@ -298,6 +301,7 @@
 				D1C2DDEC1F271E420090AA56 /* Utility.swift in Sources */,
 				D101204C1EE74DA900E7B88B /* AppDelegate.swift in Sources */,
 				D1C2DDEA1F2718840090AA56 /* ConfirmViewController.swift in Sources */,
+				D1209BE41F3BE70D00A04C47 /* Contact.swift in Sources */,
 				D1C7F5981F0179890030851C /* PlaylistViewController.swift in Sources */,
 				D1B39DEF1EF6439F001FFF01 /* Identifier.swift in Sources */,
 				D1501AF01F27D031004C9B89 /* MuzeClientSession.swift in Sources */,

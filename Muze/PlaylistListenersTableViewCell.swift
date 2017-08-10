@@ -9,8 +9,13 @@
 import UIKit
 
 class PlaylistListenersTableViewCell: UITableViewCell {
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var phoneNumberLabel: UILabel!
     @IBOutlet weak var removeButton: UIButton!
+    
+    let muzeClient = MuzeClient()
+    
+    var viewController: PlaylistListenersViewController!
+    var userId: String!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,5 +29,10 @@ class PlaylistListenersTableViewCell: UITableViewCell {
     }
 
     @IBAction func removeButtonTapped(_ sender: Any) {
+        removeButton.isEnabled = false
+        muzeClient.deletePlaylistUser(playlistId: viewController.playlistId, userId: userId) { error in
+            self.viewController.reloadTableView()
+            self.removeButton.isEnabled = true
+        }
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PlaylistListenersViewController: UIViewController, UITextFieldDelegate {
+class PlaylistListenersViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var phoneNumberTextField: UITextField!
     @IBOutlet weak var addPhoneNumberButton: UIButton!
     @IBOutlet weak var addFromContactsButton: UIButton!
@@ -16,7 +16,9 @@ class PlaylistListenersViewController: UIViewController, UITextFieldDelegate {
     
     let muzeClient = MuzeClient()
     
+    // exclude existing numbers
     var playlistId: String!
+    var playlistUsers = [(id: String, phoneNumber: String)]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,12 +27,25 @@ class PlaylistListenersViewController: UIViewController, UITextFieldDelegate {
         
         phoneNumberTextField.delegate = self
         
+        listenersTableView.delegate = self
+        listenersTableView.dataSource = self
+        
         addPhoneNumberButton.isEnabled = false
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadTableView()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        phoneNumberTextField.resignFirstResponder()
+        super.touchesBegan(touches, with: event)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -41,8 +56,16 @@ class PlaylistListenersViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    func reloadTableView() {
+        muzeClient.getPlaylistUsers(playlistId: playlistId) { users in
+            self.playlistUsers = users
+            self.listenersTableView.reloadData()
+        }
+    }
+    
     // MARK: UITextFieldDelegate methods
     
+    // bug after changing character in the middle
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let text = textField.text else { return true }
         
@@ -77,6 +100,24 @@ class PlaylistListenersViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    // UITableViewDelegate methods
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return playlistUsers.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: .playlistListenersCell, for: indexPath) as! PlaylistListenersTableViewCell
+        let playlistUser = playlistUsers[indexPath.row]
+        
+        cell.selectionStyle = .none
+        cell.phoneNumberLabel.text = playlistUser.phoneNumber
+        cell.userId = playlistUser.id
+        cell.viewController = self
+        
+        return cell
+    }
+    
     // IBAction methods
     
     @IBAction func addPhoneNumberButtonTapped(_ sender: Any) {
@@ -85,6 +126,7 @@ class PlaylistListenersViewController: UIViewController, UITextFieldDelegate {
         let phoneNumber = phoneNumberTextField.text!.replacingOccurrences(of: "-", with: "")
         
         muzeClient.addPlaylistUsers(playlistId: playlistId, phoneNumbers: [phoneNumber]) { error in
+            self.reloadTableView()
             self.addPhoneNumberButton.isEnabled = true
         }
     }

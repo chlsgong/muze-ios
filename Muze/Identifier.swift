@@ -21,6 +21,7 @@ enum Identifier {
     enum Cell: String {
         case playlist = "PlaylistCell"
         case playlistDetailCell = "PlaylistDetailCell"
+        case playlistListenersCell = "PlaylistListenersCell"
         case playlistContactsCell = "PlaylistContactsCell"
     }
 }
