@@ -14,6 +14,7 @@ enum Endpoint {
     case getVerificationCheck
     case putUsersAPNToken
     case getUsers
+    case postPlaylist
     case getPlaylistTitle
     case getPlaylist
     case getPlaylistUsers
@@ -28,6 +29,7 @@ enum Endpoint {
         case .getVerificationCheck: return host + "/verification/check"
         case .putUsersAPNToken: return host + "/users/apntoken"
         case .getUsers: return host + "/users"
+        case .postPlaylist: return host + "/playlist"
         case .getPlaylistTitle: return host + "/playlist/title"
         case .getPlaylist: return host + "/playlist"
         case .getPlaylistUsers: return host + "/playlist/users"

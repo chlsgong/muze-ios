@@ -142,9 +142,14 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Playlists" id="z8R-Oa-duI">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="5EK-4N-3Vg"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="5EK-4N-3Vg">
+                            <connections>
+                                <action selector="createPlaylistButtonTapped:" destination="rAA-gD-DTU" id="Hj5-1R-InW"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="createPlaylistButton" destination="5EK-4N-3Vg" id="J7I-8z-yvd"/>
                         <outlet property="playlistTableView" destination="xvF-iE-gsF" id="uN7-Gm-EZT"/>
                         <segue destination="O1j-k4-YZy" kind="show" identifier="ToPlaylistDetail" id="ftf-ce-Kfc"/>
                     </connections>
@@ -390,7 +395,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yuN-UK-dEv">
-                                <rect key="frame" x="0.0" y="104" width="375" height="514"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlaylistContactsCell" id="V1Z-A5-r8e" customClass="PlaylistContactsTableViewCell" customModule="Muze" customModuleProvider="target">

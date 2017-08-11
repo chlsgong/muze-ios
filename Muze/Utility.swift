@@ -47,10 +47,6 @@ extension String {
         return CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: self))
     }
     
-    func setDefault() -> String {
-        return self.isEmpty ? "None": self
-    }
-    
     func normalizePhoneNumber() -> String {
         let phoneNumber = String(self.characters.filter { "0123456789".characters.contains($0) })
         let index = phoneNumber.index(phoneNumber.startIndex, offsetBy: phoneNumber.characters.count - 10)

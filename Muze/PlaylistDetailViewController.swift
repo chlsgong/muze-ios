@@ -10,8 +10,7 @@ import UIKit
 import SocketIO
 
 // - TODO:
-// Get playlist data
-// Connect to socket
+// Leave function
 
 class PlaylistDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var playlistDetailTableView: UITableView!

@@ -33,7 +33,7 @@ class MuzeClient {
         let parameter = [
             "code": code,
             "phone_number": phoneNumber,
-            "apn_token": apnToken.setDefault()
+            "apn_token": apnToken
         ]
                 
         request(endpoint: .getVerificationCheck, method: .get, parameters: parameter).responseJSON { response in
@@ -90,6 +90,22 @@ class MuzeClient {
         ]
         
         request(endpoint: .putUsersAPNToken, method: .put, parameters: parameter, encoding: JSONEncoding.default).responseData { response in
+            let error = response.result.error
+            self.handleHTTPError(error: error)
+            
+            DispatchQueue.main.async {
+                completion?(error)
+            }
+        }
+    }
+    
+    func createPlaylist(creatorId: String, title: String, completion: ((Error?) -> Void)?) {
+        let parameter = [
+            "creator_id": creatorId,
+            "title": title
+        ]
+        
+        request(endpoint: .postPlaylist, method: .post, parameters: parameter, encoding: JSONEncoding.default).responseData { response in
             let error = response.result.error
             self.handleHTTPError(error: error)
             
