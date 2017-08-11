@@ -12,7 +12,7 @@ class PlaylistListenersTableViewCell: UITableViewCell {
     @IBOutlet weak var phoneNumberLabel: UILabel!
     @IBOutlet weak var removeButton: UIButton!
     
-    let muzeClient = MuzeClient()
+    private let muzeClient = MuzeClient()
     
     var viewController: PlaylistListenersViewController!
     var userId: String!

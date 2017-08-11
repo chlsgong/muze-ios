@@ -9,12 +9,12 @@
 import Foundation
 
 class UserModel {
-    var id: String
-    var phoneNumber: String
-    var badgeCount: Int
-    var apnToken: String
-    var ownedPlaylists: [String]
-    var sharedPlaylists: [String]
+    private(set) var id: String
+    private(set) var phoneNumber: String
+    private(set) var badgeCount: Int
+    private(set) var apnToken: String
+    private(set) var ownedPlaylists: [String]
+    private(set) var sharedPlaylists: [String]
     
     init(id: String, phoneNumber: String, badgeCount: Int, apnToken: String, ownedPlaylists: [String], sharedPlaylists: [String]) {
         self.id = id

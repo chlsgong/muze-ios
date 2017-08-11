@@ -8,5 +8,6 @@ target 'Muze' do
   # Pods for Muze
   pod 'Alamofire', '~> 4.4'
   pod 'SwiftyJSON'
+  pod 'Socket.IO-Client-Swift'
 
 end

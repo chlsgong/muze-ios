@@ -9,8 +9,8 @@
 import Foundation
 
 class Song {
-    var title: String
-    var artist: String
+    private(set) var title: String
+    private(set) var artist: String
     
     init(title: String, artist: String) {
         self.title = title

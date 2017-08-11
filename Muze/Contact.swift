@@ -9,10 +9,10 @@
 import Foundation
 
 class Contact {
-    var id: String
-    var firstName: String
-    var lastName: String
-    var phoneNumber: String
+    private(set) var id: String
+    private(set) var firstName: String
+    private(set) var lastName: String
+    private(set) var phoneNumber: String
     
     init(id: String, firstName: String, lastName: String, phoneNumber: String) {
         self.id = id

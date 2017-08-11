@@ -9,14 +9,17 @@
 import UIKit
 import Contacts
 
+//  - TODO:
+// Exclude existing numbers
+// Add hypens in between numbers
+
 class PlaylistContactsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var contactsTableView: UITableView!
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
-    let authMgr = AuthorizationManager()
-    let muzeClient = MuzeClient()
+    private let authMgr = AuthorizationManager()
+    private let muzeClient = MuzeClient()
     
-    // exclude existing numbers
     var playlistId: String!
     var contacts = [Contact]()
     var selectedContacts = [Contact]()
@@ -97,7 +100,7 @@ class PlaylistContactsViewController: UIViewController, UITableViewDelegate, UIT
         
         let phoneNumbers = selectedContacts.map { $0.phoneNumber }
         muzeClient.addPlaylistUsers(playlistId: playlistId, phoneNumbers: phoneNumbers) { error in
-            self.doneButton.isEnabled = true
+            self.navigationController?.popViewController(animated: true)
         }
     }
     

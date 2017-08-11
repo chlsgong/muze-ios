@@ -153,12 +153,11 @@ class MuzeClient {
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                let playlistId = json["id"].stringValue
                 let creatorId = json["creatorId"].stringValue
                 let playlist = json["playlist"].arrayObject as! [Song]
                 let size = json["size"].intValue
                 let creationTime = json["creationTime"].stringValue
-                playlistModel.update(id: playlistId, title: playlistModel.title, creationTime: creationTime, creatorId: creatorId, playlist: playlist, size: size)
+                playlistModel.update(title: playlistModel.title, creationTime: creationTime, creatorId: creatorId, playlist: playlist, size: size)
                 
             case .failure(let error):
                 self.handleHTTPError(error: error)
@@ -239,6 +238,10 @@ class MuzeClient {
     // MARK: - Helpers
     
     private func handleHTTPError(error: Error?) {
+        guard error != nil else {
+            return
+        }
+        
         if let error = error as? AFError {
             switch error {
             case .invalidURL(let url):

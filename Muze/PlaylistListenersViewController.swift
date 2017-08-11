@@ -8,15 +8,18 @@
 
 import UIKit
 
+// - TODO:
+// Exclude existing numbers
+// Add hyphens in between numbers
+
 class PlaylistListenersViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var phoneNumberTextField: UITextField!
     @IBOutlet weak var addPhoneNumberButton: UIButton!
     @IBOutlet weak var addFromContactsButton: UIButton!
     @IBOutlet weak var listenersTableView: UITableView!
     
-    let muzeClient = MuzeClient()
+    private let muzeClient = MuzeClient()
     
-    // exclude existing numbers
     var playlistId: String!
     var playlistUsers = [(id: String, phoneNumber: String)]()
     
@@ -56,7 +59,7 @@ class PlaylistListenersViewController: UIViewController, UITextFieldDelegate, UI
         }
     }
     
-    func reloadTableView() {
+ func reloadTableView() {
         muzeClient.getPlaylistUsers(playlistId: playlistId) { users in
             self.playlistUsers = users
             self.listenersTableView.reloadData()

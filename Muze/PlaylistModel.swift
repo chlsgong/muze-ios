@@ -8,13 +8,16 @@
 
 import Foundation
 
+// - TODO:
+// Convert creationTime to Date
+
 class PlaylistModel {
-    var id: String
-    var title: String
-    var creationTime: Date
-    var creatorId: String
-    var playlist: [Song]
-    var size: Int
+    private(set) var id: String
+    private(set) var title: String
+    private(set) var creationTime: Date
+    private(set) var creatorId: String
+    private(set) var playlist: [Song]
+    private(set) var size: Int
     
     init(id: String, title: String, creationTime: Date) {
         self.id = id
@@ -26,16 +29,23 @@ class PlaylistModel {
     }
     
     convenience init(id: String, title: String, creationTime: String) {
-        // convert creationTime to date
         self.init(id: id, title: title, creationTime: Date())
     }
     
-    func update(id: String, title: String, creationTime: String, creatorId: String, playlist: [Song], size: Int) {
-        self.id = id
+    func update(title: String, creationTime: String, creatorId: String, playlist: [Song], size: Int) {
         self.title = title
         self.creationTime = Date()
         self.creatorId = creatorId
         self.playlist = playlist
         self.size = size
+    }
+    
+    func update(playlist: [Song], size: Int) {
+        self.playlist = playlist
+        self.size = size
+    }
+    
+    func update(title: String) {
+        self.title = title
     }
 }

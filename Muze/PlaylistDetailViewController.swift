@@ -7,9 +7,17 @@
 //
 
 import UIKit
+import SocketIO
+
+// - TODO:
+// Get playlist data
+// Connect to socket
 
 class PlaylistDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var playlistDetailTableView: UITableView!
+    
+    private let muzeClient = MuzeClient()
+    private let socketClient = SocketClient()
     
     var playlistModel: PlaylistModel!
     var playlist = [Song]()
@@ -21,8 +29,13 @@ class PlaylistDetailViewController: UIViewController, UITableViewDelegate, UITab
         
         self.navigationItem.title = playlistModel.title
         
-        // get playlist data
-        // connect to socket
+        registerSocketEvents()
+        socketClient.connect()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        socketClient.disconnect()
+        super.viewDidDisappear(animated)
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,6 +48,30 @@ class PlaylistDetailViewController: UIViewController, UITableViewDelegate, UITab
             if let destination = segue.destination as? PlaylistListenersViewController {
                 destination.playlistId = playlistModel.id
             }            
+        }
+    }
+    
+    func reloadTableView() {
+        muzeClient.getPlaylist(playlistModel: playlistModel) { playlistModel in
+            self.playlistModel = playlistModel
+            self.playlist = playlistModel.playlist
+            
+            self.playlistDetailTableView.reloadData()
+        }
+    }
+    
+    func registerSocketEvents() {
+        socketClient.onConnect {
+            self.socketClient.emitRoom(roomId: self.playlistModel.id)
+        }
+        
+        socketClient.onUpdatePlaylist(playlistModel: playlistModel) { playlistModel in
+            self.playlistModel = playlistModel
+        }
+        
+        socketClient.onUpdatePlaylistTitle { title in
+            self.playlistModel.update(title: title)
+            self.navigationItem.title = title
         }
     }
     

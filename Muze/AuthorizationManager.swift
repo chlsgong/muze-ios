@@ -24,12 +24,6 @@ class AuthorizationManager {
     
     private var cloudServiceStorefrontCountryCode = "us"
     
-    init() {
-        if SKCloudServiceController.authorizationStatus() == .authorized {
-            requestCloudServiceCapabilities()
-        }
-    }
-    
     func requestCloudServiceAuthorization(completion: @escaping (SKCloudServiceAuthorizationStatus) -> Void) {
         guard SKCloudServiceController.authorizationStatus() == .notDetermined else {
             completion(SKCloudServiceController.authorizationStatus())
