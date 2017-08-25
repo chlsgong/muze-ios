@@ -48,4 +48,5 @@ class PlaylistModel {
     func update(title: String) {
         self.title = title
     }
+    
 }

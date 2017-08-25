@@ -11,7 +11,7 @@ import SocketIO
 import SwiftyJSON
 
 class SocketClient {
-    static let socket = SocketIOClient(socketURL: URL(string: "http://10.175.1.25:3000")!, config: [.compress, .nsp("/playlists")])
+    static let socket = SocketIOClient(socketURL: URL(string: ipAddress)!, config: [.compress, .nsp("/playlists")])
     
     func connect() {
         SocketClient.socket.connect()

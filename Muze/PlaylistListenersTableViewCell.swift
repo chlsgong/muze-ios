@@ -12,10 +12,7 @@ class PlaylistListenersTableViewCell: UITableViewCell {
     @IBOutlet weak var phoneNumberLabel: UILabel!
     @IBOutlet weak var removeButton: UIButton!
     
-    private let muzeClient = MuzeClient()
-    
-    var viewController: PlaylistListenersViewController!
-    var userId: String!
+    var delegate: RemovableCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,10 +26,6 @@ class PlaylistListenersTableViewCell: UITableViewCell {
     }
 
     @IBAction func removeButtonTapped(_ sender: Any) {
-        removeButton.isEnabled = false
-        muzeClient.deletePlaylistUser(playlistId: viewController.playlistId, userId: userId) { error in
-            self.viewController.reloadTableView()
-            self.removeButton.isEnabled = true
-        }
+        delegate?.removeButtonTapped(self)
     }
 }

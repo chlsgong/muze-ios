@@ -10,12 +10,14 @@ import Foundation
 
 enum Identifier {
     enum Segue: String {
+        case toLogin = "ToLogin"
         case toConnect = "ToConnect"
         case toConfirm = "ToConfirm"
         case toTabBar = "ToTabBar"
         case toPlaylistDetail = "ToPlaylistDetail"
         case toAddListeners = "ToAddListeners"
         case toContacts = "ToContacts"
+        case toAddMusic = "ToAddMusic"
     }
     
     enum Cell: String {
@@ -23,5 +25,15 @@ enum Identifier {
         case playlistDetailCell = "PlaylistDetailCell"
         case playlistListenersCell = "PlaylistListenersCell"
         case playlistContactsCell = "PlaylistContactsCell"
+        case playlistAddPlaylistCell = "PlaylistAddPlaylistCell"
+    }
+    
+    enum ViewController: String {
+        case playlistAddPlaylist = "PlaylistAddPlaylist"
+        case playlistSearchMusic = "PlaylistSearchMusic"
+    }
+    
+    enum TabBarController: String {
+        case mainTabBar = "MainTabBar"
     }
 }

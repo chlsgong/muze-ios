@@ -9,6 +9,17 @@
 import UIKit
 
 class UIUtil {
+    class func setInitialViewController(window: UIWindow) {
+        let storyboard = UIStoryboard(name: "Main", bundle: .main)
+        
+        if User.standard.isLoggedIn {
+            window.rootViewController = storyboard.instantiateViewController(withIdentifier: .mainTabBar)
+        }
+        else {
+            window.rootViewController = storyboard.instantiateInitialViewController()
+        }
+        window.makeKeyAndVisible()
+    }
 }
 
 extension UIViewController {
@@ -26,5 +37,15 @@ extension UIStoryboardSegue {
 extension UITableView {
     func dequeueReusableCell(withIdentifier id: Identifier.Cell, for indexPath: IndexPath) -> UITableViewCell {
         return self.dequeueReusableCell(withIdentifier: id.rawValue, for: indexPath)
+    }
+}
+
+extension UIStoryboard {
+    func instantiateViewController(withIdentifier id: Identifier.ViewController) -> UIViewController {
+        return self.instantiateViewController(withIdentifier: id.rawValue)
+    }
+    
+    func instantiateViewController(withIdentifier id: Identifier.TabBarController) -> UITabBarController {
+        return self.instantiateViewController(withIdentifier: id.rawValue) as! UITabBarController
     }
 }

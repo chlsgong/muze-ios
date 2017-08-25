@@ -13,6 +13,8 @@ class PlaylistDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var songArtistLabel: UILabel!
     @IBOutlet weak var removeButton: UIButton!
     
+    var delegate: RemovableCellDelegate?
+        
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -24,8 +26,8 @@ class PlaylistDetailTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    @IBAction func removeButtonTapped(_ sender: Any) {
-        print("Remove")
+    @IBAction func removeButtonTapped(_ sender: Any) {        
+        delegate?.removeButtonTapped(self)
     }
     
 }

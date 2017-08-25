@@ -17,12 +17,13 @@ enum Endpoint {
     case postPlaylist
     case getPlaylistTitle
     case getPlaylist
+    case putPlaylistSongs
     case getPlaylistUsers
     case putPlaylistUsers
     case deletePlaylistUsers
     
     var url: String {
-        let host = "http://10.175.1.25:3000"
+        let host = ipAddress
         
         switch self {
         case .postVerificationCode: return host + "/verification/code"
@@ -32,6 +33,7 @@ enum Endpoint {
         case .postPlaylist: return host + "/playlist"
         case .getPlaylistTitle: return host + "/playlist/title"
         case .getPlaylist: return host + "/playlist"
+        case .putPlaylistSongs: return host + "/playlist/songs"
         case .getPlaylistUsers: return host + "/playlist/users"
         case .putPlaylistUsers: return host + "/playlist/users"
         case .deletePlaylistUsers: return host + "/playlist/users"

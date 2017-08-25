@@ -9,7 +9,11 @@
 import UIKit
 
 class LoginViewController: UIViewController {
+    @IBOutlet weak var appleMusicButton: UIButton!
+    @IBOutlet weak var spotifyButton: UIButton!
+    
     private let authMgr = AuthorizationManager()
+    private let musicMgr = MusicManager.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,22 +23,38 @@ class LoginViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    // MARK: IBAction methods
+    
+    @IBAction func unwindToLogin(segue: UIStoryboardSegue) {
+        print("Unwind to Login")
+        User.standard.updateLoginInfo(userId: "", apnToken: "", phoneNumber: "", isLoggedIn: false)
+    }
+    
     @IBAction func appleMusicButtonTapped(_ sender: Any) {
+        appleMusicButton.isEnabled = false
+        
         authMgr.requestCloudServiceAuthorization { authorizationStatus in
             if authorizationStatus == .authorized {
                 self.authMgr.requestMediaLibraryAuthorization { authorizationStatus in
                     if authorizationStatus == .authorized {
+                        self.musicMgr.serviceProvider = .appleMusic
                         self.performSegue(withIdentifier: .toConnect, sender: nil)
                     }
                     else {
                         // handle status
+                        
+                        self.appleMusicButton.isEnabled = true
                     }
                 }
             }
             else {
                 // handle status
+                
+                self.appleMusicButton.isEnabled = true
             }
         }
     }
     
+    @IBAction func spotifyButtonTapped(_ sender: Any) {
+    }
 }

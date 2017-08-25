@@ -73,7 +73,7 @@ class ConfirmViewController: UIViewController, UITextFieldDelegate {
         
         muzeClient.checkVerificationCode(phoneNumber: phoneNumber, code: codeConfirmationTextField.text!, apnToken: user.apnToken) { userId in
             if userId != nil {
-                self.user.updateLoginInfo(userId: userId!, apnToken: self.user.apnToken, phoneNumber: self.phoneNumber)
+                self.user.updateLoginInfo(userId: userId!, apnToken: self.user.apnToken, phoneNumber: self.phoneNumber, isLoggedIn: true)
                 self.performSegue(withIdentifier: .toTabBar, sender: nil)
             }
             

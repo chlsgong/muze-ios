@@ -10,9 +10,9 @@ import UIKit
 import SocketIO
 
 // - TODO:
-// Leave function
+// Leave playlist function
 
-class PlaylistDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class PlaylistDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, RemovableCellDelegate {
     @IBOutlet weak var playlistDetailTableView: UITableView!
     
     private let muzeClient = MuzeClient()
@@ -23,12 +23,14 @@ class PlaylistDetailViewController: UIViewController, UITableViewDelegate, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         
         self.navigationItem.title = playlistModel.title
         
         registerSocketEvents()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         socketClient.connect()
     }
     
@@ -46,26 +48,34 @@ class PlaylistDetailViewController: UIViewController, UITableViewDelegate, UITab
         if segue.isIdentified(byId: .toAddListeners) {
             if let destination = segue.destination as? PlaylistListenersViewController {
                 destination.playlistId = playlistModel.id
-            }            
+            }
+        }
+        else if segue.isIdentified(byId: .toAddMusic) {
+            if let destination = segue.destination as? PlaylistAddMusicViewController {
+                destination.playlistId = playlistModel.id
+                destination.size = playlistModel.size
+            }
         }
     }
     
-    func reloadTableView() {
-        muzeClient.getPlaylist(playlistModel: playlistModel) { playlistModel in
-            self.playlistModel = playlistModel
-            self.playlist = playlistModel.playlist
-            
-            self.playlistDetailTableView.reloadData()
-        }
+    private func reloadTableView(playlistModel: PlaylistModel) {
+        self.playlistModel = playlistModel
+        self.playlist = playlistModel.playlist
+        
+        self.playlistDetailTableView.reloadData()
     }
     
-    func registerSocketEvents() {
+    private func registerSocketEvents() {
         socketClient.onConnect {
+            self.muzeClient.getPlaylist(playlistModel: self.playlistModel) { playlistModel in
+                self.reloadTableView(playlistModel: playlistModel)
+            }
             self.socketClient.emitRoom(roomId: self.playlistModel.id)
         }
         
         socketClient.onUpdatePlaylist(playlistModel: playlistModel) { playlistModel in
             self.playlistModel = playlistModel
+            self.reloadTableView(playlistModel: playlistModel)
         }
         
         socketClient.onUpdatePlaylistTitle { title in
@@ -82,10 +92,28 @@ class PlaylistDetailViewController: UIViewController, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: .playlistDetailCell, for: indexPath) as! PlaylistDetailTableViewCell
-        cell.songTitleLabel.text = playlist[indexPath.row].title
-        cell.songArtistLabel.text = playlist[indexPath.row].artist
+        cell.songTitleLabel.text = playlist[indexPath.row]["title"]
+        cell.songArtistLabel.text = playlist[indexPath.row]["artist"]
+        cell.delegate = self
         
         return cell
+    }
+    
+    // MARK: RemovableCellDelegate methods
+    
+    func removeButtonTapped(_ cell: UITableViewCell) {
+        let detailTableViewCell = cell as! PlaylistDetailTableViewCell
+        
+        detailTableViewCell.removeButton.isEnabled = false
+        if let cellIndex = playlistDetailTableView.indexPath(for: detailTableViewCell)?.row {
+            var mutablePlaylist = playlist
+            
+            mutablePlaylist.remove(at: cellIndex)
+            
+            muzeClient.updatePlaylistSongs(playlistId: playlistModel.id, playlist: mutablePlaylist, size: mutablePlaylist.count) { error in
+                detailTableViewCell.removeButton.isEnabled = true
+            }
+        }
     }
 
 }

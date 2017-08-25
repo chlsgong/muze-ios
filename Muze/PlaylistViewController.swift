@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MediaPlayer
 import UserNotifications
 
 // - TODO:
@@ -59,7 +58,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    func loadPlaylistTitles() {
+    private func loadPlaylistTitles() {
         muzeClient.getUser(userId: user.userId) { userModel in
             guard userModel != nil else { return }
             
@@ -71,7 +70,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    func setUpAlertController() {
+    private func setUpAlertController() {
         alert = UIAlertController(title: "Create playlist", message: nil, preferredStyle: .alert)
         
         let createAction = UIAlertAction(title: "Create", style: .default) { _ in
@@ -122,6 +121,10 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         self.present(alert!, animated: true) {
             self.createPlaylistButton.isEnabled = true
         }
+    }
+    
+    @IBAction func signOutButtonTapped(_ sender: Any) {
+        self.performSegue(withIdentifier: .toLogin, sender: nil)
     }
 }
 

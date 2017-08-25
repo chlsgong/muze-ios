@@ -185,6 +185,24 @@ class MuzeClient {
         }
     }
     
+    func updatePlaylistSongs(playlistId: String, playlist: [Song], size: Int, completion: ((Error?) -> Void)?) {
+        let parameter: [String: Any] = [
+            "playlist_id": playlistId,
+            "playlist": playlist,
+            "size": size
+        ]
+        
+        request(endpoint: .putPlaylistSongs, method: .put, parameters: parameter, encoding: JSONEncoding.default).responseData { response in
+            let error = response.result.error
+            self.handleHTTPError(error: error)
+            
+            DispatchQueue.main.async {
+                completion?(error)
+            }
+        }
+        
+    }
+    
     func getPlaylistUsers(playlistId: String, completion: @escaping ([(String, String)]) -> Void) {
         let parameter = [
             "playlist_id": playlistId

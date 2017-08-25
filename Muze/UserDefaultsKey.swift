@@ -12,4 +12,5 @@ enum UserDefaultsKey: String {
     case userId = "UserID"
     case apnToken = "APNToken"
     case phoneNumber = "PhoneNumber"
+    case isLoggedIn = "IsLoggedIn"
 }

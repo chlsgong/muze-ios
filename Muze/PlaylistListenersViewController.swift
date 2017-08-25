@@ -12,7 +12,7 @@ import UIKit
 // Exclude existing numbers
 // Add hyphens in between numbers
 
-class PlaylistListenersViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
+class PlaylistListenersViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, RemovableCellDelegate {
     @IBOutlet weak var phoneNumberTextField: UITextField!
     @IBOutlet weak var addPhoneNumberButton: UIButton!
     @IBOutlet weak var addFromContactsButton: UIButton!
@@ -103,7 +103,7 @@ class PlaylistListenersViewController: UIViewController, UITextFieldDelegate, UI
         return true
     }
     
-    // UITableViewDelegate methods
+    // MARK: UITableViewDelegate methods
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return playlistUsers.count
@@ -115,13 +115,27 @@ class PlaylistListenersViewController: UIViewController, UITextFieldDelegate, UI
         
         cell.selectionStyle = .none
         cell.phoneNumberLabel.text = playlistUser.phoneNumber
-        cell.userId = playlistUser.id
-        cell.viewController = self
+        cell.delegate = self
         
         return cell
     }
     
-    // IBAction methods
+    // MARK: RemovableCellDelegate methods
+    
+    func removeButtonTapped(_ cell: UITableViewCell) {
+        let listenerTableViewCell = cell as! PlaylistListenersTableViewCell
+        
+        listenerTableViewCell.removeButton.isEnabled = false
+        if let cellIndex = listenersTableView.indexPath(for: listenerTableViewCell)?.row {
+            let userId = playlistUsers[cellIndex].id
+            muzeClient.deletePlaylistUser(playlistId: playlistId, userId: userId) { error in
+                self.reloadTableView()
+                listenerTableViewCell.removeButton.isEnabled = true
+            }
+        }
+    }
+    
+    // MARK: IBAction methods
     
     @IBAction func addPhoneNumberButtonTapped(_ sender: Any) {
         addPhoneNumberButton.isEnabled = false

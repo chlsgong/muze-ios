@@ -17,11 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let user = User.standard
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         User.standard.retrieveLoginInfo()
         // print("token: \(user.apnToken)")
         
-        // muzeClient.getUser(userId: User.standard.userId, completion: {_ in})
+        window = UIWindow(frame: UIScreen.main.bounds)
+        UIUtil.setInitialViewController(window: window!)
         
         return true
     }
@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("APNs device token: \(apnToken)")
         
         // store apn token
-        user.updateLoginInfo(userId: self.user.userId, apnToken: apnToken, phoneNumber: self.user.phoneNumber)
+        user.updateLoginInfo(userId: self.user.userId, apnToken: apnToken, phoneNumber: self.user.phoneNumber, isLoggedIn: self.user.isLoggedIn)
         
         muzeClient.updateAPNToken(userId: user.userId, apnToken: apnToken) { error in
             if error == nil {
