@@ -13,9 +13,9 @@ class MuzeClientSession {
     static let manager: Alamofire.SessionManager = {
         // Create the server trust policies
         let serverTrustPolicies: [String: ServerTrustPolicy] = [
+            "http://13.65.212.181:3000": .disableEvaluation,
             "http://10.175.1.25:3000" : .disableEvaluation,
-            "http://192.168.2.120:3000": .disableEvaluation,
-            "http://35.202.161.94:3000": .disableEvaluation
+            "http://192.168.2.120:3000": .disableEvaluation
         ]
         
         // Create custom manager

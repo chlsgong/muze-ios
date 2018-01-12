@@ -23,6 +23,7 @@ class PlaylistAddPlaylistViewController: UIViewController, UITableViewDelegate, 
         super.viewDidLoad()
         
         playlistTableView.delegate = self
+        playlistTableView.dataSource = self
         
         playlists = musicMgr.queryAllPlaylists()
     }

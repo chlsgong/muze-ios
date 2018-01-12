@@ -13,37 +13,98 @@ class User {
     
     private let defaults = UserDefaults.standard
     
-    private(set) var userId: String
-    private(set) var apnToken: String
-    private(set) var phoneNumber: String
-    private(set) var isLoggedIn: Bool
+    private var _id: String
+    private var _apnToken: String
+    private var _phoneNumber: String
+    private var _serviceProvider: ServiceProvider
+    private var _isLoggedIn: Bool
     
     private init() {
-        userId = ""
-        apnToken = ""
-        phoneNumber = ""
-        isLoggedIn = false
+        _id = ""
+        _apnToken = ""
+        _phoneNumber = ""
+        _serviceProvider = .none
+        _isLoggedIn = false
     }
     
-    // Must call this method on initialization
+    // MARK: Public getters and setters
+    
+    var id: String {
+        get {
+            return _id
+        }
+        set(id) {
+            set(value: id, forKey: .userId)
+            _id = id
+        }
+    }
+    
+    var apnToken: String {
+        get {
+            return _apnToken
+        }
+        set(apnToken) {
+            set(value: apnToken, forKey: .apnToken)
+            _apnToken = apnToken
+        }
+    }
+    
+    var phoneNumber: String {
+        get {
+            return _phoneNumber
+        }
+        set(phoneNumber) {
+            set(value: phoneNumber, forKey: .phoneNumber)
+            _phoneNumber = phoneNumber
+        }
+    }
+    
+    var serviceProvider: ServiceProvider {
+        get {
+            return _serviceProvider
+        }
+        set(serviceProvider) {
+            set(value: serviceProvider, forKey: .serviceProvider)
+            _serviceProvider = serviceProvider
+        }
+    }
+    
+    var isLoggedIn: Bool {
+        get {
+            return _isLoggedIn
+        }
+        set(isLoggedIn) {
+            set(value: isLoggedIn, forKey: .isLoggedIn)
+            _isLoggedIn = isLoggedIn
+        }
+    }
+    
+    // MARK: Instance methods
+    
+    // Must call this method on start up
     func retrieveLoginInfo() {
-        userId = string(forKey: .userId)
-        apnToken = string(forKey: .apnToken)
-        phoneNumber = string(forKey: .phoneNumber)
-        isLoggedIn = bool(forKey: .isLoggedIn)
+        _id = string(forKey: .userId)
+        _apnToken = string(forKey: .apnToken)
+        _phoneNumber = string(forKey: .phoneNumber)
+        _serviceProvider = serviceProvider(forKey: .serviceProvider)
+        _isLoggedIn = bool(forKey: .isLoggedIn)
     }
     
-    func updateLoginInfo(userId: String, apnToken: String, phoneNumber: String, isLoggedIn: Bool) {
-        set(value: userId, forKey: .userId)
-        set(value: apnToken, forKey: .apnToken)
-        set(value: phoneNumber, forKey: .phoneNumber)
-        set(value: isLoggedIn, forKey: .isLoggedIn)
+    func clearLoginInfo() {
+        set(value: "", forKey: .userId)
+        set(value: "", forKey: .apnToken)
+        set(value: "", forKey: .phoneNumber)
+        set(value: .none, forKey: .serviceProvider)
+        set(value: false, forKey: .isLoggedIn)
         
-        self.userId = userId
-        self.apnToken = apnToken
-        self.phoneNumber = phoneNumber
-        self.isLoggedIn = isLoggedIn
+        _id = ""
+        _apnToken = ""
+        _phoneNumber = ""
+        _serviceProvider = .none
+        _isLoggedIn = false
     }
+    
+    // MARK: Private getters
     
     private func string(forKey key: UserDefaultsKey) -> String {
         return defaults.string(forKey: key.rawValue) ?? ""
@@ -53,11 +114,21 @@ class User {
         return defaults.bool(forKey: key.rawValue)
     }
     
+    private func serviceProvider(forKey key: UserDefaultsKey) -> ServiceProvider {
+        return ServiceProvider(rawValue: defaults.string(forKey: key.rawValue) ?? ServiceProvider.none.rawValue)!
+    }
+    
+    // MARK: Private setters
+    
     private func set(value: String, forKey key: UserDefaultsKey) {
         defaults.set(value, forKey: key.rawValue)
     }
     
     private func set(value: Bool, forKey key: UserDefaultsKey) {
         defaults.set(value, forKey: key.rawValue)
+    }
+    
+    private func set(value: ServiceProvider, forKey key: UserDefaultsKey) {
+        defaults.set(value.rawValue, forKey: key.rawValue)
     }
 }

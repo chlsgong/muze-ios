@@ -15,6 +15,7 @@ class MusicManager {
     var serviceProvider: ServiceProvider
     
     private init() {
+        // Save service provider in user defaults and retrieve
         serviceProvider = .none
     }
     
@@ -54,7 +55,7 @@ class MusicManager {
     }
 }
 
-enum ServiceProvider {
+enum ServiceProvider: String {
     case appleMusic
     case spotify
     case none

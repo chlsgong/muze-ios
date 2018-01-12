@@ -15,9 +15,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     let muzeClient = MuzeClient()
     let user = User.standard
+    let musicMgr = MusicManager.standard
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        User.standard.retrieveLoginInfo()
+        // ************ TEST AREA BEGIN ************
+        
+        // let musicClient = MusicClient()
+        
+        // musicClient.getSong()
+        
+        // ************* TEST AREA END *************
+        
+        user.retrieveLoginInfo()
+        musicMgr.serviceProvider = user.serviceProvider
+        
         // print("token: \(user.apnToken)")
         
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -31,9 +42,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("APNs device token: \(apnToken)")
         
         // store apn token
-        user.updateLoginInfo(userId: self.user.userId, apnToken: apnToken, phoneNumber: self.user.phoneNumber, isLoggedIn: self.user.isLoggedIn)
+        user.apnToken = apnToken
         
-        muzeClient.updateAPNToken(userId: user.userId, apnToken: apnToken) { error in
+        muzeClient.updateAPNToken(userId: user.id, apnToken: apnToken) { error in
             if error == nil {
                 print("ERROR")
             }

@@ -14,6 +14,7 @@ import SocketIO
 
 class PlaylistDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, RemovableCellDelegate {
     @IBOutlet weak var playlistDetailTableView: UITableView!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     
     private let muzeClient = MuzeClient()
     private let socketClient = SocketClient()
@@ -23,6 +24,9 @@ class PlaylistDetailViewController: UIViewController, UITableViewDelegate, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        playlistDetailTableView.delegate = self
+        playlistDetailTableView.dataSource = self
         
         self.navigationItem.title = playlistModel.title
         
@@ -92,6 +96,8 @@ class PlaylistDetailViewController: UIViewController, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: .playlistDetailCell, for: indexPath) as! PlaylistDetailTableViewCell
+        
+        cell.selectionStyle = .none
         cell.songTitleLabel.text = playlist[indexPath.row]["title"]
         cell.songArtistLabel.text = playlist[indexPath.row]["artist"]
         cell.delegate = self
@@ -114,6 +120,12 @@ class PlaylistDetailViewController: UIViewController, UITableViewDelegate, UITab
                 detailTableViewCell.removeButton.isEnabled = true
             }
         }
+    }
+    
+    // MARK: IBAction methods
+    
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        
     }
 
 }

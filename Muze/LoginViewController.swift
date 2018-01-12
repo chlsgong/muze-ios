@@ -13,6 +13,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var spotifyButton: UIButton!
     
     private let authMgr = AuthorizationManager()
+    private let user = User.standard
     private let musicMgr = MusicManager.standard
     
     override func viewDidLoad() {
@@ -25,11 +26,6 @@ class LoginViewController: UIViewController {
     
     // MARK: IBAction methods
     
-    @IBAction func unwindToLogin(segue: UIStoryboardSegue) {
-        print("Unwind to Login")
-        User.standard.updateLoginInfo(userId: "", apnToken: "", phoneNumber: "", isLoggedIn: false)
-    }
-    
     @IBAction func appleMusicButtonTapped(_ sender: Any) {
         appleMusicButton.isEnabled = false
         
@@ -38,6 +34,8 @@ class LoginViewController: UIViewController {
                 self.authMgr.requestMediaLibraryAuthorization { authorizationStatus in
                     if authorizationStatus == .authorized {
                         self.musicMgr.serviceProvider = .appleMusic
+                        self.user.serviceProvider = .appleMusic
+                        
                         self.performSegue(withIdentifier: .toConnect, sender: nil)
                     }
                     else {

@@ -1,3 +1,1 @@
-Coding Style Questions:
-
-- A shared class for commonly used objects? Can the memory usage be neglected?
+Muze iOS client for sharing music in a sandbox that bridges the gap between Apple Music and Spotify.

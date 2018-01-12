@@ -1,0 +1,5 @@
+# Ignore extensions
+.DS_Store
+
+# Ignore specifics
+apple_music_developer_key.txt

@@ -38,7 +38,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         
         setUpAlertController()
         
-        print(user.userId)
+        print(user.id)
         print(user.phoneNumber)
         print(user.apnToken)
         
@@ -59,7 +59,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     private func loadPlaylistTitles() {
-        muzeClient.getUser(userId: user.userId) { userModel in
+        muzeClient.getUser(userId: user.id) { userModel in
             guard userModel != nil else { return }
             
             let userPlaylists = userModel!.sharedPlaylists + userModel!.ownedPlaylists
@@ -75,7 +75,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         
         let createAction = UIAlertAction(title: "Create", style: .default) { _ in
             let playlistName = self.alert!.textFields![0].text!
-            self.muzeClient.createPlaylist(creatorId: self.user.userId, title: playlistName) { error in
+            self.muzeClient.createPlaylist(creatorId: self.user.id, title: playlistName) { error in
                 guard error == nil else { return }
                 self.loadPlaylistTitles()
             }
@@ -124,7 +124,9 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     @IBAction func signOutButtonTapped(_ sender: Any) {
-        self.performSegue(withIdentifier: .toLogin, sender: nil)
+        let loginViewController = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(withIdentifier: .login) as! LoginViewController
+        self.present(loginViewController, animated: true) {
+            self.user.clearLoginInfo()
+        }
     }
 }
-

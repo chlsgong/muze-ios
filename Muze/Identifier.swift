@@ -10,7 +10,6 @@ import Foundation
 
 enum Identifier {
     enum Segue: String {
-        case toLogin = "ToLogin"
         case toConnect = "ToConnect"
         case toConfirm = "ToConfirm"
         case toTabBar = "ToTabBar"
@@ -29,6 +28,7 @@ enum Identifier {
     }
     
     enum ViewController: String {
+        case login = "Login"
         case playlistAddPlaylist = "PlaylistAddPlaylist"
         case playlistSearchMusic = "PlaylistSearchMusic"
     }
