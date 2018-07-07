@@ -36,6 +36,16 @@ class MusicManager {
         return playlists
     }
     
+    func savePlaylist() {
+        let playlistUUID = UUID()
+        
+        let playlistCreationMetadata = MPMediaPlaylistCreationMetadata(name: "PL1")
+        
+        MPMediaLibrary.default().getPlaylist(with: playlistUUID, creationMetadata: playlistCreationMetadata) { playlist, error in
+            print(error)
+        }
+    }
+    
     // MARK: Helpers
     
     //        let playlistQuery = MPMediaQuery.playlists()
@@ -53,12 +63,6 @@ class MusicManager {
         
         return playlistCollections
     }
-}
-
-enum ServiceProvider: String {
-    case appleMusic
-    case spotify
-    case none
 }
 
 typealias Song = [String: String]

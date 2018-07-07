@@ -13,6 +13,7 @@ class ConfirmViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var resendButton: UIButton!
     @IBOutlet weak var doneButton: UIButton!
     
+    private let authMgr = AuthorizationManager()
     private let muzeClient = MuzeClient()
     private let user = User.standard
     

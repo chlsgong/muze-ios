@@ -24,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // musicClient.getSong()
         
+        
+        
         // ************* TEST AREA END *************
         
         user.retrieveLoginInfo()
@@ -57,6 +59,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print(userInfo)
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        print(url.absoluteString)
+        
+        if let visibleViewController = UIUtil.getVisibleViewController() as? LoginViewController {
+            visibleViewController.performSegue(withIdentifier: .toConnect, sender: nil)
+        }
+        
+        return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

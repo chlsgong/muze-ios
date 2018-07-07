@@ -54,5 +54,10 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func spotifyButtonTapped(_ sender: Any) {
+        spotifyButton.isEnabled = false
+        
+        authMgr.requestSpotifyAuthorization {
+            self.spotifyButton.isEnabled = true
+        }
     }
 }

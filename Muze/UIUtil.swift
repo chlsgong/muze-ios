@@ -20,6 +20,10 @@ class UIUtil {
         }
         window.makeKeyAndVisible()
     }
+    
+    class func getVisibleViewController() -> UIViewController? {
+        return UIApplication.shared.keyWindow?.rootViewController
+    }
 }
 
 extension UIViewController {

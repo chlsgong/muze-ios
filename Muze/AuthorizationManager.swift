@@ -21,8 +21,11 @@ class AuthorizationManager {
     private var cloudServiceCapabilities = SKCloudServiceCapability()
     private let userNotificationCenter = UNUserNotificationCenter.current()
     private let contactStore = CNContactStore()
+    private let musicClient = MusicClient()
     
     private var cloudServiceStorefrontCountryCode = "us"
+    
+    // Apple Music authorization
     
     func requestCloudServiceAuthorization(completion: @escaping (SKCloudServiceAuthorizationStatus) -> Void) {
         guard SKCloudServiceController.authorizationStatus() == .notDetermined else {
@@ -61,6 +64,21 @@ class AuthorizationManager {
         }
     }
     
+    func requestUserToken(completion: @escaping (String?, Error?) -> Void) {
+        let token = "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkU5R01WQUQ1RFQifQ.eyJpc3MiOiJITVlDTkU1OVMyIiwiaWF0IjoxNTMwNDY5ODU1LCJleHAiOjE1MzgzNTgzNTV9.HiQa2wL3Wu0dLkpZ0DxUX-Ek1abO2Hu3aTWz3-_8zDmjecRhVKgb5DZwFWueNALzne9WeGkI6OjdbLx0n9KxVg"
+        
+        if #available(iOS 11.0, *) {
+            cloudServiceController.requestUserToken(forDeveloperToken: token) { userToken, error in
+                completion(userToken, error)
+            }
+        } else {
+            // Fallback on earlier versions
+            cloudServiceController.requestPersonalizationToken(forClientToken: token) { userToken, error in
+                completion(userToken, error)
+            }
+        }
+    }
+    
     func availableCloudServiceCapabilities() -> [SKCloudServiceCapability] {        
         var availableCapabilities = [SKCloudServiceCapability]()
         
@@ -75,6 +93,12 @@ class AuthorizationManager {
         }
         
         return availableCapabilities
+    }
+    
+    // Spotify authorization
+    
+    func requestSpotifyAuthorization(completion: @escaping () -> Void) {        
+        musicClient.authorizeSpotify(completion: completion)
     }
     
     // change to match contacts (return type)

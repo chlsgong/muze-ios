@@ -125,7 +125,11 @@ class PlaylistDetailViewController: UIViewController, UITableViewDelegate, UITab
     // MARK: IBAction methods
     
     @IBAction func saveButtonTapped(_ sender: Any) {
+        self.saveButton.isEnabled = false
         
+        MusicManager.standard.savePlaylist()
+        
+        self.saveButton.isEnabled = true
     }
 
 }
