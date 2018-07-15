@@ -34,7 +34,7 @@ class MusicClient {
                 print(data.count)
                 
             case .failure(let error):
-                print("error")
+                print("error", error)
             }
         }
     }

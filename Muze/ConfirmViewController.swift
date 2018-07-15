@@ -48,7 +48,7 @@ class ConfirmViewController: UIViewController, UITextFieldDelegate {
         }
         else {
             guard string.isNumeric() else { return false }
-            guard string.characters.count <= 1 else { return false }
+            guard string.count <= 1 else { return false }
             guard range.location < lenLimit else { return false }
             
             if range.location == lenLimit - 1 {

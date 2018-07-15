@@ -48,8 +48,8 @@ extension String {
     }
     
     func normalizePhoneNumber() -> String {
-        let phoneNumber = String(self.characters.filter { "0123456789".characters.contains($0) })
-        let index = phoneNumber.index(phoneNumber.startIndex, offsetBy: phoneNumber.characters.count - 10)
-        return phoneNumber.substring(from: index)
+        let phoneNumber = String(self.filter { "0123456789".contains($0) })
+        let index = phoneNumber.index(phoneNumber.startIndex, offsetBy: phoneNumber.count - 10)
+        return String(phoneNumber[index...])
     }
 }

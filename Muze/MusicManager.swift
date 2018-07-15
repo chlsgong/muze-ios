@@ -42,7 +42,9 @@ class MusicManager {
         let playlistCreationMetadata = MPMediaPlaylistCreationMetadata(name: "PL1")
         
         MPMediaLibrary.default().getPlaylist(with: playlistUUID, creationMetadata: playlistCreationMetadata) { playlist, error in
-            print(error)
+            if error != nil {
+                print(error!)
+            }
         }
     }
     

@@ -10,19 +10,20 @@ import Foundation
 import SocketIO
 import SwiftyJSON
 
+// TODO: Make sure handlers on serial queues
 class SocketClient {
-    static let socket = SocketIOClient(socketURL: URL(string: ipAddress)!, config: [.compress, .nsp("/playlists")])
+    let socket = SocketManager(socketURL: URL(string: ipAddress)!, config: [.compress]).socket(forNamespace: "/playlists")
     
     func connect() {
-        SocketClient.socket.connect()
+        socket.connect()
     }
     
     func disconnect() {
-        SocketClient.socket.disconnect()
+        socket.disconnect()
     }
     
     func onConnect(callback: @escaping () -> Void) {
-        SocketClient.socket.on(clientEvent: .connect) { data, _ in
+        socket.on(clientEvent: .connect) { data, _ in
             callback()
         }
     }
@@ -54,11 +55,11 @@ class SocketClient {
     // MARK: Wrappers
     
     private func on(event: Event, callback: @escaping NormalCallback) {
-        SocketClient.socket.on(event.rawValue, callback: callback)
+        socket.on(event.rawValue, callback: callback)
     }
     
     private func emit(event: Event, items: SocketData...) {
-        SocketClient.socket.emit(event.rawValue, items)
+        socket.emit(event.rawValue, items)
     }
     
 }
