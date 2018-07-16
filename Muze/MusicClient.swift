@@ -24,7 +24,6 @@ class MusicClient {
         ]
         
         Alamofire.request("https://api.music.apple.com/v1/catalog/us/search", method: .get, parameters: parameter, encoding: URLEncoding.queryString, headers: header).responseJSON { response in
-            
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
@@ -44,23 +43,14 @@ class MusicClient {
     
     func authorizeSpotify(completion: @escaping () -> Void) {
         let parameters = [
-            "client_id": spotifyClientId,
-            "response_type": "code",
-            "redirect_uri": redirectUri,
-            "scope": "user-read-private" // TODO: add more scopes
+            "client_id": SpotifyAuth.clientId,
+            "response_type": SpotifyAuth.responseType,
+            "redirect_uri": SpotifyAuth.redirectUri,
+            "scope": SpotifyAuth.scopes
         ]
+        let url = ServiceEndpoint.getAuthorizeSpotify.url.stringifyQuery(parameters: parameters)
         
-        // TODO: Stringify function
-        var queryString = "?"
-        for (key, value) in parameters {
-            queryString += (key + "=" + value)
-            queryString += "&"
-        }
-        queryString.removeLast()
-        
-        let url = ServiceEndpoint.getAuthorizeSpotify.url + queryString
-        
-        UIApplication.shared.open(URL(string: url)!, options: [:]) { _ in
+        UIApplication.shared.open(url, options: [:]) { _ in
             completion()
         }
     }

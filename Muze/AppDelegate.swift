@@ -62,10 +62,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        print(url.absoluteString)
+        // parse code
+        let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        
+        var isAuthorized = false
+        if let name = urlComponents?.queryItems?.first?.name {
+            isAuthorized = name == SpotifyAuth.responseType
+            
+            if isAuthorized {
+                let code = urlComponents?.queryItems?.first?.value
+                SpotifyAuth.code = code
+            }
+        }
         
         if let visibleViewController = UIUtil.getVisibleViewController() as? LoginViewController {
-            visibleViewController.performSegue(withIdentifier: .toConnect, sender: nil)
+            visibleViewController.spotifyAuthorizationCallback(isAuthorized: isAuthorized)
         }
         
         return true

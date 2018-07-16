@@ -24,6 +24,22 @@ class LoginViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    func spotifyAuthorizationCallback(isAuthorized: Bool) {
+        if isAuthorized {
+            self.setServiceProvider(serviceProvider: .spotify)
+             performSegue(withIdentifier: .toConnect, sender: nil)
+        }
+        else {
+            // handle unauthorized
+            print("spotify unauthorized")
+        }
+    }
+    
+    private func setServiceProvider(serviceProvider: ServiceProvider) {
+        self.musicMgr.serviceProvider = serviceProvider
+        self.user.serviceProvider = serviceProvider
+    }
+    
     // MARK: IBAction methods
     
     @IBAction func appleMusicButtonTapped(_ sender: Any) {
@@ -33,10 +49,10 @@ class LoginViewController: UIViewController {
             if authorizationStatus == .authorized {
                 self.authMgr.requestMediaLibraryAuthorization { authorizationStatus in
                     if authorizationStatus == .authorized {
-                        self.musicMgr.serviceProvider = .appleMusic
-                        self.user.serviceProvider = .appleMusic
+                        self.setServiceProvider(serviceProvider: .appleMusic)
                         
                         self.performSegue(withIdentifier: .toConnect, sender: nil)
+                        self.appleMusicButton.isEnabled = true
                     }
                     else {
                         // handle status

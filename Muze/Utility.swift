@@ -52,4 +52,28 @@ extension String {
         let index = phoneNumber.index(phoneNumber.startIndex, offsetBy: phoneNumber.count - 10)
         return String(phoneNumber[index...])
     }
+    
+    func stringifyQuery(parameters: [String: String]) -> URL {
+        var queryString = ""
+        for (key, value) in parameters {
+            queryString += "\(key)=\(value)&"
+        }
+        queryString.removeLast()
+        
+        var urlComponents = URLComponents(string: self)!
+        urlComponents.query = queryString
+        return urlComponents.url!
+    }
+}
+
+extension Array where Element == SpotifyScope {
+    func stringify() -> String {
+        var scopesString = ""
+        for scope in self {
+            scopesString += "\(scope.rawValue) "
+        }
+        scopesString.removeLast()
+        
+        return scopesString
+    }
 }
