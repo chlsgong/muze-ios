@@ -265,8 +265,8 @@ class MuzeClient {
     
     // MARK: - Wrappers
     
-    private func request(endpoint: Endpoint, method: HTTPMethod, parameters: Parameters? = nil, encoding: ParameterEncoding = URLEncoding.queryString, header: HTTPHeaders? = nil) -> DataRequest {
-        return MuzeClientSession.manager.request(endpoint.url, method: method, parameters: parameters, encoding: encoding, headers: header).validate()
+    private func request(endpoint: Endpoint, method: HTTPMethod, parameters: Parameters? = nil, encoding: ParameterEncoding = URLEncoding.queryString, headers: HTTPHeaders? = nil) -> DataRequest {
+        return MuzeClientSession.manager.request(endpoint.url, method: method, parameters: parameters, encoding: encoding, headers: headers).validate()
     }
     
     // MARK: - Helpers

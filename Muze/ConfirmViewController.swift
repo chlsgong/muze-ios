@@ -15,6 +15,7 @@ class ConfirmViewController: UIViewController, UITextFieldDelegate {
     
     private let authMgr = AuthorizationManager()
     private let muzeClient = MuzeClient()
+    private let musicClient = MusicClient()
     private let user = User.standard
     
     var phoneNumber: String!
@@ -78,7 +79,19 @@ class ConfirmViewController: UIViewController, UITextFieldDelegate {
                 self.user.phoneNumber = self.phoneNumber
                 self.user.isLoggedIn = true
                 
-                self.performSegue(withIdentifier: .toTabBar, sender: nil)
+                if self.user.serviceProvider == .spotify {
+                    self.musicClient.requestSpotifyTokens() { accesstoken, expiresIn, refreshToken, error in
+                        if error == nil {
+                            self.performSegue(withIdentifier: .toTabBar, sender: nil)
+                        }
+                        else {
+                            
+                        }
+                    }
+                }
+                else {
+                    self.performSegue(withIdentifier: .toTabBar, sender: nil)
+                }
             }
             
             self.doneButton.isEnabled = true

@@ -64,6 +64,10 @@ extension String {
         urlComponents.query = queryString
         return urlComponents.url!
     }
+    
+    func toBase64() -> String {
+        return Data(self.utf8).base64EncodedString()
+    }
 }
 
 extension Array where Element == SpotifyScope {

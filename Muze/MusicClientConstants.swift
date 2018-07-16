@@ -19,10 +19,12 @@ enum ServiceProvider: String {
 enum ServiceEndpoint {
     // Spotify endpoints
     case getAuthorizeSpotify
+    case postToken
     
     var url: String {
         switch self {
         case .getAuthorizeSpotify: return spotifyDomainAccounts + "/authorize"
+        case .postToken: return spotifyDomainAccounts + "/api/token"
         }
     }
 }
@@ -73,8 +75,10 @@ struct SpotifyAuth {
     ]
     
     static let clientId = "0c57961c512a4ab1bde7c3d6fcc045e7"
+    static let clientSecret = "9763ecb79f7b4e8f8cef5850ccd2172f"
     static let redirectUri = "muze://"
     static let responseType = "code"
+    static let grantType = "authorization_code"
     static var scopes: String { return _scopes.stringify() }
     
     static var code: String?

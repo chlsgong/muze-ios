@@ -31,7 +31,6 @@ class MusicClient {
                 let songs = results["songs"]
                 let data = songs["data"].arrayValue
                 print(data.count)
-                
             case .failure(let error):
                 print("error", error)
             }
@@ -55,9 +54,36 @@ class MusicClient {
         }
     }
     
+    func requestSpotifyTokens(completion: @escaping (String?, Int?, String?, Error?) -> Void ) {
+        let encodedClientKeys = "\(SpotifyAuth.clientId):\(SpotifyAuth.clientSecret)".toBase64()
+        let header = ["Authorization": "Basic \(encodedClientKeys)"]
+        let parameters = [
+            "grant_type": SpotifyAuth.grantType,
+            "code": SpotifyAuth.code!,
+            "redirect_uri": SpotifyAuth.redirectUri
+        ]
+        
+        request(endpoint: .postToken, method: .post, parameters: parameters, encoding: URLEncoding.httpBody, headers: header).responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                let accessToken = json["access_token"].stringValue
+                let expiresIn = json["expires_in"].intValue
+                let refreshToken = json["refresh_token"].stringValue
+                print("accessToken", accessToken)
+                print("expiresIn", expiresIn)
+                print("refreshToken", refreshToken)
+                completion(accessToken, expiresIn, refreshToken, nil)
+            case .failure(let error):
+                print("error", error)
+                completion(nil, nil, nil, error)
+            }
+        }
+    }
+    
     // Helpers
     
-    private func request(endpoint: ServiceEndpoint, method: HTTPMethod, parameters: Parameters? = nil, encoding: ParameterEncoding = URLEncoding.queryString, header: HTTPHeaders? = nil) -> DataRequest {
-        return Alamofire.request(endpoint.url, method: method, parameters: parameters, encoding: encoding, headers: header).validate()
+    private func request(endpoint: ServiceEndpoint, method: HTTPMethod, parameters: Parameters? = nil, encoding: ParameterEncoding = URLEncoding.queryString, headers: HTTPHeaders? = nil) -> DataRequest {
+        return Alamofire.request(endpoint.url, method: method, parameters: parameters, encoding: encoding, headers: headers).validate()
     }
 }
