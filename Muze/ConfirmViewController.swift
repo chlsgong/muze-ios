@@ -80,12 +80,24 @@ class ConfirmViewController: UIViewController, UITextFieldDelegate {
                 self.user.isLoggedIn = true
                 
                 if self.user.serviceProvider == .spotify {
-                    self.musicClient.requestSpotifyTokens() { accesstoken, expiresIn, refreshToken, error in
+                    self.musicClient.requestSpotifyTokens() { accessToken, expiresIn, refreshToken, error in
                         if error == nil {
-                            self.performSegue(withIdentifier: .toTabBar, sender: nil)
+                            self.user.spotifyRefreshToken = refreshToken!
+                            SpotifyAuth.accessToken = accessToken
+                            
+                            // move to PlaylistViewController and store in user defaults
+                            self.musicClient.getCurrentUser() { userId, error in
+                                if error == nil {
+                                    SpotifyAuth.userId = userId
+                                    self.performSegue(withIdentifier: .toTabBar, sender: nil)
+                                }
+                                else {
+                                    print("error", error!)
+                                }
+                            }
                         }
                         else {
-                            
+                            print("error", error!)
                         }
                     }
                 }

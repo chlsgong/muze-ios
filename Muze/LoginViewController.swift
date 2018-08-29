@@ -24,10 +24,15 @@ class LoginViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    private func setServiceProvider(serviceProvider: ServiceProvider) {
+        musicMgr.serviceProvider = serviceProvider
+        user.serviceProvider = serviceProvider
+    }
+    
     func spotifyAuthorizationCallback(isAuthorized: Bool) {
         if isAuthorized {
-            self.setServiceProvider(serviceProvider: .spotify)
-             performSegue(withIdentifier: .toConnect, sender: nil)
+            setServiceProvider(serviceProvider: .spotify)
+            self.performSegue(withIdentifier: .toConnect, sender: nil)
         }
         else {
             // handle unauthorized
@@ -35,12 +40,12 @@ class LoginViewController: UIViewController {
         }
     }
     
-    private func setServiceProvider(serviceProvider: ServiceProvider) {
-        self.musicMgr.serviceProvider = serviceProvider
-        self.user.serviceProvider = serviceProvider
-    }
-    
     // MARK: IBAction methods
+    
+    // FIX: doesn't work when user logged in already
+    @IBAction func unwindToLogin(segue: UIStoryboardSegue) {
+        print("back to login")
+    }
     
     @IBAction func appleMusicButtonTapped(_ sender: Any) {
         appleMusicButton.isEnabled = false

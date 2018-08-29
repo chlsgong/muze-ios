@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		37360097DA8F6B3247293343 /* Pods_Muze.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5865016E2658DD8446279F92 /* Pods_Muze.framework */; };
+		56ADEA172133B20F00C584DF /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADEA162133B20F00C584DF /* Track.swift */; };
+		56ADEA1921364E3300C584DF /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADEA1821364E3300C584DF /* RootViewController.swift */; };
+		56ADEA1B21364EEC00C584DF /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADEA1A21364EEC00C584DF /* SplashViewController.swift */; };
 		D101204C1EE74DA900E7B88B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D101204B1EE74DA900E7B88B /* AppDelegate.swift */; };
 		D10120511EE74DA900E7B88B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D101204F1EE74DA900E7B88B /* Main.storyboard */; };
 		D10120531EE74DA900E7B88B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D10120521EE74DA900E7B88B /* Assets.xcassets */; };
@@ -48,6 +51,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		56ADEA162133B20F00C584DF /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
+		56ADEA1821364E3300C584DF /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		56ADEA1A21364EEC00C584DF /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		5865016E2658DD8446279F92 /* Pods_Muze.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Muze.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A14C5D3A3454C21188B77264 /* Pods-Muze.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muze.release.xcconfig"; path = "Pods/Target Support Files/Pods-Muze/Pods-Muze.release.xcconfig"; sourceTree = "<group>"; };
 		A877E5DD63A937D6CA7A4792 /* Pods-Muze.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muze.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Muze/Pods-Muze.debug.xcconfig"; sourceTree = "<group>"; };
@@ -151,6 +157,7 @@
 				D14DE8C41F2B2C4C0059C07E /* User.swift */,
 				D188938E1F300C86000F3904 /* UserModel.swift */,
 				D188938C1F300C76000F3904 /* PlaylistModel.swift */,
+				56ADEA162133B20F00C584DF /* Track.swift */,
 				D1209BE31F3BE70D00A04C47 /* Contact.swift */,
 				D181BF571F4FE30E00C2E8E5 /* NetworkingConstants.swift */,
 				D14CE4151F3D359F00E9029B /* SocketClient.swift */,
@@ -162,6 +169,8 @@
 				D12119A31F3DA1A900A138B6 /* MusicManager.swift */,
 				D19EC7061F68998900AC625F /* MusicClient.swift */,
 				D16B6EA520E9864B00797AC6 /* MusicClientConstants.swift */,
+				56ADEA1821364E3300C584DF /* RootViewController.swift */,
+				56ADEA1A21364EEC00C584DF /* SplashViewController.swift */,
 				D101205D1EE7608300E7B88B /* LoginViewController.swift */,
 				D1C2DDE71F2718410090AA56 /* ConnectViewController.swift */,
 				D1C2DDE91F2718840090AA56 /* ConfirmViewController.swift */,
@@ -317,10 +326,13 @@
 			files = (
 				D1AE868C1F3310AA0047F2ED /* PlaylistContactsTableViewCell.swift in Sources */,
 				D14DE8C51F2B2C4C0059C07E /* User.swift in Sources */,
+				56ADEA1921364E3300C584DF /* RootViewController.swift in Sources */,
 				D181BF561F4F701E00C2E8E5 /* RemovableCellDelegate.swift in Sources */,
+				56ADEA1B21364EEC00C584DF /* SplashViewController.swift in Sources */,
 				D188938D1F300C76000F3904 /* PlaylistModel.swift in Sources */,
 				D18893871F2FD33E000F3904 /* PlaylistContactsViewController.swift in Sources */,
 				D18893891F2FD450000F3904 /* PlaylistDetailTableViewCell.swift in Sources */,
+				56ADEA172133B20F00C584DF /* Track.swift in Sources */,
 				D1C2DDE81F2718410090AA56 /* ConnectViewController.swift in Sources */,
 				D18948111F3D4B43009A05FC /* SocketClientConstants.swift in Sources */,
 				D17C91731F461FE900789D71 /* PlaylistAddPlaylistTableViewCell.swift in Sources */,

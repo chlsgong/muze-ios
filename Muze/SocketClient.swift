@@ -12,14 +12,28 @@ import SwiftyJSON
 
 // TODO: Make sure handlers on serial queues
 class SocketClient {
-    let socket = SocketManager(socketURL: URL(string: ipAddress)!, config: [.compress]).socket(forNamespace: "/playlists")
+    private let manager: SocketManager
+    private let socket: SocketIOClient
+    
+    init() {
+        manager = SocketManager(socketURL: URL(string: ipAddress)!, config: [.log(false), .compress])
+        socket = manager.socket(forNamespace: "/playlists")
+    }
     
     func connect() {
+        socket.joinNamespace()
         socket.connect()
     }
     
     func disconnect() {
         socket.disconnect()
+    }
+    
+    func onError(callback: @escaping () -> Void) {
+        socket.on(clientEvent: .error) { data, _ in
+            print(data)
+            callback()
+        }
     }
     
     func onConnect(callback: @escaping () -> Void) {

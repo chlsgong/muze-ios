@@ -77,6 +77,10 @@ class PlaylistDetailViewController: UIViewController, UITableViewDelegate, UITab
             self.socketClient.emitRoom(roomId: self.playlistModel.id)
         }
         
+        socketClient.onError {
+            print("error")
+        }
+        
         socketClient.onUpdatePlaylist(playlistModel: playlistModel) { playlistModel in
             self.playlistModel = playlistModel
             self.reloadTableView(playlistModel: playlistModel)
@@ -127,7 +131,7 @@ class PlaylistDetailViewController: UIViewController, UITableViewDelegate, UITab
     @IBAction func saveButtonTapped(_ sender: Any) {
         self.saveButton.isEnabled = false
         
-        MusicManager.standard.savePlaylist()
+        MusicManager.standard.savePlaylist(playlist: playlistModel)
         
         self.saveButton.isEnabled = true
     }

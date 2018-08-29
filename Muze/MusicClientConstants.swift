@@ -8,6 +8,9 @@
 
 import Foundation
 
+let spotifyDomainAccounts = "https://accounts.spotify.com"
+let spotifyDomainAPI = "https://api.spotify.com/v1"
+
 // Music service providers
 enum ServiceProvider: String {
     case appleMusic
@@ -20,11 +23,19 @@ enum ServiceEndpoint {
     // Spotify endpoints
     case getAuthorizeSpotify
     case postToken
+    case getCurrentUser
+    case postCreatePlaylist
+    case getSearch
+    case postAddTracksToPlaylist(String)
     
     var url: String {
         switch self {
         case .getAuthorizeSpotify: return spotifyDomainAccounts + "/authorize"
         case .postToken: return spotifyDomainAccounts + "/api/token"
+        case .getCurrentUser: return spotifyDomainAPI + "/me"
+        case .postCreatePlaylist: return spotifyDomainAPI + "/users/\(SpotifyAuth.userId!)/playlists" // TODO: change to the same as below
+        case .getSearch: return spotifyDomainAPI + "/search"
+        case .postAddTracksToPlaylist(let playlistId): return spotifyDomainAPI + "/playlists/\(playlistId)/tracks"
         }
     }
 }
@@ -67,9 +78,9 @@ enum SpotifyScope: String {
 struct SpotifyAuth {
     private static let _scopes: [SpotifyScope] = [
         .playlistModifyPrivate,
+        .playlistModifyPublic,
         .playlistReadPrivate,
         .playlistReadCollaborative,
-        .playlistModifyPublic,
         .userLibraryModify,
         .userLibraryRead
     ]
@@ -82,4 +93,6 @@ struct SpotifyAuth {
     static var scopes: String { return _scopes.stringify() }
     
     static var code: String?
+    static var accessToken: String?
+    static var userId: String?
 }

@@ -14,4 +14,5 @@ enum UserDefaultsKey: String {
     case phoneNumber = "PhoneNumber"
     case serviceProvider = "ServiceProvider"
     case isLoggedIn = "IsLoggedIn"
+    case spotifyRefreshToken = "SpotifyRefreshToken"
 }

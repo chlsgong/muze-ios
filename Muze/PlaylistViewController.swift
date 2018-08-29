@@ -21,6 +21,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     
     private let authMgr = AuthorizationManager()
     private let muzeClient = MuzeClient()
+    private let musicClient = MusicClient()
     private let user = User.standard
     
     var playlists = [PlaylistModel]()
@@ -43,6 +44,8 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         print(user.apnToken)
         
         loadPlaylistTitles()
+        
+        // Get refresh token everytime this view is loaded for now
     }
     
     override func didReceiveMemoryWarning() {
@@ -54,6 +57,16 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         if segue.isIdentified(byId: .toPlaylistDetail) {
             if let destination = segue.destination as? PlaylistDetailViewController {
                 destination.playlistModel = sender as! PlaylistModel
+            }
+        }
+    }
+    
+    private func requestAccessToken() {
+        if user.serviceProvider == .spotify {
+            musicClient.requestSpotifyAccessToken(refreshToken: user.spotifyRefreshToken) { accessToken, expiresIn, error in
+                if error == nil {
+                    SpotifyAuth.accessToken = accessToken
+                }
             }
         }
     }
@@ -124,9 +137,8 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     @IBAction func signOutButtonTapped(_ sender: Any) {
-        let loginViewController = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(withIdentifier: .login) as! LoginViewController
-        self.present(loginViewController, animated: true) {
-            self.user.clearLoginInfo()
-        }
+        self.user.clearLoginInfo()
+        
+        self.performSegue(withIdentifier: .backToLogin, sender: nil)
     }
 }

@@ -10,9 +10,9 @@ import Foundation
 
 enum Identifier {
     enum Segue: String {
+        case backToLogin = "BackToLogin"
         case toConnect = "ToConnect"
         case toConfirm = "ToConfirm"
-        case toTabBar = "ToTabBar"
         case toPlaylistDetail = "ToPlaylistDetail"
         case toAddListeners = "ToAddListeners"
         case toContacts = "ToContacts"

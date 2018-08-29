@@ -16,7 +16,7 @@ class PlaylistModel {
     private(set) var title: String
     private(set) var creationTime: Date
     private(set) var creatorId: String
-    private(set) var playlist: [Song]
+    private(set) var playlist: [Song] // TODO: rename to songs
     private(set) var size: Int
     
     init(id: String, title: String, creationTime: Date) {

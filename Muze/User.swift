@@ -18,6 +18,7 @@ class User {
     private var _phoneNumber: String
     private var _serviceProvider: ServiceProvider
     private var _isLoggedIn: Bool
+    private var _spotifyRefreshToken: String
     
     private init() {
         _id = ""
@@ -25,6 +26,7 @@ class User {
         _phoneNumber = ""
         _serviceProvider = .none
         _isLoggedIn = false
+        _spotifyRefreshToken = ""
     }
     
     // MARK: Public getters and setters
@@ -79,6 +81,16 @@ class User {
         }
     }
     
+    var spotifyRefreshToken: String {
+        get {
+            return _spotifyRefreshToken
+        }
+        set(spotifyRefreshToken) {
+            set(value: spotifyRefreshToken, forKey: .spotifyRefreshToken)
+            _spotifyRefreshToken = spotifyRefreshToken
+        }
+    }
+    
     // MARK: Instance methods
     
     // Must call this method on start up
@@ -88,6 +100,7 @@ class User {
         _phoneNumber = string(forKey: .phoneNumber)
         _serviceProvider = serviceProvider(forKey: .serviceProvider)
         _isLoggedIn = bool(forKey: .isLoggedIn)
+        _spotifyRefreshToken = string(forKey: .spotifyRefreshToken)
     }
     
     func clearLoginInfo() {
@@ -96,12 +109,14 @@ class User {
         set(value: "", forKey: .phoneNumber)
         set(value: .none, forKey: .serviceProvider)
         set(value: false, forKey: .isLoggedIn)
+        set(value: "", forKey: .spotifyRefreshToken)
         
         _id = ""
         _apnToken = ""
         _phoneNumber = ""
         _serviceProvider = .none
         _isLoggedIn = false
+        _spotifyRefreshToken = ""
     }
     
     // MARK: Private getters

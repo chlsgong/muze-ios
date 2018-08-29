@@ -12,11 +12,13 @@ import MediaPlayer
 class MusicManager {
     static let standard = MusicManager()
     
+    let musicClient = MusicClient()
+    
     var serviceProvider: ServiceProvider
     
     private init() {
         // Save service provider in user defaults and retrieve
-        serviceProvider = .none
+        serviceProvider = User.standard.serviceProvider
     }
     
     // only consider Apple Music for now
@@ -36,14 +38,38 @@ class MusicManager {
         return playlists
     }
     
-    func savePlaylist() {
-        let playlistUUID = UUID()
+    func savePlaylist(playlist: PlaylistModel) {
+        let title = playlist.title
+        let songs = playlist.playlist
         
-        let playlistCreationMetadata = MPMediaPlaylistCreationMetadata(name: "PL1")
-        
-        MPMediaLibrary.default().getPlaylist(with: playlistUUID, creationMetadata: playlistCreationMetadata) { playlist, error in
-            if error != nil {
-                print(error!)
+        // TODO: change this to decorator pattern
+        if serviceProvider == .appleMusic {
+            let playlistUUID = UUID() // use playlist id?
+            
+            let playlistCreationMetadata = MPMediaPlaylistCreationMetadata(name: title)
+            
+            MPMediaLibrary.default().getPlaylist(with: playlistUUID, creationMetadata: playlistCreationMetadata) { playlist, error in
+                if error != nil {
+                    print(error!)
+                }
+            }
+        }
+        else if serviceProvider == .spotify {
+            musicClient.createPlaylist(title: title) { playlistId, error in
+                if error != nil {
+                    print(error!)
+                }
+                else {
+                    for track in songs {
+                        self.musicClient.querySong(title: track["title"]!, artist: track["artist"]!) { trackId, name, error in
+                            self.musicClient.addTracksToPlaylist(playlistId: playlistId!, trackIds: [trackId!]) { error in
+                                if error != nil {
+                                    print(error)
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
