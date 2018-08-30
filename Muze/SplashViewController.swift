@@ -9,11 +9,24 @@
 import UIKit
 
 class SplashViewController: UIViewController {
+    let navMgr = NavigationManager.shared
+    let user = User.standard
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        print(user.isLoggedIn)
+        
+        if user.isLoggedIn {
+            navMgr.move(toTabBarController: .mainTabBar)
+        }
+        else {
+            navMgr.move(toViewController: .login)
+        }
     }
 
     override func didReceiveMemoryWarning() {

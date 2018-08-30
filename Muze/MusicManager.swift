@@ -9,6 +9,7 @@
 import Foundation
 import MediaPlayer
 
+// TODO: Use pluggable service provider. Kind of like delegate.
 class MusicManager {
     static let standard = MusicManager()
     
@@ -21,7 +22,7 @@ class MusicManager {
         serviceProvider = User.standard.serviceProvider
     }
     
-    // only consider Apple Music for now
+    // Only consider Apple Music for now
     func queryAllPlaylists() -> [MPMediaItemCollection] {
         var playlists = [MPMediaItemCollection]()
         

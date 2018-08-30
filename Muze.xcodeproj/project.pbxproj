@@ -11,6 +11,7 @@
 		56ADEA172133B20F00C584DF /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADEA162133B20F00C584DF /* Track.swift */; };
 		56ADEA1921364E3300C584DF /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADEA1821364E3300C584DF /* RootViewController.swift */; };
 		56ADEA1B21364EEC00C584DF /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADEA1A21364EEC00C584DF /* SplashViewController.swift */; };
+		56ADEA1D21365A7D00C584DF /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADEA1C21365A7D00C584DF /* NavigationManager.swift */; };
 		D101204C1EE74DA900E7B88B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D101204B1EE74DA900E7B88B /* AppDelegate.swift */; };
 		D10120511EE74DA900E7B88B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D101204F1EE74DA900E7B88B /* Main.storyboard */; };
 		D10120531EE74DA900E7B88B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D10120521EE74DA900E7B88B /* Assets.xcassets */; };
@@ -54,6 +55,7 @@
 		56ADEA162133B20F00C584DF /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		56ADEA1821364E3300C584DF /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		56ADEA1A21364EEC00C584DF /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		56ADEA1C21365A7D00C584DF /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
 		5865016E2658DD8446279F92 /* Pods_Muze.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Muze.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A14C5D3A3454C21188B77264 /* Pods-Muze.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muze.release.xcconfig"; path = "Pods/Target Support Files/Pods-Muze/Pods-Muze.release.xcconfig"; sourceTree = "<group>"; };
 		A877E5DD63A937D6CA7A4792 /* Pods-Muze.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muze.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Muze/Pods-Muze.debug.xcconfig"; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				D101204B1EE74DA900E7B88B /* AppDelegate.swift */,
+				56ADEA1C21365A7D00C584DF /* NavigationManager.swift */,
 				D14DE8C61F2B32BE0059C07E /* UserDefaultsKey.swift */,
 				D1B39DEE1EF6439F001FFF01 /* Identifier.swift */,
 				D1B39DF01EF6443E001FFF01 /* UIUtil.swift */,
@@ -353,6 +356,7 @@
 				D1501AEE1F27CDCD004C9B89 /* MuzeClient.swift in Sources */,
 				D12119A41F3DA1A900A138B6 /* MusicManager.swift in Sources */,
 				D17C916F1F461FB900789D71 /* PlaylistAddPlaylistViewController.swift in Sources */,
+				56ADEA1D21365A7D00C584DF /* NavigationManager.swift in Sources */,
 				D16B6EA620E9864B00797AC6 /* MusicClientConstants.swift in Sources */,
 				D181BF581F4FE30E00C2E8E5 /* NetworkingConstants.swift in Sources */,
 				D14DE8C71F2B32BE0059C07E /* UserDefaultsKey.swift in Sources */,

@@ -33,8 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // print("token: \(user.apnToken)")
         
-        window = UIWindow(frame: UIScreen.main.bounds)
-        UIUtil.setInitialViewController(window: window!)
+        // window = UIWindow(frame: UIScreen.main.bounds)
+        // UIUtil.setInitialViewController(window: window!)
         
         return true
     }

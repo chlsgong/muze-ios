@@ -42,11 +42,6 @@ class LoginViewController: UIViewController {
     
     // MARK: IBAction methods
     
-    // FIX: doesn't work when user logged in already
-    @IBAction func unwindToLogin(segue: UIStoryboardSegue) {
-        print("back to login")
-    }
-    
     @IBAction func appleMusicButtonTapped(_ sender: Any) {
         appleMusicButton.isEnabled = false
         

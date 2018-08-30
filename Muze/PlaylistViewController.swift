@@ -138,7 +138,5 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBAction func signOutButtonTapped(_ sender: Any) {
         self.user.clearLoginInfo()
-        
-        self.performSegue(withIdentifier: .backToLogin, sender: nil)
     }
 }

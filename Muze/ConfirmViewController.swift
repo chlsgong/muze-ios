@@ -89,7 +89,7 @@ class ConfirmViewController: UIViewController, UITextFieldDelegate {
                             self.musicClient.getCurrentUser() { userId, error in
                                 if error == nil {
                                     SpotifyAuth.userId = userId
-                                    self.performSegue(withIdentifier: .toTabBar, sender: nil)
+                                    // self.performSegue(withIdentifier: .toTabBar, sender: nil)
                                 }
                                 else {
                                     print("error", error!)
@@ -102,7 +102,7 @@ class ConfirmViewController: UIViewController, UITextFieldDelegate {
                     }
                 }
                 else {
-                    self.performSegue(withIdentifier: .toTabBar, sender: nil)
+                    // self.performSegue(withIdentifier: .toTabBar, sender: nil)
                 }
             }
             
