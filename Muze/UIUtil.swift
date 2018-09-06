@@ -21,6 +21,7 @@ class UIUtil {
         window.makeKeyAndVisible()
     }
     
+    // FIX: check root vc for current vc
     class func getVisibleViewController() -> UIViewController? {
         return UIApplication.shared.keyWindow?.rootViewController
     }

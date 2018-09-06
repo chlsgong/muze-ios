@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 
 class MusicClient {
-    let token = "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkU5R01WQUQ1RFQifQ.eyJpc3MiOiJITVlDTkU1OVMyIiwiaWF0IjoxNTMwNDY5ODU1LCJleHAiOjE1MzgzNTgzNTV9.HiQa2wL3Wu0dLkpZ0DxUX-Ek1abO2Hu3aTWz3-_8zDmjecRhVKgb5DZwFWueNALzne9WeGkI6OjdbLx0n9KxVg"
+    let appleMusicToken = "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkU5R01WQUQ1RFQifQ.eyJpc3MiOiJITVlDTkU1OVMyIiwiaWF0IjoxNTMwNDY5ODU1LCJleHAiOjE1MzgzNTgzNTV9.HiQa2wL3Wu0dLkpZ0DxUX-Ek1abO2Hu3aTWz3-_8zDmjecRhVKgb5DZwFWueNALzne9WeGkI6OjdbLx0n9KxVg"
     
     func getSong() {
         let parameter = [
@@ -20,7 +20,7 @@ class MusicClient {
         ]
         
         let header = [
-            "Authorization": "Bearer \(token)"
+            "Authorization": "Bearer \(appleMusicToken)"
         ]
         
         Alamofire.request("https://api.music.apple.com/v1/catalog/us/search", method: .get, parameters: parameter, encoding: URLEncoding.queryString, headers: header).responseJSON { response in
@@ -86,7 +86,7 @@ class MusicClient {
         }
     }
     
-    func requestSpotifyAccessToken(refreshToken: String, completion: @escaping (String?, Int?, Error?) -> Void) {
+    func requestSpotifyAccessToken(refreshToken: String, completion: @escaping (Error?) -> Void) {
         let encodedClientKeys = "\(SpotifyAuth.clientId):\(SpotifyAuth.clientSecret)".toBase64()
         let header = ["Authorization": "Basic \(encodedClientKeys)"]
         let parameters = [
@@ -103,13 +103,16 @@ class MusicClient {
                 print("accessToken", accessToken)
                 print("expiresIn", expiresIn)
                 
+                SpotifyAuth.accessToken = accessToken
+                SpotifyAuth.expirationDate = Date(timeIntervalSinceNow: Double(expiresIn - 1000))
+                
                 DispatchQueue.main.async {
-                    completion(accessToken, expiresIn, nil)
+                    completion(nil)
                 }
             case .failure(let error):
                 print("error", error)
                 DispatchQueue.main.async {
-                    completion(nil, nil, error)
+                    completion(error)
                 }
             }
         }
@@ -218,5 +221,15 @@ class MusicClient {
     
     private func spotifyUriList(forTrackIds trackIds: [String]) -> [String] {
         return trackIds.map { return "spotify:track:\($0)" }
+    }
+    
+    private func refreshAccessTokenIfNeeded(completion: @escaping () -> Void) {
+        if Date() > SpotifyAuth.expirationDate! {
+            requestSpotifyAccessToken(refreshToken: User.standard.spotifyRefreshToken) { error in
+                if error == nil {
+                    completion()
+                }
+            }
+        }
     }
 }

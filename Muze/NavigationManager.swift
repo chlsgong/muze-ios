@@ -11,7 +11,7 @@ import UIKit
 class NavigationManager {
     static let shared = NavigationManager()
     
-    var rootViewController: RootViewController
+    private var rootViewController: RootViewController
     
     private init() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate

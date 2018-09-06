@@ -41,7 +41,6 @@ class RootViewController: UIViewController {
     
     // MARK: Helpers
     
-    // TODO: make sure replaced views are out of memory (instantiate creates new instance every time)
     private func replaceCurrentView(withViewController viewController: UIViewController) {
         addNewView(viewController: viewController)
         removeCurrentView()

@@ -29,6 +29,7 @@ enum Identifier {
     enum ViewController: String {
         case splash = "Splash"
         case login = "Login"
+        case loginNav = "LoginNav"
         case playlistAddPlaylist = "PlaylistAddPlaylist"
         case playlistSearchMusic = "PlaylistSearchMusic"
     }

@@ -14,6 +14,7 @@ class ConfirmViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var doneButton: UIButton!
     
     private let authMgr = AuthorizationManager()
+    private let navMgr = NavigationManager.shared
     private let muzeClient = MuzeClient()
     private let musicClient = MusicClient()
     private let user = User.standard
@@ -34,9 +35,16 @@ class ConfirmViewController: UIViewController, UITextFieldDelegate {
         super.didReceiveMemoryWarning()
     }
     
+    // MARK: Helpers
+    
+    private func moveToMainTabBarController() {
+        self.navMgr.move(toTabBarController: .mainTabBar)
+        self.navigationController!.dismiss(animated: false, completion: nil)
+    }
+    
     // MARK: UITextFieldDelegate methods
     
-    // bug after changing character in the middle
+    // FIX: bug after changing character in the middle
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let lenLimit = 6
         
@@ -85,11 +93,11 @@ class ConfirmViewController: UIViewController, UITextFieldDelegate {
                             self.user.spotifyRefreshToken = refreshToken!
                             SpotifyAuth.accessToken = accessToken
                             
-                            // move to PlaylistViewController and store in user defaults
+                            /* Move to PlaylistViewController and store in user defaults */
                             self.musicClient.getCurrentUser() { userId, error in
                                 if error == nil {
                                     SpotifyAuth.userId = userId
-                                    // self.performSegue(withIdentifier: .toTabBar, sender: nil)
+                                    self.moveToMainTabBarController()
                                 }
                                 else {
                                     print("error", error!)
@@ -102,7 +110,7 @@ class ConfirmViewController: UIViewController, UITextFieldDelegate {
                     }
                 }
                 else {
-                    // self.performSegue(withIdentifier: .toTabBar, sender: nil)
+                    self.moveToMainTabBarController()
                 }
             }
             

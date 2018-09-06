@@ -95,4 +95,5 @@ struct SpotifyAuth {
     static var code: String?
     static var accessToken: String?
     static var userId: String?
+    static var expirationDate: Date?
 }

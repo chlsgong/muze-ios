@@ -9,9 +9,12 @@
 import UIKit
 import UserNotifications
 
-// - TODO:
+// TODO:
 // Limit playlist name length
 // Sort by newest creation date
+
+// FIX:
+// Retain cycle keeping this VC alive
 
 class PlaylistViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var playlistTableView: UITableView!
@@ -20,6 +23,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     private var alert: UIAlertController?
     
     private let authMgr = AuthorizationManager()
+    private let navMgr = NavigationManager.shared
     private let muzeClient = MuzeClient()
     private let musicClient = MusicClient()
     private let user = User.standard
@@ -44,8 +48,6 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         print(user.apnToken)
         
         loadPlaylistTitles()
-        
-        // Get refresh token everytime this view is loaded for now
     }
     
     override func didReceiveMemoryWarning() {
@@ -57,16 +59,6 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         if segue.isIdentified(byId: .toPlaylistDetail) {
             if let destination = segue.destination as? PlaylistDetailViewController {
                 destination.playlistModel = sender as! PlaylistModel
-            }
-        }
-    }
-    
-    private func requestAccessToken() {
-        if user.serviceProvider == .spotify {
-            musicClient.requestSpotifyAccessToken(refreshToken: user.spotifyRefreshToken) { accessToken, expiresIn, error in
-                if error == nil {
-                    SpotifyAuth.accessToken = accessToken
-                }
             }
         }
     }
@@ -127,7 +119,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         createPlaylistButton.isEnabled = false
         
         guard alert != nil else {
-            self.createPlaylistButton.isEnabled = true
+            createPlaylistButton.isEnabled = true
             return
         }
         
@@ -137,6 +129,8 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     @IBAction func signOutButtonTapped(_ sender: Any) {
-        self.user.clearLoginInfo()
+        user.clearLoginInfo()
+        
+        navMgr.move(toViewController: .login)
     }
 }

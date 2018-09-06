@@ -127,6 +127,7 @@
                             <constraint firstItem="bmR-iH-LaH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yNP-Wx-XP8"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="naH-Hp-1l8"/>
                     <connections>
                         <outlet property="appleMusicButton" destination="bmR-iH-LaH" id="VkJ-BL-Hc4"/>
                         <outlet property="spotifyButton" destination="W2y-sJ-bZ8" id="qqe-fV-OJB"/>
@@ -135,7 +136,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2258" y="-1011"/>
+            <point key="canvasLocation" x="-2258" y="-1078"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Qit-Cl-81s">
@@ -203,7 +204,7 @@
                     <navigationItem key="navigationItem" title="Playlists" id="z8R-Oa-duI">
                         <barButtonItem key="leftBarButtonItem" title="Sign out" id="PWh-kz-yoy">
                             <connections>
-                                <action selector="signOutButtonTapped:" destination="rAA-gD-DTU" id="i2P-LQ-9b5"/>
+                                <action selector="signOutButtonTapped:" destination="rAA-gD-DTU" id="QEK-AP-GD1"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="5EK-4N-3Vg">
@@ -596,7 +597,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s32-ey-KM3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1065" y="-1366"/>
+            <point key="canvasLocation" x="2943.1999999999998" y="-1366.8665667166417"/>
         </scene>
         <!--Playlist Add Playlist View Controller-->
         <scene sceneID="nYj-rK-yIj">
@@ -668,7 +669,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dD7-uk-d0I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1882" y="-1007"/>
+            <point key="canvasLocation" x="3759.1999999999998" y="-1007.0464767616193"/>
         </scene>
         <!--Playlist Search Music View Controller-->
         <scene sceneID="sNF-GG-dhD">
@@ -754,7 +755,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pzM-1Z-5D0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="92" y="-1007"/>
+            <point key="canvasLocation" x="92" y="-1074"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="YLZ-z2-ooO">
@@ -855,7 +856,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pfz-o3-2OO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-706" y="-1010"/>
+            <point key="canvasLocation" x="-706" y="-1077"/>
         </scene>
         <!--Item 2-->
         <scene sceneID="bpA-Ez-cOa">
@@ -892,7 +893,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pwm-tH-Wph" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1484" y="-1011"/>
+            <point key="canvasLocation" x="-1484" y="-1078"/>
         </scene>
     </scenes>
 </document>

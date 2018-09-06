@@ -9,8 +9,9 @@
 import UIKit
 
 class SplashViewController: UIViewController {
-    let navMgr = NavigationManager.shared
-    let user = User.standard
+    private let navMgr = NavigationManager.shared
+    private let user = User.standard
+    private let musicClient = MusicClient()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,8 +20,20 @@ class SplashViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        print(user.isLoggedIn)
-        
+        // TODO: find a way to make network call in viewDidLoad and move VC in here
+        requestAccessToken {
+            self.moveToViewController()
+        }
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: Helpers
+    
+    private func moveToViewController() {
         if user.isLoggedIn {
             navMgr.move(toTabBarController: .mainTabBar)
         }
@@ -28,9 +41,17 @@ class SplashViewController: UIViewController {
             navMgr.move(toViewController: .login)
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    private func requestAccessToken(completion: @escaping () -> Void) {
+        if user.isLoggedIn && !user.spotifyRefreshToken.isEmpty && user.serviceProvider == .spotify {
+            musicClient.requestSpotifyAccessToken(refreshToken: user.spotifyRefreshToken) { error in
+                if error == nil {
+                    completion()
+                }
+            }
+        }
+        else {
+            completion()
+        }
     }
 }
