@@ -12,6 +12,8 @@
 		56ADEA1921364E3300C584DF /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADEA1821364E3300C584DF /* RootViewController.swift */; };
 		56ADEA1B21364EEC00C584DF /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADEA1A21364EEC00C584DF /* SplashViewController.swift */; };
 		56ADEA1D21365A7D00C584DF /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56ADEA1C21365A7D00C584DF /* NavigationManager.swift */; };
+		56B969B32141C32F008A53EB /* AppleMusicClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B969B22141C32F008A53EB /* AppleMusicClient.swift */; };
+		56B969B52141C3F5008A53EB /* AppleMusicConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B969B42141C3F5008A53EB /* AppleMusicConstants.swift */; };
 		D101204C1EE74DA900E7B88B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D101204B1EE74DA900E7B88B /* AppDelegate.swift */; };
 		D10120511EE74DA900E7B88B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D101204F1EE74DA900E7B88B /* Main.storyboard */; };
 		D10120531EE74DA900E7B88B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D10120521EE74DA900E7B88B /* Assets.xcassets */; };
@@ -56,6 +58,8 @@
 		56ADEA1821364E3300C584DF /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		56ADEA1A21364EEC00C584DF /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		56ADEA1C21365A7D00C584DF /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
+		56B969B22141C32F008A53EB /* AppleMusicClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicClient.swift; sourceTree = "<group>"; };
+		56B969B42141C3F5008A53EB /* AppleMusicConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicConstants.swift; sourceTree = "<group>"; };
 		5865016E2658DD8446279F92 /* Pods_Muze.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Muze.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A14C5D3A3454C21188B77264 /* Pods-Muze.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muze.release.xcconfig"; path = "Pods/Target Support Files/Pods-Muze/Pods-Muze.release.xcconfig"; sourceTree = "<group>"; };
 		A877E5DD63A937D6CA7A4792 /* Pods-Muze.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muze.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Muze/Pods-Muze.debug.xcconfig"; sourceTree = "<group>"; };
@@ -172,6 +176,8 @@
 				D12119A31F3DA1A900A138B6 /* MusicManager.swift */,
 				D19EC7061F68998900AC625F /* MusicClient.swift */,
 				D16B6EA520E9864B00797AC6 /* MusicClientConstants.swift */,
+				56B969B22141C32F008A53EB /* AppleMusicClient.swift */,
+				56B969B42141C3F5008A53EB /* AppleMusicConstants.swift */,
 				56ADEA1821364E3300C584DF /* RootViewController.swift */,
 				56ADEA1A21364EEC00C584DF /* SplashViewController.swift */,
 				D101205D1EE7608300E7B88B /* LoginViewController.swift */,
@@ -355,6 +361,7 @@
 				D19EC7071F68998900AC625F /* MusicClient.swift in Sources */,
 				D1501AEE1F27CDCD004C9B89 /* MuzeClient.swift in Sources */,
 				D12119A41F3DA1A900A138B6 /* MusicManager.swift in Sources */,
+				56B969B32141C32F008A53EB /* AppleMusicClient.swift in Sources */,
 				D17C916F1F461FB900789D71 /* PlaylistAddPlaylistViewController.swift in Sources */,
 				56ADEA1D21365A7D00C584DF /* NavigationManager.swift in Sources */,
 				D16B6EA620E9864B00797AC6 /* MusicClientConstants.swift in Sources */,
@@ -362,6 +369,7 @@
 				D14DE8C71F2B32BE0059C07E /* UserDefaultsKey.swift in Sources */,
 				D14CE4161F3D359F00E9029B /* SocketClient.swift in Sources */,
 				D1501AF21F27D0F9004C9B89 /* MuzeClientConstants.swift in Sources */,
+				56B969B52141C3F5008A53EB /* AppleMusicConstants.swift in Sources */,
 				D1B39DF11EF6443E001FFF01 /* UIUtil.swift in Sources */,
 				D188938F1F300C86000F3904 /* UserModel.swift in Sources */,
 				D13DCD921EF61B8300969FC0 /* AuthorizationManager.swift in Sources */,

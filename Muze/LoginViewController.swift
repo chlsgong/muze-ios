@@ -48,16 +48,18 @@ class LoginViewController: UIViewController {
         authMgr.requestCloudServiceAuthorization { authorizationStatus in
             if authorizationStatus == .authorized {
                 self.authMgr.requestMediaLibraryAuthorization { authorizationStatus in
-                    if authorizationStatus == .authorized {
-                        self.setServiceProvider(serviceProvider: .appleMusic)
-                        
-                        self.performSegue(withIdentifier: .toConnect, sender: nil)
-                        self.appleMusicButton.isEnabled = true
-                    }
-                    else {
-                        // handle status
-                        
-                        self.appleMusicButton.isEnabled = true
+                    DispatchQueue.main.async {
+                        if authorizationStatus == .authorized {
+                            self.setServiceProvider(serviceProvider: .appleMusic)
+                            
+                            self.performSegue(withIdentifier: .toConnect, sender: nil)
+                            self.appleMusicButton.isEnabled = true
+                        }
+                        else {
+                            // handle status
+                            
+                            self.appleMusicButton.isEnabled = true
+                        }
                     }
                 }
             }

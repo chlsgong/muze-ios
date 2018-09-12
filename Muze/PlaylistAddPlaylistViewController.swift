@@ -17,7 +17,7 @@ class PlaylistAddPlaylistViewController: UIViewController, UITableViewDelegate, 
     
     var playlistId: String!
     var size: Int!
-    var playlists = [MPMediaItemCollection]()
+    var playlists = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,10 @@ class PlaylistAddPlaylistViewController: UIViewController, UITableViewDelegate, 
         playlistTableView.delegate = self
         playlistTableView.dataSource = self
         
-        playlists = musicMgr.queryAllPlaylists()
+        musicMgr.queryAllPlaylists { playlists in
+            self.playlists = playlists
+            self.playlistTableView.reloadData()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -49,8 +52,8 @@ class PlaylistAddPlaylistViewController: UIViewController, UITableViewDelegate, 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: .playlistAddPlaylistCell, for: indexPath) as! PlaylistAddPlaylistTableViewCell
         
-        let playlist = playlists[indexPath.row]
-        cell.playlistTitle.text = playlist.playlistName()
+        let playlistTitle = playlists[indexPath.row]
+        cell.playlistTitle.text = playlistTitle
         
         return cell
     }
@@ -59,17 +62,17 @@ class PlaylistAddPlaylistViewController: UIViewController, UITableViewDelegate, 
         let cell = tableView.cellForRow(at: indexPath) as! PlaylistAddPlaylistTableViewCell
         cell.isUserInteractionEnabled = false
         
-        let playlist = playlists[indexPath.row].playlistJSON()
-        
-        size = size + playlist.count
-        
-        muzeClient.updatePlaylistSongs(playlistId: playlistId, playlist: playlist, size: size) { error in
-            if error == nil {
-                cell.addPlaylistLabel.text = ""
-            }
-            cell.isUserInteractionEnabled = true
-            cell.setSelected(false, animated: true)
-        }
+//        let playlist = playlists[indexPath.row].playlistJSON()
+//
+//        size = size + playlist.count
+//
+//        muzeClient.updatePlaylistSongs(playlistId: playlistId, playlist: playlist, size: size) { error in
+//            if error == nil {
+//                cell.addPlaylistLabel.text = ""
+//            }
+//            cell.isUserInteractionEnabled = true
+//            cell.setSelected(false, animated: true)
+//        }
     }
 
 }

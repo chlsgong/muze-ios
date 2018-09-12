@@ -11,32 +11,6 @@ import Alamofire
 import SwiftyJSON
 
 class MusicClient {
-    let appleMusicToken = "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkU5R01WQUQ1RFQifQ.eyJpc3MiOiJITVlDTkU1OVMyIiwiaWF0IjoxNTMwNDY5ODU1LCJleHAiOjE1MzgzNTgzNTV9.HiQa2wL3Wu0dLkpZ0DxUX-Ek1abO2Hu3aTWz3-_8zDmjecRhVKgb5DZwFWueNALzne9WeGkI6OjdbLx0n9KxVg"
-    
-    func getSong() {
-        let parameter = [
-            "term": "HUMBLE.+Kendrick+Lamar",
-            "types": "songs"
-        ]
-        
-        let header = [
-            "Authorization": "Bearer \(appleMusicToken)"
-        ]
-        
-        Alamofire.request("https://api.music.apple.com/v1/catalog/us/search", method: .get, parameters: parameter, encoding: URLEncoding.queryString, headers: header).responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                let results = json["results"]
-                let songs = results["songs"]
-                let data = songs["data"].arrayValue
-                print(data.count)
-            case .failure(let error):
-                print("error", error)
-            }
-        }
-    }
-    
     // Spotify requests
     // TODO: Spotify logout call
     
@@ -178,7 +152,7 @@ class MusicClient {
                 let track = items[0]
                 let id = track["id"].stringValue
                 let name = track["name"].stringValue
-                let isExplicit = track["explicit"].boolValue
+                // let isExplicit = track["explicit"].boolValue
                 
                 DispatchQueue.main.async {
                     completion(id, name, nil)

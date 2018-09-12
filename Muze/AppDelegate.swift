@@ -20,9 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // ************ TEST AREA BEGIN ************
         
-        // let musicClient = MusicClient()
+         // let musicClient = MusicClient()
         
-        // musicClient.getSong()
+         // musicClient.getSong()
         
         
         
@@ -31,8 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         user.retrieveLoginInfo()
         musicMgr.serviceProvider = user.serviceProvider
         
-        // print("token: \(user.apnToken)")
-        
         return true
     }
     
@@ -40,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let apnToken = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
         print("APNs device token: \(apnToken)")
         
-        // store apn token
+        // Store APN token
         user.apnToken = apnToken
         
         muzeClient.updateAPNToken(userId: user.id, apnToken: apnToken) { error in
@@ -59,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        // parse code
+        // Parse code
         let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
         
         var isAuthorized = false

@@ -11,7 +11,7 @@ import UIKit
 class RootViewController: UIViewController {
     private let mainStoryboard = UIStoryboard(name: "Main", bundle: .main)
     
-    private var currentViewController: UIViewController?
+    private(set) var currentViewController: UIViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()

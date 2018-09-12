@@ -9,21 +9,9 @@
 import UIKit
 
 class UIUtil {
-    class func setInitialViewController(window: UIWindow) {
-        let storyboard = UIStoryboard(name: "Main", bundle: .main)
-        
-        if User.standard.isLoggedIn {
-            window.rootViewController = storyboard.instantiateViewController(withIdentifier: .mainTabBar)
-        }
-        else {
-            window.rootViewController = storyboard.instantiateInitialViewController()
-        }
-        window.makeKeyAndVisible()
-    }
-    
-    // FIX: check root vc for current vc
     class func getVisibleViewController() -> UIViewController? {
-        return UIApplication.shared.keyWindow?.rootViewController
+        let rootViewController = UIApplication.shared.keyWindow!.rootViewController as! RootViewController
+        return rootViewController.currentViewController
     }
 }
 

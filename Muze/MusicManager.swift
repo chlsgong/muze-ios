@@ -23,20 +23,20 @@ class MusicManager {
     }
     
     // Only consider Apple Music for now
-    func queryAllPlaylists() -> [MPMediaItemCollection] {
-        var playlists = [MPMediaItemCollection]()
-        
+    func queryAllPlaylists(completion: @escaping ([String]) -> Void) {
         switch(serviceProvider) {
         case .appleMusic:
             print("apple music")
-            playlists = queryAllPlaylistsFromAppleMusic()
+            AppleMusicClient.shared.getPlaylists { playlistTitles, error in
+                if error == nil {
+                    completion(playlistTitles!)
+                }
+            }
         case .spotify:
             print("spotify")
         default:
             print("none")
         }
-        
-        return playlists
     }
     
     func savePlaylist(playlist: PlaylistModel) {
@@ -65,7 +65,7 @@ class MusicManager {
                         self.musicClient.querySong(title: track["title"]!, artist: track["artist"]!) { trackId, name, error in
                             self.musicClient.addTracksToPlaylist(playlistId: playlistId!, trackIds: [trackId!]) { error in
                                 if error != nil {
-                                    print(error)
+                                    print(error!)
                                 }
                             }
                         }
@@ -103,8 +103,9 @@ extension MPMediaItemCollection {
     
     func playlistJSON() -> [Song] {
         var playlistJSON = [Song]()
-        for playlist in self.items {
-            playlistJSON.append(["title": playlist.title!, "artist": playlist.artist!])
+        for track in self.items {
+            print("persistent ID", track.persistentID)
+            playlistJSON.append(["title": track.title!, "artist": track.artist!])
         }
         
         return playlistJSON

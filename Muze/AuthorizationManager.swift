@@ -64,17 +64,28 @@ class AuthorizationManager {
         }
     }
     
-    func requestUserToken(completion: @escaping (String?, Error?) -> Void) {
-        let token = "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkU5R01WQUQ1RFQifQ.eyJpc3MiOiJITVlDTkU1OVMyIiwiaWF0IjoxNTMwNDY5ODU1LCJleHAiOjE1MzgzNTgzNTV9.HiQa2wL3Wu0dLkpZ0DxUX-Ek1abO2Hu3aTWz3-_8zDmjecRhVKgb5DZwFWueNALzne9WeGkI6OjdbLx0n9KxVg"
+    func requestAppleMusicUserToken(completion: @escaping (Error?) -> Void) {
+        let devToken = User.standard.appleMusicDevToken
         
         if #available(iOS 11.0, *) {
-            cloudServiceController.requestUserToken(forDeveloperToken: token) { userToken, error in
-                completion(userToken, error)
+            cloudServiceController.requestUserToken(forDeveloperToken: devToken) { userToken, error in
+                if error == nil {
+                    User.standard.appleMusicUserToken = userToken!
+                }
+                DispatchQueue.main.async {
+                    completion(error)
+                }
             }
-        } else {
+        }
+        else {
             // Fallback on earlier versions
-            cloudServiceController.requestPersonalizationToken(forClientToken: token) { userToken, error in
-                completion(userToken, error)
+            cloudServiceController.requestPersonalizationToken(forClientToken: devToken) { userToken, error in
+                if error == nil {
+                    User.standard.appleMusicUserToken = userToken!
+                }
+                DispatchQueue.main.async {
+                    completion(error)
+                }
             }
         }
     }
@@ -101,7 +112,7 @@ class AuthorizationManager {
         musicClient.authorizeSpotify(completion: completion)
     }
     
-    // change to match contacts (return type)
+    // TODO: change to match contacts (return type)
     func requestNotificationCenterAuthorization(completion: ((Bool) -> Void)?) {
         userNotificationCenter.getNotificationSettings() { settings in
             if settings.authorizationStatus == .notDetermined {

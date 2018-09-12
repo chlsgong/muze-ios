@@ -19,6 +19,8 @@ class User {
     private var _serviceProvider: ServiceProvider
     private var _isLoggedIn: Bool
     private var _spotifyRefreshToken: String
+    private var _appleMusicDevToken: String // For now, persist all the time. TODO: retrieve from backend
+    private var _appleMusicUserToken: String
     
     private init() {
         _id = ""
@@ -27,6 +29,8 @@ class User {
         _serviceProvider = .none
         _isLoggedIn = false
         _spotifyRefreshToken = ""
+        _appleMusicDevToken = ""
+        _appleMusicUserToken = ""
     }
     
     // MARK: Public getters and setters
@@ -91,6 +95,26 @@ class User {
         }
     }
     
+    var appleMusicDevToken: String {
+        get {
+            return _appleMusicDevToken
+        }
+        set(appleMusicDevToken) {
+            set(value: appleMusicDevToken, forKey: .appleMusicDevToken)
+            _appleMusicDevToken = appleMusicDevToken
+        }
+    }
+    
+    var appleMusicUserToken: String {
+        get {
+            return _appleMusicUserToken
+        }
+        set(appleMusicUserToken) {
+            set(value: appleMusicUserToken, forKey: .appleMusicUserToken)
+            _appleMusicUserToken = appleMusicUserToken
+        }
+    }
+    
     // MARK: Instance methods
     
     // Must call this method on start up
@@ -101,6 +125,10 @@ class User {
         _serviceProvider = serviceProvider(forKey: .serviceProvider)
         _isLoggedIn = bool(forKey: .isLoggedIn)
         _spotifyRefreshToken = string(forKey: .spotifyRefreshToken)
+        // _appleMusicDevToken = string(forKey: .appleMusicDevToken)
+        _appleMusicUserToken = string(forKey: .appleMusicUserToken)
+        
+        _appleMusicDevToken = "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkU5R01WQUQ1RFQifQ.eyJpc3MiOiJITVlDTkU1OVMyIiwiaWF0IjoxNTMwNDY5ODU1LCJleHAiOjE1MzgzNTgzNTV9.HiQa2wL3Wu0dLkpZ0DxUX-Ek1abO2Hu3aTWz3-_8zDmjecRhVKgb5DZwFWueNALzne9WeGkI6OjdbLx0n9KxVg"
     }
     
     func clearLoginInfo() {
@@ -110,6 +138,8 @@ class User {
         set(value: .none, forKey: .serviceProvider)
         set(value: false, forKey: .isLoggedIn)
         set(value: "", forKey: .spotifyRefreshToken)
+        set(value: "", forKey: .appleMusicDevToken)
+        set(value: "", forKey: .appleMusicUserToken)
         
         _id = ""
         _apnToken = ""
@@ -117,6 +147,8 @@ class User {
         _serviceProvider = .none
         _isLoggedIn = false
         _spotifyRefreshToken = ""
+        // _appleMusicDevToken = ""
+        _appleMusicUserToken = ""
     }
     
     // MARK: Private getters

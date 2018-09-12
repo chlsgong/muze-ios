@@ -93,7 +93,7 @@ class ConfirmViewController: UIViewController, UITextFieldDelegate {
                             self.user.spotifyRefreshToken = refreshToken!
                             SpotifyAuth.accessToken = accessToken
                             
-                            /* Move to PlaylistViewController and store in user defaults */
+                            /* Navigate to PlaylistViewController and store in user defaults */
                             self.musicClient.getCurrentUser() { userId, error in
                                 if error == nil {
                                     SpotifyAuth.userId = userId
@@ -109,8 +109,15 @@ class ConfirmViewController: UIViewController, UITextFieldDelegate {
                         }
                     }
                 }
-                else {
-                    self.moveToMainTabBarController()
+                else if self.user.serviceProvider == .appleMusic {
+                    self.authMgr.requestAppleMusicUserToken { error in
+                        if error == nil {
+                            self.moveToMainTabBarController()
+                        }
+                        else {
+                            print("error", error!)
+                        }
+                    }
                 }
             }
             
