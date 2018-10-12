@@ -20,7 +20,7 @@ class PlaylistDetailViewController: UIViewController, UITableViewDelegate, UITab
     private let socketClient = SocketClient()
     
     var playlistModel: PlaylistModel!
-    var playlist = [Song]()
+    var playlist = [Track]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +64,7 @@ class PlaylistDetailViewController: UIViewController, UITableViewDelegate, UITab
     
     private func reloadTableView(playlistModel: PlaylistModel) {
         self.playlistModel = playlistModel
-        self.playlist = playlistModel.playlist
+        self.playlist = playlistModel.tracks
         
         self.playlistDetailTableView.reloadData()
     }
@@ -102,8 +102,8 @@ class PlaylistDetailViewController: UIViewController, UITableViewDelegate, UITab
         let cell = tableView.dequeueReusableCell(withIdentifier: .playlistDetailCell, for: indexPath) as! PlaylistDetailTableViewCell
         
         cell.selectionStyle = .none
-        cell.songTitleLabel.text = playlist[indexPath.row]["title"]
-        cell.songArtistLabel.text = playlist[indexPath.row]["artist"]
+        cell.songTitleLabel.text = playlist[indexPath.row].title
+        cell.songArtistLabel.text = playlist[indexPath.row].artist
         cell.delegate = self
         
         return cell
@@ -112,18 +112,18 @@ class PlaylistDetailViewController: UIViewController, UITableViewDelegate, UITab
     // MARK: RemovableCellDelegate methods
     
     func removeButtonTapped(_ cell: UITableViewCell) {
-        let detailTableViewCell = cell as! PlaylistDetailTableViewCell
-        
-        detailTableViewCell.removeButton.isEnabled = false
-        if let cellIndex = playlistDetailTableView.indexPath(for: detailTableViewCell)?.row {
-            var mutablePlaylist = playlist
-            
-            mutablePlaylist.remove(at: cellIndex)
-            
-            muzeClient.updatePlaylistSongs(playlistId: playlistModel.id, playlist: mutablePlaylist, size: mutablePlaylist.count) { error in
-                detailTableViewCell.removeButton.isEnabled = true
-            }
-        }
+//        let detailTableViewCell = cell as! PlaylistDetailTableViewCell
+//
+//        detailTableViewCell.removeButton.isEnabled = false
+//        if let cellIndex = playlistDetailTableView.indexPath(for: detailTableViewCell)?.row {
+//            var mutablePlaylist = playlist
+//
+//            mutablePlaylist.remove(at: cellIndex)
+//
+//            muzeClient.updatePlaylistSongs(playlistId: playlistModel.id, playlist: mutablePlaylist, size: mutablePlaylist.count) { error in
+//                detailTableViewCell.removeButton.isEnabled = true
+//            }
+//        }
     }
     
     // MARK: IBAction methods
@@ -131,9 +131,9 @@ class PlaylistDetailViewController: UIViewController, UITableViewDelegate, UITab
     @IBAction func saveButtonTapped(_ sender: Any) {
         self.saveButton.isEnabled = false
         
-        MusicManager.standard.savePlaylist(playlist: playlistModel)
-        
-        self.saveButton.isEnabled = true
+        MusicManager.standard.savePlaylist(playlist: playlistModel) { _ in
+            self.saveButton.isEnabled = true
+        }
     }
 
 }

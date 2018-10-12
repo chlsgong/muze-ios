@@ -128,7 +128,7 @@ class User {
         // _appleMusicDevToken = string(forKey: .appleMusicDevToken)
         _appleMusicUserToken = string(forKey: .appleMusicUserToken)
         
-        _appleMusicDevToken = "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkU5R01WQUQ1RFQifQ.eyJpc3MiOiJITVlDTkU1OVMyIiwiaWF0IjoxNTMwNDY5ODU1LCJleHAiOjE1MzgzNTgzNTV9.HiQa2wL3Wu0dLkpZ0DxUX-Ek1abO2Hu3aTWz3-_8zDmjecRhVKgb5DZwFWueNALzne9WeGkI6OjdbLx0n9KxVg"
+        _appleMusicDevToken = "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkU5R01WQUQ1RFQifQ.eyJpYXQiOjE1Mzg1MjA5MjgsImV4cCI6MTU1NDA3MjkyOCwiaXNzIjoiSE1ZQ05FNTlTMiJ9.HW6oB5Pjr-XxMj-AbbQLNEklgWWWnDiRKEYUEW4X6IdTCid3ELg12X-Ndo28YwQiNdqNFaUfJWMtGd0q1LQ6dw"
     }
     
     func clearLoginInfo() {

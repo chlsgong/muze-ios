@@ -8,6 +8,6 @@
 
 import Foundation
 
-// let ipAddress = "http://13.65.212.181:3000"
-let ipAddress = "http://192.168.1.129:3000"
+let ipAddress = "http://13.65.212.181:3000"
+// let ipAddress = "http://192.168.1.129:3000"
 // let ipAddress = "http://192.168.2.120:3000"

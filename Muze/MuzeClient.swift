@@ -12,6 +12,17 @@ import SwiftyJSON
 
 class MuzeClient {
     
+    func helloWorld() {
+        MuzeClientSession.manager.request(ipAddress, method: .get).responseData { response in
+            switch response.result {
+            case .success(let value):
+                print(JSON(value))
+            case .failure(let error):
+                self.handleHTTPError(error: error)
+            }
+        }
+    }
+    
     // MARK: - HTTP methods
     
     func requestVerificationCode(phoneNumber: String, completion: ((Error?) -> Void)?) {
@@ -170,10 +181,21 @@ class MuzeClient {
             case .success(let value):
                 let json = JSON(value)
                 let creatorId = json["creatorId"].stringValue
-                let playlist = json["playlist"].arrayObject as! [Song]
+                let playlist = json["playlist"].arrayValue
+                // TODO: change into utility function
+                var tracks = [Track]()
+                for trackData in playlist {
+                    let appleMusicId = trackData["appleMusicId"].stringValue
+                    let spotifyId = trackData["spotifyId"].stringValue
+                    let title = trackData["title"].stringValue
+                    let artist = trackData["artist"].stringValue
+                    let contentRating = trackData["contentRating"].stringValue
+                    let track = Track(appleMusicId: appleMusicId, spotifyId: spotifyId, title: title, artist: artist, contentRating: contentRating)
+                    tracks.append(track)
+                }
                 let size = json["size"].intValue
                 let creationTime = json["creationTime"].stringValue
-                playlistModel.update(title: playlistModel.title, creationTime: creationTime, creatorId: creatorId, playlist: playlist, size: size)
+                playlistModel.update(title: playlistModel.title, creationTime: creationTime, creatorId: creatorId, tracks: tracks, size: size)
                 
             case .failure(let error):
                 self.handleHTTPError(error: error)
@@ -185,7 +207,7 @@ class MuzeClient {
         }
     }
     
-    func updatePlaylistSongs(playlistId: String, playlist: [Song], size: Int, completion: ((Error?) -> Void)?) {
+    func updatePlaylistSongs(playlistId: String, playlist: [MuzeTrackRequestData], size: Int, completion: ((Error?) -> Void)?) {
         let parameter: [String: Any] = [
             "playlist_id": playlistId,
             "playlist": playlist,

@@ -40,3 +40,5 @@ enum Endpoint {
         }
     }
 }
+
+typealias MuzeTrackRequestData = [String: String]

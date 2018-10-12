@@ -17,7 +17,7 @@ class PlaylistAddPlaylistViewController: UIViewController, UITableViewDelegate, 
     
     var playlistId: String!
     var size: Int!
-    var playlists = [String]()
+    var playlists = [PlaylistModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +52,7 @@ class PlaylistAddPlaylistViewController: UIViewController, UITableViewDelegate, 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: .playlistAddPlaylistCell, for: indexPath) as! PlaylistAddPlaylistTableViewCell
         
-        let playlistTitle = playlists[indexPath.row]
+        let playlistTitle = playlists[indexPath.row].title
         cell.playlistTitle.text = playlistTitle
         
         return cell
@@ -62,17 +62,20 @@ class PlaylistAddPlaylistViewController: UIViewController, UITableViewDelegate, 
         let cell = tableView.cellForRow(at: indexPath) as! PlaylistAddPlaylistTableViewCell
         cell.isUserInteractionEnabled = false
         
-//        let playlist = playlists[indexPath.row].playlistJSON()
-//
-//        size = size + playlist.count
-//
-//        muzeClient.updatePlaylistSongs(playlistId: playlistId, playlist: playlist, size: size) { error in
-//            if error == nil {
-//                cell.addPlaylistLabel.text = ""
-//            }
-//            cell.isUserInteractionEnabled = true
-//            cell.setSelected(false, animated: true)
-//        }
+        let playlist = playlists[indexPath.row]
+        musicMgr.getPlaylistTracks(playlist: playlist) { playlist, error in
+            if error == nil {
+                self.size = self.size + playlist.size
+                
+                self.muzeClient.updatePlaylistSongs(playlistId: self.playlistId, playlist: playlist.muzeRequestData(), size: self.size) { error in
+                    if error == nil {
+                        cell.addPlaylistLabel.text = ""
+                    }
+                    cell.isUserInteractionEnabled = true
+                    cell.setSelected(false, animated: true)
+                }
+            }
+        }
     }
 
 }

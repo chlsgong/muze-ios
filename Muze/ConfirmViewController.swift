@@ -85,7 +85,7 @@ class ConfirmViewController: UIViewController, UITextFieldDelegate {
             if userId != nil {
                 self.user.id = userId!
                 self.user.phoneNumber = self.phoneNumber
-                self.user.isLoggedIn = true
+                self.user.isLoggedIn = true // TODO: move further down
                 
                 if self.user.serviceProvider == .spotify {
                     self.musicClient.requestSpotifyTokens() { accessToken, expiresIn, refreshToken, error in

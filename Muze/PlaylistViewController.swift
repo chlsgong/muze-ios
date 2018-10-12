@@ -58,7 +58,7 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.isIdentified(byId: .toPlaylistDetail) {
             if let destination = segue.destination as? PlaylistDetailViewController {
-                destination.playlistModel = sender as! PlaylistModel
+                destination.playlistModel = (sender as! PlaylistModel)
             }
         }
     }

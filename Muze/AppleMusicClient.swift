@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class AppleMusicClient {
+class AppleMusicClient: MusicServiceClient {
     static let shared = AppleMusicClient()
     
     private var devToken = User.standard.appleMusicDevToken
@@ -43,10 +43,12 @@ class AppleMusicClient {
         }
     }
     
-    func getPlaylists(completion: @escaping ([String]?, Error?) -> Void) {
+    // MARK: HTTP methods
+    
+    func getPlaylists(completion: @escaping ([PlaylistModel]?, Error?) -> Void) {
         let headers = [
-            "Authorization": "Bearer \(devToken)",
-            "Music-User-Token": userToken
+            "Authorization": "Bearer \(User.standard.appleMusicDevToken)",
+            "Music-User-Token": User.standard.appleMusicUserToken
         ]
         
         request(endpoint: .getLibraryPlaylists, method: .get, headers: headers).responseJSON { response in
@@ -55,15 +57,18 @@ class AppleMusicClient {
                 let json = JSON(value)
                 let data = json["data"].arrayValue
                 
-                var playlistTitles = [String]()
-                for playlist in data {
-                    let attributes = playlist["attributes"].dictionaryValue
-                    let title = attributes["name"]!.stringValue
-                    playlistTitles.append(title)
+                var playlists = [PlaylistModel]()
+                for playlistData in data {
+                    let id = playlistData["id"].stringValue
+                    let attributes = JSON(playlistData["attributes"])
+                    let title = attributes["name"].stringValue
+                    
+                    let playlist = PlaylistModel(appleMusicId: id, title: title)
+                    playlists.append(playlist)
                 }
                 
                 DispatchQueue.main.async {
-                    completion(playlistTitles, nil)
+                    completion(playlists, nil)
                 }
             case .failure(let error):
                 print("error", error)
@@ -72,6 +77,101 @@ class AppleMusicClient {
                 }
             }
         }
+    }
+    
+    func getPlaylistTracks(playlist: PlaylistModel, completion: @escaping (PlaylistModel, Error?) -> Void) {
+        let headers = [
+            "Authorization": "Bearer \(User.standard.appleMusicDevToken)",
+            "Music-User-Token": User.standard.appleMusicUserToken
+        ]
+        
+        request(endpoint: .getLibraryPlaylistTracks(playlist.appleMusicId), method: .get, headers: headers).responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                let data = json["data"].arrayValue
+                
+                var tracks = [Track]()
+                for trackData in data {
+                    let id = trackData["id"].stringValue
+                    let attributes = JSON(trackData["attributes"])
+                    let title = attributes["name"].stringValue
+                    let artist = attributes["artistName"].stringValue
+                    let contentRating = attributes["contentRating"].stringValue
+                    
+                    let track = Track(appleMusicId: id, title: title, artist: artist, contentRating: contentRating)
+                    tracks.append(track)
+                }
+                playlist.update(tracks: tracks, size: tracks.count)
+                
+                DispatchQueue.main.async {
+                    completion(playlist, nil)
+                }
+            case .failure(let error):
+                print("error", error)
+                DispatchQueue.main.async {
+                    completion(playlist, error)
+                }
+            }
+            
+        }
+    }
+    
+    func createPlaylist(playlist: PlaylistModel, completion: @escaping (Error?) -> Void) {
+        let headers = [
+            "Authorization": "Bearer \(User.standard.appleMusicDevToken)",
+            "Music-User-Token": User.standard.appleMusicUserToken
+        ]
+        
+        let parameters = [
+            "attributes": ["name": playlist.title],
+            "relationships": ["tracks": playlist.appleMusicTracksRequestData()]
+        ]
+        
+        request(endpoint: .createLibraryPlaylist, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                let data = json["data"].arrayValue
+                let id = data[0]["id"].stringValue
+                print(id)
+                
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
+            case .failure(let error):
+                print("error", error)
+                DispatchQueue.main.async {
+                    completion(error)
+                }
+            }
+        }
+    }
+    
+    func addTracksToPlaylist(playlist: PlaylistModel, completion: @escaping (Error?) -> Void) {
+        let headers = [
+            "Authorization": "Bearer \(User.standard.appleMusicDevToken)",
+            "Music-User-Token": User.standard.appleMusicUserToken
+        ]
+        
+        let parameters = playlist.appleMusicTracksRequestData()
+        
+        request(endpoint: .addLibraryPlaylistTracks(playlist.appleMusicId), method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            switch response.result {
+            case .success:
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
+            case .failure(let error):
+                print("error", error)
+                DispatchQueue.main.async {
+                    completion(error)
+                }
+            }
+        }
+    }
+    
+    func queryTrack() {
     }
     
     // MARK: Helpers
