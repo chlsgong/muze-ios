@@ -17,102 +17,42 @@ import Contacts
 // Add notification observers
 
 class AuthorizationManager {
-    private let cloudServiceController = SKCloudServiceController()
-    private var cloudServiceCapabilities = SKCloudServiceCapability()
+    static let shared = AuthorizationManager()
+    
+    private init() {}
+    
+    // MARK: Properties
+    
     private let userNotificationCenter = UNUserNotificationCenter.current()
     private let contactStore = CNContactStore()
-    private let musicClient = MusicClient()
     
-    private var cloudServiceStorefrontCountryCode = "us"
+    private let musicServiceAuths: [MusicServiceProvider: MusicServiceAuth] = [
+        .spotify: SpotifyAuth.shared,
+        .appleMusic: AppleMusicAuth.shared
+    ]
     
-    // Apple Music authorization
-    
-    func requestCloudServiceAuthorization(completion: @escaping (SKCloudServiceAuthorizationStatus) -> Void) {
-        guard SKCloudServiceController.authorizationStatus() == .notDetermined else {
-            completion(SKCloudServiceController.authorizationStatus())
-            return
-        }
-
-        SKCloudServiceController.requestAuthorization { authorizationStatus in
-            switch authorizationStatus {
-            case .authorized:
-                self.requestCloudServiceCapabilities()
-            default:
-                break
-            }
-            
-            completion(authorizationStatus)
-        }
+    private var musicServiceAuth: MusicServiceAuth? {
+        return musicServiceAuths[musicServiceProvider]
     }
     
-    private func requestCloudServiceCapabilities() {
-        cloudServiceController.requestCapabilities { cloudServiceCapability, error in
-            guard error == nil else { /* handle error */ return }
-            
-            self.cloudServiceCapabilities = cloudServiceCapability
-        }
+    var musicServiceProvider: MusicServiceProvider = .none
+    
+    // MARK: Music service auth methods
+    
+    func requestAuthorization(completion: @escaping () -> Void) {        
+        musicServiceAuth?.requestAuthorization(completion: completion)
     }
     
-    func requestMediaLibraryAuthorization(completion: @escaping (MPMediaLibraryAuthorizationStatus) -> Void) {
-        guard MPMediaLibrary.authorizationStatus() == .notDetermined else {
-            completion(MPMediaLibrary.authorizationStatus())
-            return
-        }
-        
-        MPMediaLibrary.requestAuthorization { authorizationStatus in
-            completion(authorizationStatus)
-        }
-    }
-    
-    func requestAppleMusicUserToken(completion: @escaping (Error?) -> Void) {
-        let devToken = User.standard.appleMusicDevToken
-        
-        if #available(iOS 11.0, *) {
-            cloudServiceController.requestUserToken(forDeveloperToken: devToken) { userToken, error in
-                if error == nil {
-                    User.standard.appleMusicUserToken = userToken!
-                }
-                DispatchQueue.main.async {
-                    completion(error)
-                }
-            }
-        }
-        else {
-            // Fallback on earlier versions
-            cloudServiceController.requestPersonalizationToken(forClientToken: devToken) { userToken, error in
-                if error == nil {
-                    User.standard.appleMusicUserToken = userToken!
-                }
-                DispatchQueue.main.async {
-                    completion(error)
-                }
+    func getSession(completion: @escaping () -> Void) {
+        musicServiceAuth?.getSession { error in
+            self.handleError(error: error) {
+               completion()
             }
         }
     }
     
-    func availableCloudServiceCapabilities() -> [SKCloudServiceCapability] {        
-        var availableCapabilities = [SKCloudServiceCapability]()
-        
-        if cloudServiceCapabilities.contains(.addToCloudMusicLibrary) {
-            availableCapabilities.append(.addToCloudMusicLibrary)
-        }
-        if cloudServiceCapabilities.contains(.musicCatalogPlayback) {
-            availableCapabilities.append(.musicCatalogPlayback)
-        }
-        if cloudServiceCapabilities.contains(.musicCatalogSubscriptionEligible) {
-            availableCapabilities.append(.musicCatalogSubscriptionEligible)
-        }
-        
-        return availableCapabilities
-    }
+    // MARK: Remote notifications
     
-    // Spotify authorization
-    
-    func requestSpotifyAuthorization(completion: @escaping () -> Void) {        
-        musicClient.authorizeSpotify(completion: completion)
-    }
-    
-    // TODO: change to match contacts (return type)
     func requestNotificationCenterAuthorization(completion: ((Bool) -> Void)?) {
         userNotificationCenter.getNotificationSettings() { settings in
             if settings.authorizationStatus == .notDetermined {
@@ -129,6 +69,8 @@ class AuthorizationManager {
         }
     }
     
+    // MARK: Contacts
+    
     func requestContactsAuthorization(completion: @escaping (CNAuthorizationStatus) -> Void) {
         guard CNContactStore.authorizationStatus(for: .contacts) == .notDetermined else {
             completion(CNContactStore.authorizationStatus(for: .contacts))
@@ -139,19 +81,15 @@ class AuthorizationManager {
             completion(CNContactStore.authorizationStatus(for: .contacts))
         }
     }
-}
-
-extension SKCloudServiceCapability {
-    func capabilityString() -> String {
-        switch self {
-        case .addToCloudMusicLibrary:
-            return "Add To Cloud Music Library"
-        case .musicCatalogPlayback:
-            return "Music Catalog Playback"
-        case .musicCatalogSubscriptionEligible:
-            return "Music Catalog Subscription Eligible"
-        default:
-            return ""
+    
+    // Mark: Helpers
+    
+    private func handleError(error: Error?, completion: @escaping () -> Void) {
+        guard error == nil else {
+            print(error!.localizedDescription)
+            return
         }
+        
+        completion()
     }
 }

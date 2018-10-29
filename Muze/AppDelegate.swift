@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     let muzeClient = MuzeClient()
     let user = User.standard
-    let musicMgr = MusicManager.standard
+    let musicMgr = MusicManager.shared
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // ************ TEST AREA BEGIN ************
@@ -28,8 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // ************* TEST AREA END *************
         
-        user.retrieveLoginInfo()
-        musicMgr.serviceProvider = user.serviceProvider
+        App.initialize()
         
         return true
     }
@@ -62,11 +61,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         var isAuthorized = false
         if let name = urlComponents?.queryItems?.first?.name {
-            isAuthorized = name == SpotifyAuth.responseType
+            isAuthorized = name == SpotifyAuth.shared.responseType
             
             if isAuthorized {
                 let code = urlComponents?.queryItems?.first?.value
-                SpotifyAuth.code = code
+                SpotifyAuth.shared.code = code
             }
         }
         

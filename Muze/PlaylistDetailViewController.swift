@@ -131,7 +131,7 @@ class PlaylistDetailViewController: UIViewController, UITableViewDelegate, UITab
     @IBAction func saveButtonTapped(_ sender: Any) {
         self.saveButton.isEnabled = false
         
-        MusicManager.standard.savePlaylist(playlist: playlistModel) { _ in
+        MusicManager.shared.createPlaylist(playlist: playlistModel) {
             self.saveButton.isEnabled = true
         }
     }

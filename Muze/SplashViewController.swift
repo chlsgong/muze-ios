@@ -11,7 +11,7 @@ import UIKit
 class SplashViewController: UIViewController {
     private let navMgr = NavigationManager.shared
     private let user = User.standard
-    private let musicClient = MusicClient()
+    private let spotifyAuth = SpotifyAuth.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +45,7 @@ class SplashViewController: UIViewController {
     
     private func requestAccessToken(completion: @escaping () -> Void) {
         if user.serviceProvider == .spotify {
-            musicClient.requestSpotifyAccessToken(refreshToken: user.spotifyRefreshToken) { error in
+            spotifyAuth.requestSpotifyAccessToken { error in
                 if error == nil {
                     completion()
                 }

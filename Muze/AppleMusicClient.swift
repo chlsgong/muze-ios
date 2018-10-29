@@ -13,10 +13,12 @@ import SwiftyJSON
 class AppleMusicClient: MusicServiceClient {
     static let shared = AppleMusicClient()
     
-    private var devToken = User.standard.appleMusicDevToken
-    private var userToken = User.standard.appleMusicUserToken
-    
     private init() {}
+    
+    private let user = User.standard
+    
+    private var devToken: String { return user.appleMusicDevToken }
+    private var userToken: String { return user.appleMusicUserToken }
     
     func getSong() {
         let parameter = [
@@ -47,8 +49,8 @@ class AppleMusicClient: MusicServiceClient {
     
     func getPlaylists(completion: @escaping ([PlaylistModel]?, Error?) -> Void) {
         let headers = [
-            "Authorization": "Bearer \(User.standard.appleMusicDevToken)",
-            "Music-User-Token": User.standard.appleMusicUserToken
+            "Authorization": "Bearer \(devToken)",
+            "Music-User-Token": userToken
         ]
         
         request(endpoint: .getLibraryPlaylists, method: .get, headers: headers).responseJSON { response in
@@ -60,7 +62,7 @@ class AppleMusicClient: MusicServiceClient {
                 var playlists = [PlaylistModel]()
                 for playlistData in data {
                     let id = playlistData["id"].stringValue
-                    let attributes = JSON(playlistData["attributes"])
+                    let attributes = playlistData["attributes"]
                     let title = attributes["name"].stringValue
                     
                     let playlist = PlaylistModel(appleMusicId: id, title: title)
@@ -81,8 +83,8 @@ class AppleMusicClient: MusicServiceClient {
     
     func getPlaylistTracks(playlist: PlaylistModel, completion: @escaping (PlaylistModel, Error?) -> Void) {
         let headers = [
-            "Authorization": "Bearer \(User.standard.appleMusicDevToken)",
-            "Music-User-Token": User.standard.appleMusicUserToken
+            "Authorization": "Bearer \(devToken)",
+            "Music-User-Token": userToken
         ]
         
         request(endpoint: .getLibraryPlaylistTracks(playlist.appleMusicId), method: .get, headers: headers).responseJSON { response in
@@ -94,7 +96,7 @@ class AppleMusicClient: MusicServiceClient {
                 var tracks = [Track]()
                 for trackData in data {
                     let id = trackData["id"].stringValue
-                    let attributes = JSON(trackData["attributes"])
+                    let attributes = trackData["attributes"]
                     let title = attributes["name"].stringValue
                     let artist = attributes["artistName"].stringValue
                     let contentRating = attributes["contentRating"].stringValue
@@ -119,8 +121,8 @@ class AppleMusicClient: MusicServiceClient {
     
     func createPlaylist(playlist: PlaylistModel, completion: @escaping (Error?) -> Void) {
         let headers = [
-            "Authorization": "Bearer \(User.standard.appleMusicDevToken)",
-            "Music-User-Token": User.standard.appleMusicUserToken
+            "Authorization": "Bearer \(devToken)",
+            "Music-User-Token": userToken
         ]
         
         let parameters = [
@@ -128,7 +130,7 @@ class AppleMusicClient: MusicServiceClient {
             "relationships": ["tracks": playlist.appleMusicTracksRequestData()]
         ]
         
-        request(endpoint: .createLibraryPlaylist, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+        request(endpoint: .postCreateLibraryPlaylist, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
@@ -150,13 +152,13 @@ class AppleMusicClient: MusicServiceClient {
     
     func addTracksToPlaylist(playlist: PlaylistModel, completion: @escaping (Error?) -> Void) {
         let headers = [
-            "Authorization": "Bearer \(User.standard.appleMusicDevToken)",
-            "Music-User-Token": User.standard.appleMusicUserToken
+            "Authorization": "Bearer \(devToken)",
+            "Music-User-Token": userToken
         ]
         
         let parameters = playlist.appleMusicTracksRequestData()
         
-        request(endpoint: .addLibraryPlaylistTracks(playlist.appleMusicId), method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+        request(endpoint: .postAddLibraryPlaylistTracks(playlist.appleMusicId), method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             switch response.result {
             case .success:
                 DispatchQueue.main.async {

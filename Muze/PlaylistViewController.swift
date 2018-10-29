@@ -22,10 +22,10 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     
     private var alert: UIAlertController?
     
-    private let authMgr = AuthorizationManager()
+    private let authMgr = AuthorizationManager.shared
     private let navMgr = NavigationManager.shared
     private let muzeClient = MuzeClient()
-    private let musicClient = MusicClient()
+
     private let user = User.standard
     
     var playlists = [PlaylistModel]()

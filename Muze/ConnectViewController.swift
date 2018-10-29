@@ -95,5 +95,4 @@ class ConnectViewController: UIViewController, UITextFieldDelegate {
     @IBAction func cancelButtonTapped(_ sender: Any) {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
-    
 }

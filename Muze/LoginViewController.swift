@@ -12,9 +12,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var appleMusicButton: UIButton!
     @IBOutlet weak var spotifyButton: UIButton!
     
-    private let authMgr = AuthorizationManager()
-    private let user = User.standard
-    private let musicMgr = MusicManager.standard
+    private let authMgr = AuthorizationManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,15 +22,17 @@ class LoginViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    private func setServiceProvider(serviceProvider: ServiceProvider) {
-        musicMgr.serviceProvider = serviceProvider
-        user.serviceProvider = serviceProvider
+    private func setServiceProvider(serviceProvider: MusicServiceProvider) {
+        authMgr.musicServiceProvider = serviceProvider
+    }
+    
+    private func segueToConnect() {
+        self.performSegue(withIdentifier: .toConnect, sender: nil)
     }
     
     func spotifyAuthorizationCallback(isAuthorized: Bool) {
         if isAuthorized {
-            setServiceProvider(serviceProvider: .spotify)
-            self.performSegue(withIdentifier: .toConnect, sender: nil)
+            segueToConnect()
         }
         else {
             // handle unauthorized
@@ -45,36 +45,43 @@ class LoginViewController: UIViewController {
     @IBAction func appleMusicButtonTapped(_ sender: Any) {
         appleMusicButton.isEnabled = false
         
-        authMgr.requestCloudServiceAuthorization { authorizationStatus in
-            if authorizationStatus == .authorized {
-                self.authMgr.requestMediaLibraryAuthorization { authorizationStatus in
-                    DispatchQueue.main.async {
-                        if authorizationStatus == .authorized {
-                            self.setServiceProvider(serviceProvider: .appleMusic)
-                            
-                            self.performSegue(withIdentifier: .toConnect, sender: nil)
-                            self.appleMusicButton.isEnabled = true
-                        }
-                        else {
-                            // handle status
-                            
-                            self.appleMusicButton.isEnabled = true
-                        }
-                    }
-                }
-            }
-            else {
-                // handle status
-                
-                self.appleMusicButton.isEnabled = true
-            }
+        setServiceProvider(serviceProvider: .appleMusic)
+        authMgr.requestAuthorization {
+            self.segueToConnect()
+            self.appleMusicButton.isEnabled = true
         }
+        
+//        authMgr.requestCloudServiceAuthorization { authorizationStatus in
+//            if authorizationStatus == .authorized {
+//                self.authMgr.requestMediaLibraryAuthorization { authorizationStatus in
+//                    DispatchQueue.main.async {
+//                        if authorizationStatus == .authorized {
+//                            self.setServiceProvider(serviceProvider: .appleMusic)
+//
+//                            self.performSegue(withIdentifier: .toConnect, sender: nil)
+//                            self.appleMusicButton.isEnabled = true
+//                        }
+//                        else {
+//                            // handle status
+//
+//                            self.appleMusicButton.isEnabled = true
+//                        }
+//                    }
+//                }
+//            }
+//            else {
+//                // handle status
+//
+//                self.appleMusicButton.isEnabled = true
+//            }
+//        }
     }
     
     @IBAction func spotifyButtonTapped(_ sender: Any) {
         spotifyButton.isEnabled = false
         
-        authMgr.requestSpotifyAuthorization {
+        setServiceProvider(serviceProvider: .spotify)
+        authMgr.requestAuthorization {
             self.spotifyButton.isEnabled = true
         }
     }

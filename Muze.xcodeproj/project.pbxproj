@@ -16,6 +16,12 @@
 		56B969B52141C3F5008A53EB /* AppleMusicConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B969B42141C3F5008A53EB /* AppleMusicConstants.swift */; };
 		56B969B7214A2C29008A53EB /* MusicServiceClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B969B6214A2C29008A53EB /* MusicServiceClient.swift */; };
 		56B969BB214A3781008A53EB /* SpotifyClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B969BA214A3781008A53EB /* SpotifyClient.swift */; };
+		56BFD907217AADB00095269C /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BFD906217AADB00095269C /* App.swift */; };
+		56BFD90B217AB37D0095269C /* MusicServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BFD90A217AB37D0095269C /* MusicServiceProvider.swift */; };
+		56BFD90D217D30A20095269C /* MusicServiceAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BFD90C217D30A20095269C /* MusicServiceAuth.swift */; };
+		56F815CC2171510800859B41 /* SpotifyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F815CB2171510800859B41 /* SpotifyConstants.swift */; };
+		56F815CE21743EE100859B41 /* SpotifyAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F815CD21743EE100859B41 /* SpotifyAuth.swift */; };
+		56F815D021743F2C00859B41 /* AppleMusicAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F815CF21743F2C00859B41 /* AppleMusicAuth.swift */; };
 		D101204C1EE74DA900E7B88B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D101204B1EE74DA900E7B88B /* AppDelegate.swift */; };
 		D10120511EE74DA900E7B88B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D101204F1EE74DA900E7B88B /* Main.storyboard */; };
 		D10120531EE74DA900E7B88B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D10120521EE74DA900E7B88B /* Assets.xcassets */; };
@@ -31,7 +37,6 @@
 		D1501AF01F27D031004C9B89 /* MuzeClientSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1501AEF1F27D031004C9B89 /* MuzeClientSession.swift */; };
 		D1501AF21F27D0F9004C9B89 /* MuzeClientConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1501AF11F27D0F9004C9B89 /* MuzeClientConstants.swift */; };
 		D16489291F3E4980007372DC /* PlaylistAddMusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16489281F3E4980007372DC /* PlaylistAddMusicViewController.swift */; };
-		D16B6EA620E9864B00797AC6 /* MusicClientConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16B6EA520E9864B00797AC6 /* MusicClientConstants.swift */; };
 		D17C916F1F461FB900789D71 /* PlaylistAddPlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17C916E1F461FB900789D71 /* PlaylistAddPlaylistViewController.swift */; };
 		D17C91711F461FCC00789D71 /* PlaylistSearchMusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17C91701F461FCC00789D71 /* PlaylistSearchMusicViewController.swift */; };
 		D17C91731F461FE900789D71 /* PlaylistAddPlaylistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17C91721F461FE900789D71 /* PlaylistAddPlaylistTableViewCell.swift */; };
@@ -44,7 +49,6 @@
 		D188938D1F300C76000F3904 /* PlaylistModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D188938C1F300C76000F3904 /* PlaylistModel.swift */; };
 		D188938F1F300C86000F3904 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D188938E1F300C86000F3904 /* UserModel.swift */; };
 		D18948111F3D4B43009A05FC /* SocketClientConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18948101F3D4B43009A05FC /* SocketClientConstants.swift */; };
-		D19EC7071F68998900AC625F /* MusicClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19EC7061F68998900AC625F /* MusicClient.swift */; };
 		D1AE86881F3303F70047F2ED /* PlaylistListenersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE86871F3303F70047F2ED /* PlaylistListenersTableViewCell.swift */; };
 		D1AE868C1F3310AA0047F2ED /* PlaylistContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AE868B1F3310AA0047F2ED /* PlaylistContactsTableViewCell.swift */; };
 		D1B39DEF1EF6439F001FFF01 /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B39DEE1EF6439F001FFF01 /* Identifier.swift */; };
@@ -64,6 +68,12 @@
 		56B969B42141C3F5008A53EB /* AppleMusicConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicConstants.swift; sourceTree = "<group>"; };
 		56B969B6214A2C29008A53EB /* MusicServiceClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicServiceClient.swift; sourceTree = "<group>"; };
 		56B969BA214A3781008A53EB /* SpotifyClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyClient.swift; sourceTree = "<group>"; };
+		56BFD906217AADB00095269C /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		56BFD90A217AB37D0095269C /* MusicServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicServiceProvider.swift; sourceTree = "<group>"; };
+		56BFD90C217D30A20095269C /* MusicServiceAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicServiceAuth.swift; sourceTree = "<group>"; };
+		56F815CB2171510800859B41 /* SpotifyConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyConstants.swift; sourceTree = "<group>"; };
+		56F815CD21743EE100859B41 /* SpotifyAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyAuth.swift; sourceTree = "<group>"; };
+		56F815CF21743F2C00859B41 /* AppleMusicAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicAuth.swift; sourceTree = "<group>"; };
 		5865016E2658DD8446279F92 /* Pods_Muze.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Muze.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A14C5D3A3454C21188B77264 /* Pods-Muze.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muze.release.xcconfig"; path = "Pods/Target Support Files/Pods-Muze/Pods-Muze.release.xcconfig"; sourceTree = "<group>"; };
 		A877E5DD63A937D6CA7A4792 /* Pods-Muze.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Muze.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Muze/Pods-Muze.debug.xcconfig"; sourceTree = "<group>"; };
@@ -85,7 +95,6 @@
 		D1501AEF1F27D031004C9B89 /* MuzeClientSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuzeClientSession.swift; sourceTree = "<group>"; };
 		D1501AF11F27D0F9004C9B89 /* MuzeClientConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuzeClientConstants.swift; sourceTree = "<group>"; };
 		D16489281F3E4980007372DC /* PlaylistAddMusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistAddMusicViewController.swift; sourceTree = "<group>"; };
-		D16B6EA520E9864B00797AC6 /* MusicClientConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicClientConstants.swift; sourceTree = "<group>"; };
 		D17C916E1F461FB900789D71 /* PlaylistAddPlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistAddPlaylistViewController.swift; sourceTree = "<group>"; };
 		D17C91701F461FCC00789D71 /* PlaylistSearchMusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistSearchMusicViewController.swift; sourceTree = "<group>"; };
 		D17C91721F461FE900789D71 /* PlaylistAddPlaylistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistAddPlaylistTableViewCell.swift; sourceTree = "<group>"; };
@@ -98,7 +107,6 @@
 		D188938C1F300C76000F3904 /* PlaylistModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistModel.swift; sourceTree = "<group>"; };
 		D188938E1F300C86000F3904 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		D18948101F3D4B43009A05FC /* SocketClientConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketClientConstants.swift; sourceTree = "<group>"; };
-		D19EC7061F68998900AC625F /* MusicClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicClient.swift; sourceTree = "<group>"; };
 		D1AE86871F3303F70047F2ED /* PlaylistListenersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistListenersTableViewCell.swift; sourceTree = "<group>"; };
 		D1AE868B1F3310AA0047F2ED /* PlaylistContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistContactsTableViewCell.swift; sourceTree = "<group>"; };
 		D1B39DEE1EF6439F001FFF01 /* Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifier.swift; sourceTree = "<group>"; };
@@ -160,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				D101204B1EE74DA900E7B88B /* AppDelegate.swift */,
+				56BFD906217AADB00095269C /* App.swift */,
 				56ADEA1C21365A7D00C584DF /* NavigationManager.swift */,
 				D14DE8C61F2B32BE0059C07E /* UserDefaultsKey.swift */,
 				D1B39DEE1EF6439F001FFF01 /* Identifier.swift */,
@@ -177,11 +186,14 @@
 				D1501AEF1F27D031004C9B89 /* MuzeClientSession.swift */,
 				D1501AF11F27D0F9004C9B89 /* MuzeClientConstants.swift */,
 				D13DCD911EF61B8300969FC0 /* AuthorizationManager.swift */,
+				56BFD90C217D30A20095269C /* MusicServiceAuth.swift */,
 				D12119A31F3DA1A900A138B6 /* MusicManager.swift */,
 				56B969B6214A2C29008A53EB /* MusicServiceClient.swift */,
-				D19EC7061F68998900AC625F /* MusicClient.swift */,
-				D16B6EA520E9864B00797AC6 /* MusicClientConstants.swift */,
+				56BFD90A217AB37D0095269C /* MusicServiceProvider.swift */,
+				56F815CD21743EE100859B41 /* SpotifyAuth.swift */,
 				56B969BA214A3781008A53EB /* SpotifyClient.swift */,
+				56F815CB2171510800859B41 /* SpotifyConstants.swift */,
+				56F815CF21743F2C00859B41 /* AppleMusicAuth.swift */,
 				56B969B22141C32F008A53EB /* AppleMusicClient.swift */,
 				56B969B42141C3F5008A53EB /* AppleMusicConstants.swift */,
 				56ADEA1821364E3300C584DF /* RootViewController.swift */,
@@ -298,6 +310,8 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Muze/Pods-Muze-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesSwift/Promises.framework",
 				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -305,6 +319,8 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Promises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -352,6 +368,7 @@
 				D18948111F3D4B43009A05FC /* SocketClientConstants.swift in Sources */,
 				D17C91731F461FE900789D71 /* PlaylistAddPlaylistTableViewCell.swift in Sources */,
 				D101205E1EE7608300E7B88B /* LoginViewController.swift in Sources */,
+				56BFD907217AADB00095269C /* App.swift in Sources */,
 				D18893831F2FD2CB000F3904 /* PlaylistDetailViewController.swift in Sources */,
 				D1C2DDEC1F271E420090AA56 /* Utility.swift in Sources */,
 				D101204C1EE74DA900E7B88B /* AppDelegate.swift in Sources */,
@@ -360,23 +377,26 @@
 				D1209BE41F3BE70D00A04C47 /* Contact.swift in Sources */,
 				D16489291F3E4980007372DC /* PlaylistAddMusicViewController.swift in Sources */,
 				D1C7F5981F0179890030851C /* PlaylistViewController.swift in Sources */,
+				56F815D021743F2C00859B41 /* AppleMusicAuth.swift in Sources */,
 				D1B39DEF1EF6439F001FFF01 /* Identifier.swift in Sources */,
 				D1501AF01F27D031004C9B89 /* MuzeClientSession.swift in Sources */,
 				56B969BB214A3781008A53EB /* SpotifyClient.swift in Sources */,
 				D18893851F2FD322000F3904 /* PlaylistListenersViewController.swift in Sources */,
 				D1AE86881F3303F70047F2ED /* PlaylistListenersTableViewCell.swift in Sources */,
-				D19EC7071F68998900AC625F /* MusicClient.swift in Sources */,
+				56F815CC2171510800859B41 /* SpotifyConstants.swift in Sources */,
+				56F815CE21743EE100859B41 /* SpotifyAuth.swift in Sources */,
 				D1501AEE1F27CDCD004C9B89 /* MuzeClient.swift in Sources */,
 				D12119A41F3DA1A900A138B6 /* MusicManager.swift in Sources */,
 				56B969B32141C32F008A53EB /* AppleMusicClient.swift in Sources */,
 				56B969B7214A2C29008A53EB /* MusicServiceClient.swift in Sources */,
 				D17C916F1F461FB900789D71 /* PlaylistAddPlaylistViewController.swift in Sources */,
+				56BFD90B217AB37D0095269C /* MusicServiceProvider.swift in Sources */,
 				56ADEA1D21365A7D00C584DF /* NavigationManager.swift in Sources */,
-				D16B6EA620E9864B00797AC6 /* MusicClientConstants.swift in Sources */,
 				D181BF581F4FE30E00C2E8E5 /* NetworkingConstants.swift in Sources */,
 				D14DE8C71F2B32BE0059C07E /* UserDefaultsKey.swift in Sources */,
 				D14CE4161F3D359F00E9029B /* SocketClient.swift in Sources */,
 				D1501AF21F27D0F9004C9B89 /* MuzeClientConstants.swift in Sources */,
+				56BFD90D217D30A20095269C /* MusicServiceAuth.swift in Sources */,
 				56B969B52141C3F5008A53EB /* AppleMusicConstants.swift in Sources */,
 				D1B39DF11EF6443E001FFF01 /* UIUtil.swift in Sources */,
 				D188938F1F300C86000F3904 /* UserModel.swift in Sources */,
@@ -527,6 +547,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HMYCNE59S2;
 				INFOPLIST_FILE = Muze/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.charlesgong.muze;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -546,6 +567,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HMYCNE59S2;
 				INFOPLIST_FILE = Muze/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.charlesgong.muze;
 				PRODUCT_NAME = "$(TARGET_NAME)";

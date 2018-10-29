@@ -17,7 +17,7 @@ class PlaylistContactsViewController: UIViewController, UITableViewDelegate, UIT
     @IBOutlet weak var contactsTableView: UITableView!
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
-    private let authMgr = AuthorizationManager()
+    private let authMgr = AuthorizationManager.shared
     private let muzeClient = MuzeClient()
     
     var playlistId: String!

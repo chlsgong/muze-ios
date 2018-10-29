@@ -16,8 +16,9 @@ class User {
     private var _id: String
     private var _apnToken: String
     private var _phoneNumber: String
-    private var _serviceProvider: ServiceProvider
+    private var _serviceProvider: MusicServiceProvider
     private var _isLoggedIn: Bool
+    private var _spotifyUserId: String
     private var _spotifyRefreshToken: String
     private var _appleMusicDevToken: String // For now, persist all the time. TODO: retrieve from backend
     private var _appleMusicUserToken: String
@@ -28,6 +29,7 @@ class User {
         _phoneNumber = ""
         _serviceProvider = .none
         _isLoggedIn = false
+        _spotifyUserId = ""
         _spotifyRefreshToken = ""
         _appleMusicDevToken = ""
         _appleMusicUserToken = ""
@@ -65,7 +67,7 @@ class User {
         }
     }
     
-    var serviceProvider: ServiceProvider {
+    var serviceProvider: MusicServiceProvider {
         get {
             return _serviceProvider
         }
@@ -82,6 +84,16 @@ class User {
         set(isLoggedIn) {
             set(value: isLoggedIn, forKey: .isLoggedIn)
             _isLoggedIn = isLoggedIn
+        }
+    }
+    
+    var spotifyUserId: String {
+        get {
+            return _spotifyUserId
+        }
+        set(spotifyUserId) {
+            set(value: spotifyUserId, forKey: .spotifyUserId)
+            _spotifyUserId = spotifyUserId
         }
     }
     
@@ -124,6 +136,7 @@ class User {
         _phoneNumber = string(forKey: .phoneNumber)
         _serviceProvider = serviceProvider(forKey: .serviceProvider)
         _isLoggedIn = bool(forKey: .isLoggedIn)
+        _spotifyUserId = string(forKey: .spotifyUserId)
         _spotifyRefreshToken = string(forKey: .spotifyRefreshToken)
         // _appleMusicDevToken = string(forKey: .appleMusicDevToken)
         _appleMusicUserToken = string(forKey: .appleMusicUserToken)
@@ -137,6 +150,7 @@ class User {
         set(value: "", forKey: .phoneNumber)
         set(value: .none, forKey: .serviceProvider)
         set(value: false, forKey: .isLoggedIn)
+        set(value: "", forKey: .spotifyUserId)
         set(value: "", forKey: .spotifyRefreshToken)
         set(value: "", forKey: .appleMusicDevToken)
         set(value: "", forKey: .appleMusicUserToken)
@@ -146,6 +160,7 @@ class User {
         _phoneNumber = ""
         _serviceProvider = .none
         _isLoggedIn = false
+        _spotifyUserId = ""
         _spotifyRefreshToken = ""
         // _appleMusicDevToken = ""
         _appleMusicUserToken = ""
@@ -161,8 +176,8 @@ class User {
         return defaults.bool(forKey: key.rawValue)
     }
     
-    private func serviceProvider(forKey key: UserDefaultsKey) -> ServiceProvider {
-        return ServiceProvider(rawValue: defaults.string(forKey: key.rawValue) ?? ServiceProvider.none.rawValue)!
+    private func serviceProvider(forKey key: UserDefaultsKey) -> MusicServiceProvider {
+        return MusicServiceProvider(rawValue: defaults.string(forKey: key.rawValue) ?? MusicServiceProvider.none.rawValue)!
     }
     
     // MARK: Private setters
@@ -175,7 +190,7 @@ class User {
         defaults.set(value, forKey: key.rawValue)
     }
     
-    private func set(value: ServiceProvider, forKey key: UserDefaultsKey) {
+    private func set(value: MusicServiceProvider, forKey key: UserDefaultsKey) {
         defaults.set(value.rawValue, forKey: key.rawValue)
     }
 }

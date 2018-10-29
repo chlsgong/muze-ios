@@ -9,76 +9,87 @@
 import Foundation
 import MediaPlayer
 
-// TODO: Use pluggable service provider. Kind of like delegate.
 class MusicManager {
-    static let standard = MusicManager()
+    static let shared = MusicManager()
     
-    let musicClient = MusicClient()
+    private init() {}
     
-    // TODO: consider making clients non-singletons
-    private let musicServiceClients: [ServiceProvider: MusicServiceClient] = [
+    // MARK: Properties
+    
+    private let musicServiceClients: [MusicServiceProvider: MusicServiceClient] = [
         .spotify: SpotifyClient.shared,
         .appleMusic: AppleMusicClient.shared
     ]
     
-    // TODO: make private
-    var serviceProvider: ServiceProvider
-    private var musicServiceClient: MusicServiceClient?
-    
-    private init() {
-        // Save service provider in user defaults and retrieve
-        // serviceProvider = User.standard.serviceProvider
-        serviceProvider = .appleMusic
-        musicServiceClient = musicServiceClients[serviceProvider]
+    private var musicServiceClient: MusicServiceClient? {
+        return musicServiceClients[User.standard.serviceProvider]
     }
     
-    func getPlaylists(completion: @escaping ([PlaylistModel]?, Error?) -> Void) {
+    // MARK: Music service client methods
+    
+    func getPlaylists(completion: @escaping ([PlaylistModel]) -> Void) {
         musicServiceClient?.getPlaylists { playlists, error in
-            print(playlists?.count)
-            
-            completion(playlists, error)
+            self.handleError(error: error) {
+                completion(playlists!)
+            }
         }
     }
     
-    func getPlaylistTracks(playlist: PlaylistModel, completion: @escaping (PlaylistModel, Error?) -> Void) {
+    func getPlaylistTracks(playlist: PlaylistModel, completion: @escaping (PlaylistModel) -> Void) {
         musicServiceClient?.getPlaylistTracks(playlist: playlist) { playlist, error in
-            for track in playlist.tracks {
-                print(track.title, track.artist)
+            self.handleError(error: error) {
+                completion(playlist)
             }
-            
-            completion(playlist, error)
         }
     }
     
-    func savePlaylist(playlist: PlaylistModel, completion: @escaping (Error?) -> Void) {
+    func createPlaylist(playlist: PlaylistModel, completion: @escaping () -> Void) {
         musicServiceClient?.createPlaylist(playlist: playlist) { error in
-            if error != nil {
-                print(error!)
+            self.handleError(error: error) {
+                completion()
             }
-            
-            completion(error)
         }
     }
     
-    func addPlaylistTracks(playlist: PlaylistModel, completion: @escaping (Error?) -> Void) {
+    func addTracksToPlaylist(playlist: PlaylistModel, completion: @escaping () -> Void) {
+        musicServiceClient?.addTracksToPlaylist(playlist: playlist) { error in
+            self.handleError(error: error) {
+                completion()
+            }
+        }
+    }
+    
+    func queryTrack() {
+        musicServiceClient?.queryTrack()
+    }
+    
+    // MARK: Helpers
+    
+    private func handleError(error: Error?, completion: @escaping () -> Void) {
+        guard error == nil else {
+            print(error!.localizedDescription)
+            return
+        }
+        
+        completion()
     }
     
     // Only consider Apple Music for now
-    func queryAllPlaylists(completion: @escaping ([PlaylistModel]) -> Void) {
-        switch(serviceProvider) {
-        case .appleMusic:
-            print("apple music")
-            AppleMusicClient.shared.getPlaylists { playlists, error in
-                if error == nil {
-                    completion(playlists!)
-                }
-            }
-        case .spotify:
-            print("spotify")
-        default:
-            print("none")
-        }
-    }
+//    func queryAllPlaylists(completion: @escaping ([PlaylistModel]) -> Void) {
+//        switch(serviceProvider) {
+//        case .appleMusic:
+//            print("apple music")
+//            AppleMusicClient.shared.getPlaylists { playlists, error in
+//                if error == nil {
+//                    completion(playlists!)
+//                }
+//            }
+//        case .spotify:
+//            print("spotify")
+//        default:
+//            print("none")
+//        }
+//    }
     
 //    func savePlaylist(playlist: PlaylistModel) {
 //        let title = playlist.title

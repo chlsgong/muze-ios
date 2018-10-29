@@ -1,8 +1,8 @@
 //
-//  MusicClientConstants.swift
+//  SpotifyConstants.swift
 //  Muze
 //
-//  Created by Charles Gong on 7/1/18.
+//  Created by Charles Gong on 10/12/18.
 //  Copyright © 2018 Charles Gong. All rights reserved.
 //
 
@@ -11,31 +11,27 @@ import Foundation
 let spotifyDomainAccounts = "https://accounts.spotify.com"
 let spotifyDomainAPI = "https://api.spotify.com/v1"
 
-// Music service providers
-enum ServiceProvider: String {
-    case appleMusic
-    case spotify
-    case none
-}
-
-// Music service API endpoints
-enum ServiceEndpoint {
-    // Spotify endpoints
+// Spotify endpoints
+enum SpotifyEndpoint {
     case getAuthorizeSpotify
     case postToken
     case getCurrentUser
-    case postCreatePlaylist
-    case getSearch
+    case getPlaylists
+    case getPlaylistTracks(String)
+    case postCreatePlaylist(String)
     case postAddTracksToPlaylist(String)
+    case getSearch
     
     var url: String {
         switch self {
         case .getAuthorizeSpotify: return spotifyDomainAccounts + "/authorize"
         case .postToken: return spotifyDomainAccounts + "/api/token"
         case .getCurrentUser: return spotifyDomainAPI + "/me"
-        case .postCreatePlaylist: return spotifyDomainAPI + "/users/\(SpotifyAuth.userId!)/playlists" // TODO: change to the same as below
-        case .getSearch: return spotifyDomainAPI + "/search"
+        case .getPlaylists: return spotifyDomainAPI + "/me/playlists"
+        case .getPlaylistTracks(let playlistId): return spotifyDomainAPI + "/playlists/\(playlistId)/tracks"
+        case .postCreatePlaylist(let userId): return spotifyDomainAPI + "/users/\(userId)/playlists"
         case .postAddTracksToPlaylist(let playlistId): return spotifyDomainAPI + "/playlists/\(playlistId)/tracks"
+        case .getSearch: return spotifyDomainAPI + "/search"
         }
     }
 }
@@ -72,28 +68,4 @@ enum SpotifyScope: String {
     // Listening History
     case userReadRecentlyPlayed = "user-read-recently-played"
     case userTopRead = "user-top-read"
-}
-
-// Spotify constants
-struct SpotifyAuth {
-    private static let _scopes: [SpotifyScope] = [
-        .playlistModifyPrivate,
-        .playlistModifyPublic,
-        .playlistReadPrivate,
-        .playlistReadCollaborative,
-        .userLibraryModify,
-        .userLibraryRead
-    ]
-    
-    static let clientId = "0c57961c512a4ab1bde7c3d6fcc045e7"
-    static let clientSecret = "9763ecb79f7b4e8f8cef5850ccd2172f"
-    static let redirectUri = "muze://"
-    static let responseType = "code"
-    static let grantType = "authorization_code"
-    static var scopes: String { return _scopes.stringify() }
-    
-    static var code: String?
-    static var accessToken: String?
-    static var userId: String?
-    static var expirationDate: Date?
 }

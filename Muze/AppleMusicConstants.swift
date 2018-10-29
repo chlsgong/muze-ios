@@ -14,17 +14,17 @@ let appleMusicCatalog = "https://api.music.apple.com/v1/catalog"
 enum AppleMusicEndpoint {
     case getLibraryPlaylists
     case getLibraryPlaylistTracks(String)
-    case createLibraryPlaylist
-    case addLibraryPlaylistTracks(String)
-    case searchCatalog
+    case postCreateLibraryPlaylist
+    case postAddLibraryPlaylistTracks(String)
+    case getSearchCatalog
     
     var url: String {
         switch self {
         case .getLibraryPlaylists: return "\(appleMusicLibrary)/playlists"
         case .getLibraryPlaylistTracks(let playlistId): return "\(appleMusicLibrary)/playlists/\(playlistId)/tracks"
-        case .createLibraryPlaylist: return "\(appleMusicLibrary)/playlists"
-        case .addLibraryPlaylistTracks(let playlistId): return "\(appleMusicLibrary)/playlists/\(playlistId)/tracks"
-        case .searchCatalog: return "\(appleMusicCatalog)/us/search" // NOTE: default to 'us' storefront for now
+        case .postCreateLibraryPlaylist: return "\(appleMusicLibrary)/playlists"
+        case .postAddLibraryPlaylistTracks(let playlistId): return "\(appleMusicLibrary)/playlists/\(playlistId)/tracks"
+        case .getSearchCatalog: return "\(appleMusicCatalog)/us/search" // NOTE: default to 'us' storefront for now
         }
     }
 }

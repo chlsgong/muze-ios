@@ -13,10 +13,10 @@ class ConfirmViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var resendButton: UIButton!
     @IBOutlet weak var doneButton: UIButton!
     
-    private let authMgr = AuthorizationManager()
+    private let authMgr = AuthorizationManager.shared
     private let navMgr = NavigationManager.shared
     private let muzeClient = MuzeClient()
-    private let musicClient = MusicClient()
+    private let spotifyAuth = SpotifyAuth.shared
     private let user = User.standard
     
     var phoneNumber: String!
@@ -83,46 +83,47 @@ class ConfirmViewController: UIViewController, UITextFieldDelegate {
         
         muzeClient.checkVerificationCode(phoneNumber: phoneNumber, code: codeConfirmationTextField.text!, apnToken: user.apnToken) { userId in
             if userId != nil {
-                self.user.id = userId!
-                self.user.phoneNumber = self.phoneNumber
-                self.user.isLoggedIn = true // TODO: move further down
+                self.authMgr.getSession {
+                    // Save user defaults to storage
+                    // TODO: put all these inside UserModel
+                    self.user.id = userId!
+                    self.user.phoneNumber = self.phoneNumber
+                    self.user.serviceProvider = self.authMgr.musicServiceProvider
+                    self.user.isLoggedIn = true
+                    
+                    self.moveToMainTabBarController()
+                }
                 
-                if self.user.serviceProvider == .spotify {
-                    self.musicClient.requestSpotifyTokens() { accessToken, expiresIn, refreshToken, error in
-                        if error == nil {
-                            self.user.spotifyRefreshToken = refreshToken!
-                            SpotifyAuth.accessToken = accessToken
-                            
-                            /* Navigate to PlaylistViewController and store in user defaults */
-                            self.musicClient.getCurrentUser() { userId, error in
-                                if error == nil {
-                                    SpotifyAuth.userId = userId
-                                    self.moveToMainTabBarController()
-                                }
-                                else {
-                                    print("error", error!)
-                                }
-                            }
-                        }
-                        else {
-                            print("error", error!)
-                        }
-                    }
-                }
-                else if self.user.serviceProvider == .appleMusic {
-                    self.authMgr.requestAppleMusicUserToken { error in
-                        if error == nil {
-                            self.moveToMainTabBarController()
-                        }
-                        else {
-                            print("error", error!)
-                        }
-                    }
-                }
+//                if self.user.serviceProvider == .spotify {
+//                    self.spotifyAuth.requestSpotifyTokens { error in
+//                        if error == nil {
+//                            self.spotifyAuth.getCurrentUser { error in
+//                                if error == nil {
+//                                    self.moveToMainTabBarController()
+//                                }
+//                                else {
+//                                    print("error", error!)
+//                                }
+//                            }
+//                        }
+//                        else {
+//                            print("error", error!)
+//                        }
+//                    }
+//                }
+//                else if self.user.serviceProvider == .appleMusic {
+//                    self.authMgr.requestAppleMusicUserToken { error in
+//                        if error == nil {
+//                            self.moveToMainTabBarController()
+//                        }
+//                        else {
+//                            print("error", error!)
+//                        }
+//                    }
+//                }
             }
             
             self.doneButton.isEnabled = true
         }
     }
-
 }

@@ -12,7 +12,7 @@ import MediaPlayer
 class PlaylistAddPlaylistViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var playlistTableView: UITableView!
     
-    private let musicMgr = MusicManager.standard
+    private let musicMgr = MusicManager.shared
     private let muzeClient = MuzeClient()
     
     var playlistId: String!
@@ -25,7 +25,7 @@ class PlaylistAddPlaylistViewController: UIViewController, UITableViewDelegate, 
         playlistTableView.delegate = self
         playlistTableView.dataSource = self
         
-        musicMgr.queryAllPlaylists { playlists in
+        musicMgr.getPlaylists { playlists in
             self.playlists = playlists
             self.playlistTableView.reloadData()
         }
@@ -63,17 +63,15 @@ class PlaylistAddPlaylistViewController: UIViewController, UITableViewDelegate, 
         cell.isUserInteractionEnabled = false
         
         let playlist = playlists[indexPath.row]
-        musicMgr.getPlaylistTracks(playlist: playlist) { playlist, error in
-            if error == nil {
-                self.size = self.size + playlist.size
-                
-                self.muzeClient.updatePlaylistSongs(playlistId: self.playlistId, playlist: playlist.muzeRequestData(), size: self.size) { error in
-                    if error == nil {
-                        cell.addPlaylistLabel.text = ""
-                    }
-                    cell.isUserInteractionEnabled = true
-                    cell.setSelected(false, animated: true)
+        musicMgr.getPlaylistTracks(playlist: playlist) { playlist in
+            self.size = self.size + playlist.size
+            
+            self.muzeClient.updatePlaylistSongs(playlistId: self.playlistId, playlist: playlist.muzeRequestData(), size: self.size) { error in
+                if error == nil {
+                    cell.addPlaylistLabel.text = ""
                 }
+                cell.isUserInteractionEnabled = true
+                cell.setSelected(false, animated: true)
             }
         }
     }
