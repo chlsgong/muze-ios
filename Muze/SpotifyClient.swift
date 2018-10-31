@@ -26,12 +26,12 @@ class SpotifyClient: MusicServiceClient {
                 switch response.result {
                 case .success(let value):
                     let json = JSON(value)
-                    let data = json["items"].arrayValue
+                    let items = json["items"].arrayValue
                     
                     var playlists = [PlaylistModel]()
-                    for playlistData in data {
-                        let id = playlistData["id"].stringValue
-                        let title = playlistData["name"].stringValue
+                    for item in items {
+                        let id = item["id"].stringValue
+                        let title = item["name"].stringValue
                         
                         let playlist = PlaylistModel(spotifyId: id, title: title)
                         playlists.append(playlist)
@@ -56,16 +56,23 @@ class SpotifyClient: MusicServiceClient {
                 switch response.result {
                 case .success(let value):
                     let json = JSON(value)
-                    let data = json["items"].arrayValue
+                    let items = json["items"].arrayValue
                     
                     var tracks = [Track]()
-                    for trackData in data {
+                    for item in items {
+                        let trackData = item["track"]
                         let id = trackData["id"].stringValue
                         let title = trackData["name"].stringValue
-                        let artist = trackData["artistName"].stringValue
-                        let contentRating = trackData["contentRating"].stringValue
+                        let artists = trackData["artists"].arrayValue
+                        let isExplicit = trackData["explicit"].boolValue
                         
-                        let track = Track(spotifyId: id, title: title, artist: artist, contentRating: contentRating)
+                        var artistNames = [String]()
+                        for artist in artists {
+                            let name = artist["name"].stringValue
+                            artistNames.append(name)
+                        }
+                        
+                        let track = Track(spotifyId: id, title: title, artist: artistNames.stringify(), isExplicit: isExplicit)
                         tracks.append(track)
                     }
                     
@@ -93,12 +100,13 @@ class SpotifyClient: MusicServiceClient {
             self.request(endpoint: .postCreatePlaylist(self.user.spotifyUserId), method: .post, parameters: parameter, encoding: JSONEncoding.default, headers: header).responseJSON { response in
                 switch response.result {
                 case .success(let value):
-                    let playlist = JSON(value)
-                    let id = playlist["id"].stringValue
+                    let data = JSON(value)
+                    let id = data["id"].stringValue
                     print(id)
+                    playlist.update(spotifyId: id)
                     
-                    DispatchQueue.main.async {
-                        completion(nil)
+                    self.addTracksToPlaylist(playlist: playlist) { error in
+                        completion(error)
                     }
                 case .failure(let error):
                     print("error", error)
@@ -142,6 +150,6 @@ class SpotifyClient: MusicServiceClient {
     }
     
     private func spotifyUriList(forTracks tracks: [Track]) -> [String] {
-        return tracks.map { return "spotify:track:\($0.id)" }
+        return tracks.map { return "spotify:track:\($0.spotifyId)" }
     }
 }

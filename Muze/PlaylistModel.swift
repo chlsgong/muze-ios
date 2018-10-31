@@ -77,6 +77,14 @@ class PlaylistModel {
         self.title = title
     }
     
+    func update(appleMusicId: String) {
+        self.appleMusicId = appleMusicId
+    }
+    
+    func update(spotifyId: String) {
+        self.spotifyId = spotifyId
+    }
+    
     func muzeRequestData() -> [MuzeTrackRequestData] {
         var tracksData = [MuzeTrackRequestData]()
         for track in tracks {

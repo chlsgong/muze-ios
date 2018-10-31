@@ -189,8 +189,8 @@ class MuzeClient {
                     let spotifyId = trackData["spotifyId"].stringValue
                     let title = trackData["title"].stringValue
                     let artist = trackData["artist"].stringValue
-                    let contentRating = trackData["contentRating"].stringValue
-                    let track = Track(appleMusicId: appleMusicId, spotifyId: spotifyId, title: title, artist: artist, contentRating: contentRating)
+                    let isExplicit = trackData["isExplicit"].boolValue
+                    let track = Track(appleMusicId: appleMusicId, spotifyId: spotifyId, title: title, artist: artist, isExplicit: isExplicit)
                     tracks.append(track)
                 }
                 let size = json["size"].intValue

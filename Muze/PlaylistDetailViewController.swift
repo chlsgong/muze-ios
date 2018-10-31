@@ -56,8 +56,7 @@ class PlaylistDetailViewController: UIViewController, UITableViewDelegate, UITab
         }
         else if segue.isIdentified(byId: .toAddMusic) {
             if let destination = segue.destination as? PlaylistAddMusicViewController {
-                destination.playlistId = playlistModel.id
-                destination.size = playlistModel.size
+                destination.muzePlaylist = playlistModel
             }
         }
     }
@@ -78,7 +77,7 @@ class PlaylistDetailViewController: UIViewController, UITableViewDelegate, UITab
         }
         
         socketClient.onError {
-            print("error")
+            print("socket error")
         }
         
         socketClient.onUpdatePlaylist(playlistModel: playlistModel) { playlistModel in

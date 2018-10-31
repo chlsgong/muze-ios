@@ -47,6 +47,10 @@ extension String {
         return CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: self))
     }
     
+    func isExplicit() -> Bool {
+        return self == ContentRating.explicit.rawValue
+    }
+    
     func normalizePhoneNumber() -> String {
         let phoneNumber = String(self.filter { "0123456789".contains($0) })
         let index = phoneNumber.index(phoneNumber.startIndex, offsetBy: phoneNumber.count - 10)
@@ -79,5 +83,17 @@ extension Array where Element == SpotifyScope {
         scopesString.removeLast()
         
         return scopesString
+    }
+}
+
+extension Array where Element == String {
+    func stringify() -> String {
+        var combinedString = ""
+        for string in self {
+            combinedString += "\(string) "
+        }
+        combinedString.removeLast()
+        
+        return combinedString
     }
 }

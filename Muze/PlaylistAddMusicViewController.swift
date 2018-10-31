@@ -13,9 +13,9 @@ class PlaylistAddMusicViewController: UIViewController {
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
     private let mainStoryboard = UIStoryboard(name: "Main", bundle: .main)
+    private var shouldLayoutView = false
     
-    var playlistId: String!
-    var size: Int!
+    var muzePlaylist: PlaylistModel!
     
     private lazy var playlistAddPlaylistViewController: PlaylistAddPlaylistViewController = {
         let viewController = self.mainStoryboard.instantiateViewController(withIdentifier: .playlistAddPlaylist) as! PlaylistAddPlaylistViewController
@@ -32,7 +32,15 @@ class PlaylistAddMusicViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        updateView(index: 0)
+        shouldLayoutView = true
+    }
+    
+    override func viewDidLayoutSubviews() {
+        // TODO: figure out if there's a better way to do this
+        if shouldLayoutView {
+            updateView(index: 0)
+            shouldLayoutView = false
+        }
     }
 
     override func didReceiveMemoryWarning() {

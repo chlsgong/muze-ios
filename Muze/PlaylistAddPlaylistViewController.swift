@@ -15,8 +15,7 @@ class PlaylistAddPlaylistViewController: UIViewController, UITableViewDelegate, 
     private let musicMgr = MusicManager.shared
     private let muzeClient = MuzeClient()
     
-    var playlistId: String!
-    var size: Int!
+    var muzePlaylist: PlaylistModel!
     var playlists = [PlaylistModel]()
     
     override func viewDidLoad() {
@@ -38,8 +37,7 @@ class PlaylistAddPlaylistViewController: UIViewController, UITableViewDelegate, 
     
     override func willMove(toParentViewController parent: UIViewController?) {
         if let container = parent as? PlaylistAddMusicViewController {
-            playlistId = container.playlistId
-            size = container.size
+            muzePlaylist = container.muzePlaylist
         }
     }
     
@@ -64,9 +62,11 @@ class PlaylistAddPlaylistViewController: UIViewController, UITableViewDelegate, 
         
         let playlist = playlists[indexPath.row]
         musicMgr.getPlaylistTracks(playlist: playlist) { playlist in
-            self.size = self.size + playlist.size
+            let tracks = self.muzePlaylist.tracks + playlist.tracks
+            let size = self.muzePlaylist.size + playlist.size
+            self.muzePlaylist.update(tracks: tracks, size: size)
             
-            self.muzeClient.updatePlaylistSongs(playlistId: self.playlistId, playlist: playlist.muzeRequestData(), size: self.size) { error in
+            self.muzeClient.updatePlaylistSongs(playlistId: self.muzePlaylist.id, playlist: self.muzePlaylist.muzeRequestData(), size: size) { error in
                 if error == nil {
                     cell.addPlaylistLabel.text = ""
                 }

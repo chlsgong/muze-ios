@@ -14,15 +14,15 @@ class Track {
     private(set) var spotifyId: String
     private(set) var title: String
     private(set) var artist: String
-    private(set) var contentRating: String
+    private(set) var isExplicit: Bool
     
-    init(id: String = "", appleMusicId: String = "", spotifyId: String = "", title: String, artist: String, contentRating: String) {
+    init(id: String = "", appleMusicId: String = "", spotifyId: String = "", title: String, artist: String, isExplicit: Bool) {
         self.id = id
         self.appleMusicId = appleMusicId
         self.spotifyId = spotifyId
         self.title = title
         self.artist = artist
-        self.contentRating = contentRating
+        self.isExplicit = isExplicit
     }
     
     func muzeRequestData() -> MuzeTrackRequestData {
@@ -31,7 +31,7 @@ class Track {
             "spotifyId": self.spotifyId,
             "title": self.title,
             "artist": self.artist,
-            "contentRating": self.contentRating
+            "isExplicit": String(self.isExplicit)
         ]
     }
     
@@ -41,4 +41,9 @@ class Track {
             "type": "songs"
         ]
     }
+}
+
+enum ContentRating: String {
+    case clean
+    case explicit
 }

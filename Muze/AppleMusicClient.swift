@@ -99,9 +99,9 @@ class AppleMusicClient: MusicServiceClient {
                     let attributes = trackData["attributes"]
                     let title = attributes["name"].stringValue
                     let artist = attributes["artistName"].stringValue
-                    let contentRating = attributes["contentRating"].stringValue
+                    let isExplicit = attributes["contentRating"].stringValue.isExplicit()
                     
-                    let track = Track(appleMusicId: id, title: title, artist: artist, contentRating: contentRating)
+                    let track = Track(appleMusicId: id, title: title, artist: artist, isExplicit: isExplicit)
                     tracks.append(track)
                 }
                 playlist.update(tracks: tracks, size: tracks.count)

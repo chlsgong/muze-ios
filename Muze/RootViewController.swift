@@ -24,6 +24,7 @@ class RootViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // TODO: make these lazy properties?
     func moveToSplash() {
         currentViewController = mainStoryboard.instantiateViewController(withIdentifier: .splash) as! SplashViewController
         addNewView(viewController: currentViewController!)
